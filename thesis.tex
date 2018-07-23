@@ -1,0 +1,433 @@
+%%%% Notes %%%%
+% Indices: y_i => I is the number of target words (e), J the number of source words (f)
+
+%todo: Check spelling of authors: Accents?
+%todo: \cite{j.2018on}: Without volume, compiling breaks. But there is no volume number in the source!
+
+\documentclass[
+    a4paper,
+    11pt,              % verwendete Schriftgroesse (Std: 11pt)
+    DIV10,             % Bestimmt die Groesse des Textbereichs (Std: 10)
+    BCOR12mm,           % Zusaetzlicher Rand auf der Innenseite (Bindekorrektur)
+%    twoside,           % beidseitiger Druck
+    headsepline,       % Kolumnentitel mit horizontaler Trennlinie
+    cleardoublepage=empty,  % Auf Leerseiten kein Kolumnentitel und keine Seitenzahlen
+    listof=totoc,       % Tabellen und Abbildungsverzeichnis ins Inhaltsverzeichnis
+    bibliography=totocnumbered,  % Literaturverzeichnis ins Inhaltverzeichnis
+    % idxtotoc,         % Index ins Inhaltverzeichnis
+    %english,          % oder ngerman
+    chapterprefix,     % Print chapter prefix before each Chapter
+    %nochapterprefix,  % Don't print ``chapter'' prefix
+    appendixprefix,
+    numbers=noenddot,  % appendix verursacht sonst, dass ein punkt hinter die chapters gesetzt wird
+    captions=tableheading,  % Tabellen Beschriftungen ueber der Tabelle
+]{scrbook}             % or scrartcl - KOMA Script
+
+\usepackage[british,ngerman]{babel}
+\usepackage{natbib}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+
+\usepackage[svgnames]{xcolor}
+
+\usepackage{listings}
+
+\usepackage{adjustbox}
+
+
+\usepackage{pgf}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+
+\usepackage[algo2e]{algorithm2e}
+
+\usepackage{amssymb}
+
+\usepackage{glossaries} % for the glossary of cause 
+
+% these packages have to be loaded _before_hyperref
+% otherwise you get a "destination with the same identifier X has already been used, duplicate ignored" error 
+\usepackage{float}
+
+\usepackage[
+    english,
+%     a4paper,
+    %bpagebackref,         % link from bibliography back to citing pages; (incompatible with biblatex)
+    pdfpagelabels,
+    plainpages=false,     % fuer arabische und roemische nummern wichtig
+    hyperindex,
+    hyperfigures,
+    %linktocpage,         % Die Seitennummern als Link im Inhaltsverzeichnis anstatt des Textes
+    colorlinks,           % Text als Link anstatt Box
+    linkcolor=Black, %MidnightBlue,       % Linkfarbe, std=red 
+    citecolor=Black, %MidnightBlue,       % cite Linkfarbe, std=green
+    urlcolor=Black, %MidnightBlue,        % URL Linkfarbe, std=blue (printed version in black, online version in blue)
+    breaklinks,           % Links ueber mehrere Zeilen moeglich
+    bookmarks,            % Acrobat Bookmarks erstellen
+    bookmarksopen=true,   % Acrobat Bookmarks beim oeffnen des Dokumentes anzeigen
+    bookmarksnumbered=true,
+    pdfproducer={LaTeX with hyperref and thumbpdf},
+    pdfstartpage={1},     % Startseite 
+    %pdfstartview={Fit},
+    %pdfview={FitH},
+    %pdffitwindow=true    
+]{hyperref}
+
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{algorithmicx,algpseudocode}
+  \makeatletter
+  \def\theHALC@line{\thealgorithm-\theALC@line}
+  \def\theHALC@rem{\thealgorithm-\theALC@rem}
+  \makeatother
+
+\usepackage{needspace} %To prevent line break where I don't want it
+\usepackage{fix-cm} % to build huge font size
+
+
+%\usepackage{cite} %Allows citations to be broken at the end of a line
+
+\usepackage{enumerate} %enumerate formating
+
+\usepackage[caption=false]{subfig} %subfloat
+%\usepackage{subfigure}
+%\addtolength{\subfigcapskip}{-0.2in}
+
+
+\usepackage{longtable}
+
+%Chinese
+%\usepackage{CJK}
+\newcommand{\cninput}[1]{\hspace{-0.3cm}\begin{CJK}{UTF8}{gbsn}#1\end{CJK}}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning} 
+\usetikzlibrary{shapes,decorations}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathreplacing}
+
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    punkt/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           text width=6.5em,
+           minimum height=2em,
+           text centered},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+\tikzstyle{word} = [draw, top color=blue!10, bottom color=blue!50, rounded corners=1mm]
+\tikzstyle{wordRed} = [draw, top color=red!10, bottom color=red!90, rounded corners=1mm]
+\tikzstyle{wordGreen} = [draw, top color=green!10, bottom color=green!90, rounded corners=1mm]
+\tikzstyle{wordOrange} = [draw, top color=orange!10, bottom color=orange!90, rounded corners=1mm]
+
+\usepackage{amsmath,bm} %bm avoids horizontal whitespace between bolded characters and index
+
+%used for rp helper command
+\usepackage{fp}
+\usepackage{numprint}
+
+\newcommand{\Sig}[1]{\textcolor{blue}{#1}} % significant to 95%
+\newcommand{\sig}[1]{\textcolor{magenta}{#1}} % significant to 90%
+\newcommand{\significanceExplanation}{Significant improvements over the baseline}
+
+\newcommand{\cev}[1]{\rule{0mm}{0mm}\,\,\mathchoice%
+{\reflectbox{$\displaystyle\vec{\reflectbox{$\displaystyle\!\!#1$}}$}}%
+{\reflectbox{$\vec{\reflectbox{$\!\!#1$}}$}}%
+{\reflectbox{$\scriptstyle\vec{\reflectbox{$\scriptstyle\!\!#1$}}$}}%
+{\reflectbox{$\scriptscriptstyle\vec{\reflectbox{$\scriptscriptstyle\!\!#1$}}$}}%
+}
+
+\newcommand{\significanceKey}{
+\begin{flushright}
+\hspace{-1cm}\begin{tabular}{lll}
+  \sig{$p < .1$}  & significance \\
+  \Sig{$p < .05$} & significance \\
+\end{tabular}
+\end{flushright}
+}
+
+% Hurenkinder und Schusterjungen verhindern
+\clubpenalty10000
+\widowpenalty10000
+\displaywidowpenalty=10000
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% own helper functions
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%Rounds numbers to percent
+\newcommand{\rp}[1]{%
+  \FPset{\per}{#1}%
+  \FPmul{\per}{\per}{100}%
+  \FPround{\per}{\per}{1}%
+  \numprint{\per}%
+}%
+
+\newcommand{\percent}[2]{%
+  \FPset{\per}{#1}%
+  \FPdiv{\per}{#1}{#2}
+  \rp{\per}\%
+}%
+
+
+
+\usepackage{theorem}                            % instead of \usepackage{amsthm}
+\theoremstyle{break}
+\theorembodyfont{\itshape}	
+\theoremheaderfont{\scshape}
+\newtheorem{Cor}{Corollary}
+\newtheorem{Def}{Definition}
+\newtheorem{Rmk}{Remark}
+\newtheorem{Theorem}{Theorem}
+\newtheorem{Notation}{Notation}
+
+\newcommand\T{\rule{0pt}{2.2ex}}       % Top strut
+
+% @ environment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xspace}                             % context sensitive space after macros
+\makeatletter 
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+\def\eg{{e.g}\onedot} \def\Eg{{E.g}\onedot}
+\def\ie{{i.e}\onedot} \def\Ie{{I.e}\onedot}
+\def\cf{{c.f}\onedot} \def\Cf{{C.f}\onedot}
+\def\etc{{etc}\onedot} \def\vs{{vs}\onedot} 
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\etal{{et al}\onedot}
+\def\zB{z.B\onedot} \def\ZB{Z.B\onedot}
+\def\dh{d.h\onedot} \def\Dh{D.h\onedot}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{mfirstuc} % capitalize words using \capitalisewords
+
+%TikZ code "illustrating" the new "brace"
+\newcommand{\newbrace}[1][]{
+\begin{tikzpicture}[baseline=-0.5ex]
+\draw[#1] (0,0) -- (0.3,0.3);
+\draw[#1] (0,0) -- (0.3,-0.3);
+\end{tikzpicture}
+}
+
+% the optional argument allows you to select the type of arrow 
+% you can also customize the "new brace"
+\newenvironment{casesnew}[1][->]%
+{\;\newbrace[#1]\;\begin{array}{@{}l@{}}}%
+{\end{array}}
+
+\newcommand{\publicationDate}{27. M\"arz 2018}
+\subject{Masterarbeit im Fach Informatik}
+\title{Unsupervised Learning of Neural Network Lexicon and
+	Cross-lingual Word Embedding}
+\newcommand{\Surname}{LastName}
+\newcommand{\Firstname}{Firstname}
+\newcommand{\Aachen}{Aachen}
+\newcommand{\studentname}{\Firstname~\Surname}
+\newcommand{\MatrikelNummer}{Number}
+\author{\studentname}
+
+
+%Global commands
+%\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+%\DeclareMathOperator*{\argmax}{arg\,max} % I'm not sure where the difference is between this one and operatornamewithlimits
+%\DeclareMathOperator*{\argmin}{arg\,min} % I'm not sure where the difference is between this one and operatornamewithlimits
+
+%\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+%\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{argmax}}}
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{argmin}}}
+
+
+\newcommand{\phraseset}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand\BLEU{\textsc{Bleu}}
+\newcommand\TER{\textsc{Ter}}
+\newcommand{\PPL}{\textsc{Ppl}}
+
+\newcommand{\GIZA}{{GIZA\nolinebreak[4]\hspace{-.025em}\raisebox{.2ex}{\small\bf++}}\xspace}
+
+\newcommand{\leftphrasedelim}{\mathlarger{\langle}}
+\newcommand{\rightphrasedelim}{\mathlarger{\rangle}}
+\newcommand{\kstar}{^\star}
+\newcommand{\ntind}[1][]{^{\sim#1}} % ``Non-terminal'' index
+
+\newcommand{\phrasepair}[2]{\ensuremath{\leftphrasedelim}#1, #2\ensuremath{\rightphrasedelim}}
+\newcommand{\rulearrow}{\rightarrow}
+\newcommand{\gap}{\ \ensuremath{\Diamond}\ }
+
+% Indentation
+\newcommand{\ind}{\hspace*{5mm}}
+
+%fix figure placement
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+
+
+%\input{figures}
+\makeglossaries
+
+% \usepackage{showframe}
+
+%%%%%%%%%%%%% custom packages %%%%%%%%%%%%%%
+\patchcmd{\@setref}{\bfseries ??}{\bfseries\color{red} undefined Label}{}{} %makes broken references (by \ref) more visible
+\usepackage{forest}
+\usepackage{textcomp}
+\usepackage{booktabs} %nice tables
+\usepackage{needspace} %to avoid page break to soon after section header
+
+\usepackage{tablefootnote}
+
+
+% https://tex.stackexchange.com/a/88963/118090
+% bold with same width - allows to align numbers in tables
+\newcommand{\bftab}{\fontseries{b}\selectfont}
+
+\usepackage{mathtools} % allow centered equal signs with text above them
+\newlength{\leftstackrelawd}
+\newlength{\leftstackrelbwd}
+\def\leftstackrel#1#2{\settowidth{\leftstackrelawd}%
+	{${{}^{#1}}$}\settowidth{\leftstackrelbwd}{$#2$}%
+	\addtolength{\leftstackrelawd}{-\leftstackrelbwd}%
+	\leavevmode\ifthenelse{\lengthtest{\leftstackrelawd>0pt}}%
+	{\kern-.5\leftstackrelawd}{}\mathrel{\mathop{#2}\limits^{#1}}}
+\newcommand{\eqtext}[1]{\leftstackrel{\mathrm{#1}}{=}}
+\newcommand{\equivtext}[1]{\leftstackrel{\mathrm{#1}}{\Leftrightarrow}}
+
+\usepackage[nameinlink,capitalize,noabbrev]{cleveref} % references \cref and \Cref
+\creflabelformat{equation}{#2\textup{#1}#3} %no paranthesis for equations
+\DeclareRobustCommand{\abbrevcrefs}{% \cshref uses abbreviations, used within equations (see eg. derivations)
+	\crefname{figure}{fig.}{figs.}%
+	\crefname{equation}{Eq.}{Eqs.}%
+}
+\DeclareRobustCommand{\cshref}[1]{{\abbrevcrefs\cref{#1}}}
+
+% https://tex.stackexchange.com/a/65130/118090
+% define "struts", as suggested by Claudio Beccari in
+%    a piece in TeX and TUG News, Vol. 2, 1993.
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+
+
+
+\babelhyphenation[british]{peep-holes}
+\babelhyphenation[british]{ex-pec-ta-tion}
+\babelhyphenation[british]{mea-sured}
+\babelhyphenation[british]{mathe-matcis}
+\babelhyphenation[british]{RETURNN}
+\babelhyphenation[british]{in-for-ma-tion}
+
+\usepackage{tkz-fct}
+
+\usetikzlibrary{positioning, fit, arrows.meta}
+
+\tikzstyle{neuronSmall}=[rectangle,
+thick,
+line width=0.5mm,
+minimum size=1.2cm,
+draw=black,
+text centered,
+minimum height=3em,
+fill=white!20]
+
+
+
+%taken from att_nmt.tex for the figure of attention
+% define the shape of nodes here!
+\tikzstyle{neuron}=[circle,
+thick,
+line width=0.5mm,
+minimum size=1.3cm,
+draw=black,
+text centered,
+minimum height=2em,
+fill=white!20]
+\tikzstyle{neuronSmall}=[circle,
+thick,
+line width=0.5mm,
+minimum size=0.7cm,
+draw=black,
+text centered,
+minimum height=2em,
+fill=white!20]
+\tikzstyle{neuronNoBorder}=[circle,
+thick,
+minimum size=1.2cm,
+draw=none,
+fill=white!20]   
+
+
+
+% glossary entries
+\newacronym{NMT}{NMT}{neural machine translation}
+
+
+\begin{document}
+
+\cleardoublepage
+\graphicspath{{pictures/}}
+\include{glossary}
+\frontmatter
+
+\pdfbookmark[0]{Title}{front}
+\input{title}
+
+\selectlanguage{ngerman}
+{
+\renewcommand*\chapterheadstartvskip{\vspace*{-5\topskip}} % the assurance needs more space, so move the title up with this
+\input{assurance}
+} 
+
+\selectlanguage{british}
+\input{abstract}
+
+%\input{acknowledgements}
+
+\pdfbookmark[0]{Contents}{toc} % ziffer fuer ebene
+\glsunsetall
+\tableofcontents
+
+\mainmatter          % Hauptteil (arabische Seitenzahlen)
+
+\glsresetall
+\input{introduction}
+%\cite{mikolov2013distributed}
+%\cite{artetxe2017unsupervised}
+
+
+\glsresetall
+\input{Machine Translation}
+
+\glsresetall
+\input{wordembedding}
+
+\glsresetall
+\input{sentencetranslation}
+
+
+\appendix
+\input{appendix}
+
+
+
+\backmatter          % Nachspann einleiten (wie frontmatter)
+\listoffigures
+\listoftables
+
+% \nocite{*}
+
+\printglossaries	
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

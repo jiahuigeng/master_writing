@@ -1,0 +1,23 @@
+\BOOKMARK [0][]{front.0}{Title}{}% 1
+\BOOKMARK [0][]{chapter*.2}{Abstract}{}% 2
+\BOOKMARK [0][]{toc.0}{Contents}{}% 3
+\BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 4
+\BOOKMARK [1][]{section.1.1}{1.1 Neural Network Lexicon}{chapter.1}% 5
+\BOOKMARK [1][]{section.1.2}{1.2 Cross-lingual Word Embedding}{chapter.1}% 6
+\BOOKMARK [0][]{chapter.2}{2 Word Embedding}{}% 7
+\BOOKMARK [1][]{section.2.1}{2.1 Monolingual Embedding}{chapter.2}% 8
+\BOOKMARK [1][]{section.2.2}{2.2 Cross-lingual Word Embedding}{chapter.2}% 9
+\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Supervised Learning}{section.2.2}% 10
+\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Unsupervised Learning}{section.2.2}% 11
+\BOOKMARK [0][]{chapter.3}{3 Sentence Translation}{}% 12
+\BOOKMARK [1][]{section.3.1}{3.1 Context-aware Beam Search}{chapter.3}% 13
+\BOOKMARK [2][]{subsection.3.1.1}{3.1.1 Language Model}{section.3.1}% 14
+\BOOKMARK [2][]{subsection.3.1.2}{3.1.2 Beam Search}{section.3.1}% 15
+\BOOKMARK [1][]{section.3.2}{3.2 Denoising Autoencoder}{chapter.3}% 16
+\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Reordering Noise}{section.3.2}% 17
+\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Insertion Noise}{section.3.2}% 18
+\BOOKMARK [2][]{subsection.3.2.3}{3.2.3 Deletion Noise}{section.3.2}% 19
+\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 20
+\BOOKMARK [0][]{chapter*.7}{List of Figures}{}% 21
+\BOOKMARK [0][]{chapter*.8}{List of Tables}{}% 22
+\BOOKMARK [0][]{chapter*.9}{Bibliography}{}% 23

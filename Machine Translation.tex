@@ -1,0 +1,19 @@
+\chapter{Machine Translation}
+\section{Rule-based machine translation}
+
+
+Rule-based machine translation is machine translation system based on linguistic information. An RBMT system generates translation based on different levels of analysis, e.g. part of speech tagging (POS), morphological analysis,  semantic analysis, constituent analysis, dependency analysis.
+
+Rule-based machine translation has the following advantages: No bilingual texts are required. Also because RBMT are built on a source language analysis and the target language generator and the source analysis part and target generation part are seperate, so it can be shared between multiple translation system if we replace the part with an other part for a closed related language.
+However the method is still not so general, we need to build the dictionary and  linguistic rule set manually, it is very expensive. also it is hard to deal with rule interactions in big systems, ambiguity and idiomatic expression.
+
+
+
+
+\section{Statistical machine translation}
+The initial models for machine translation are based on words as units (Word-based machine translation), that can be translated, inserted, dropped and reordered.
+Fertility is the notion that input words produce a specific number of output words in the output language.
+
+Define the phrase-based statistical machine translation model mathematically.  First apply the Bayes rule to invert the translation direction and integrate a language model $p_{LM}$ so the best English translation for the input sentence ${f} $ is defined as 
+Reordering is handled by a distance-based reordering model.
+\section{Neural machine translation}

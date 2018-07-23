@@ -1,0 +1,82 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\definecolor{mycolor1}{rgb}{0.0, 0.5, 0.0}
+\definecolor{mycolor2}{rgb}{0.0,0,1}%
+\definecolor{mycolor3}{rgb}{0,0,0}%
+\definecolor{mycolor4}{rgb}{1.0, 0.88, 0.21}
+\definecolor{mycolor5}{rgb}{1,0,0.0}%
+
+\pgfplotscreateplotcyclelist{my list}{%
+solid, every mark/.append style={solid, fill=gray}, mark=*\\%
+dotted, every mark/.append style={solid, fill=gray}, mark=square*\\%
+densely dotted, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
+loosely dotted, every mark/.append style={solid, fill=gray}, mark=triangle*\\%
+dashed, every mark/.append style={solid, fill=gray},mark=diamond*\\%
+loosely dashed, every mark/.append style={solid, fill=gray},mark=*\\%
+densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
+dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
+dasdotdotted, every mark/.append style={solid},mark=star\\%
+densely dashdotted,every mark/.append style={solid, fill=gray},mark=diamond*\\%
+}
+
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=\figurewidth,
+height=\figureheight,
+scale only axis,
+xmin=10,
+xmax=60,
+x label style={at={(axis description cs:0.5,-0.3)},anchor=north},
+y label style={at={(axis description cs:-0.1,0.5)},rotate=0,anchor=south},
+ymin=40,
+ymax=55,
+xlabel={Length of Source Sentence},
+ylabel={TER [\%]},
+axis background/.style={fill=white},
+legend style={legend cell align=left,align=left,draw=white!15!black, font=\tiny, legend pos=south east},
+xticklabels={0,1-10,11-20,21-30,31-40,41-50,51+},
+xticklabel style={rotate=30},
+]
+\addplot [color=mycolor1,solid,line width=1.0pt, mark=+, mark size=1pt]
+  table[row sep=crcr]{%
+10 50.1\\
+20 50.3\\
+30 50.2\\
+40 49.7\\
+50 49.3\\
+60 52.4 \\
+};
+\addlegendentry{baseline};
+
+
+\addplot [color=mycolor2,solid,line width=1.0pt, mark=triangle*, mark size=1pt]
+  table[row sep=crcr]{%
+10 53.3\\
+20 51.8\\
+30 51.8\\
+40 51.0\\
+50 50.1\\
+60 49.5\\
+};
+\addlegendentry{2D-seq2seq};
+
+\addplot [color=mycolor3,solid,line width=1.0pt, mark=square*, mark size=1pt]
+  table[row sep=crcr]{%
+10 49.6\\
+20 50.3\\
+30 49.7\\
+40 49.5\\
+50 48.7\\
+60 47.5\\
+};
+\addlegendentry{weighted 2D-seq2seq};
+
+
+\end{axis}
+\end{tikzpicture}%

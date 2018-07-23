@@ -1,0 +1,105 @@
+\chapter{Word Embedding}
+\section{Monolingual Embedding}
+	Word embeddings is distributed representation of words in a vector space. With the learning algorithm it can capture the contextual or co-occurrence information. The word embedding has an interesting and important property: similar words will have similar distribution in the embedding space, with that property, we can find meaningful near-synonyms or  Some successful methods for learning word embeddings like word2vec  \cite{mikolov2013distributed}
+	Continuous Bag-of-Words model(CBOW) and Skip-Gram model
+	CBOW model and Skip-Gram model are currently the  common structures to learn the word embedding. Algorithmically,  CBOW tries to predict the current word based on the context while Skip-Gram model tries to maximize classification of a word based on another word in the same sentence.
+	The neural probability language model defines the prediction probability using the softmax function:
+
+	
+	\begin{align}
+	p(w_t | w_s) & = \textrm{softmax} {(s(w_t, w_s))} \\
+	& = \frac{\exp\{s(w_t, w_s)\}}{\sum_{w^{\prime} \in W}{\exp\{s( w^{\prime}, w_s)\}}} 
+	\end{align}
+	where ${w_t}$ is target word)label word), ${w_s}$ is the source word(input word), for Skip-Gram model, the target word refers to the context words, the source word refers to the current word, for CBOW model is simply inverted. ${W}$ denotes the whole vocabulary. Then the training objective of the model is to maximize the log-likelihood on the training dataset, i.e. by maximizing:
+	
+	\begin{align}
+	J_{ML} & = \log p(w_t| w_s)	\\
+	& = s(w_t, w_s) - \log(\sum_{w^\prime \in W} {\exp\{s(w^\prime, w_s)\}})	
+	\end{align}
+
+
+	
+	However the normalization on the whole vocabulary is very expensive because it is conducted for all words at every training step. The problem of predicting words can be considered as an independent binary classification task. For example in the Skip-Gram model, we consider all the context words as positive samples and the words randomly sampled from the dictionary as the negative ones. Then the training objective is 
+	\[J_{NEG} = \log {Q_{\theta}{(D=1 | w^{\prime}, w_s)}} + \sum_{w^{\prime} \sim W} {\log{Q_{\theta}{(D=0 | w^{\prime}, w_s )}}}  \]
+	
+	where ${Q_{\theta}{(D=1| w^{\prime} w_s)}}$ is the binary logistic regression probability. In practice, we draw k contrastive words from the noise distribution. Since we only calculate the loss function for k samples instead the whole vocabulary, it becomes much faster to train.
+	
+	
+	\[\frac{1}{T} \sum_{t=1}^{T} \sum_{-c<j<c, j\neq 0}{\textrm{log}{p(w_{t+j}|w_t)}}\]
+	where c is the size of training context, larger context size make the results more precise at the cost of training time. Suppose we are give a scoring function to evaluate the word pair(word, context), the Skip-Gram model
+	
+	\[\frac{1}{T} \sum_{t=1}^{T} \sum_{-c<j<c, j\neq 0}{\textrm{log}{p(w_{t}|w_{t+j})}}\]
+	 According to  empirical results, CBOW works better on smaller datasets because CBOW smoothes over a lot of the distributional information while Skip-Gram model performs better when we have larger datasets
+	
+	
+	Noise-Contrastive Training
+	
+	
+	fastText
+	The training methods above treat each word as a distinct word embedding, however intuitively we can obtain more information from the morphological information of words. A subword model was proposed to try to fix such problem.The training network is similar, the model design a new presentation of the word: it adds speicial symbols $<$, ${>}$ as boundary information at the beginning and the end of a word. Then a normal word is represented as a bag of character $n$-grams . For example the word "where" and n equals 3, the it can be represented as the following 5 tri-grams: 
+	\[ <wh, whe, her, ere, re>\]
+	Suppose in this way we denote a word ${w}$ as ${G_{w}}$ the set of character ${n}$-grams, we assign for each character ${n}$-gram $g$ in ${G_{w}}$, we assign a distinct vector $z_g$, we will finally represent the embedding of word ${w}$ as the sum of these vector and also for the scoring function:
+	\[s(w, w_s) = \sum_{g \in G_{w}} z_g^{T} w_s \]
+	
+\section{Cross-lingual Word Embedding}
+	Cross-lingual word embedding is defined as word embedding of multiple languages in a joint embedding space. Mikolov first notice that the embedding distributions exhibit similar structure across languages. They proposed to use a linear mapping from the source embedding to target embedding. \\
+	
+	In the thesis, I assume there are two set of embeddings ${E}$, ${F}$trained separately on monolingual data.  The propose of cross-lingual word embedding training is to learn such a mapping ${W \in }$ from source embedding space to target embedding space, so $WF, E$ in the same embedding space and 
+	\[ 1 \]
+	where $d$ is the dimension of embeddings, 
+	
+	
+	\subsection{Supervised Learning}
+	A dictionary is necessary for learning the cross-lingual word embedding. 
+	minimizing the distance in a bilingual dictionary.\\
+	
+	Xing \cite{ } showed that the results are improved when we constrain the ${W}$ to be an orthogonal matrix. This constraint,  the optimal transformation can be efficiently calculated in linear time with respect to the vocabulary size.
+	
+	The problem then is simplified as the Procrustes problem and there exists a closed-form solution obtained from the SVD of ${EF^T}$
+	
+	
+	
+	\subsection{Unsupervised Learning}
+	However, large dictionary is also not readily available for many language pairs.
+	
+	Several unsupervised learning algorithms are studies   
+	
+	Self-learning framework\\
+	
+	\begin{figure}[ht]
+		\centering
+		\begin{minipage}{.7\linewidth}
+			\begin{algorithm}[H]
+				\SetAlgoLined
+				\KwIn{$\mathcal{F}$ (source embeddings)}
+				\KwIn{$\mathcal{E}$ (target embeddings)}
+				\KwIn{$\mathcal{D}$ (seed dictionary)}
+				\KwResult{$\mathcal{W}$ (embedding mapping) }
+				%initialization
+				%\While{not convergence criterion}{
+				%	$\mathcal{W} \leftarrow  \bm{learn\_mapping} \mathcal{(E, F, D)}$
+				%	$\mathcal{D} \leftarrow \bm{learn\_mapping}\mathcal{(E, F, W)}$ 
+				%}
+				
+				\caption{Self-learning framework}
+			\end{algorithm}
+		\end{minipage}
+	\end{figure}
+	
+	
+	
+	\subsubsection{Unsupervised Initialization}
+	\subsubsection{Iterative Closest Point Method}
+	\subsubsection{Adversarial Training} 
+	Discriminator is trained to discriminate between elements randomly sampled from ${WF}$ and ${E}$ and generator ${W}$ is trained to prevent the discriminator from making accurate prediction\\
+	
+	The training algorithm follows the standard procedure of deep adversarial networks(GAN) of Goodfellow \cite{bibid}: the discriminator and generator are trained iteratively with the stochastic gradient descent to minimize the ${L_D}$ and ${L_w}$
+	
+	Cross-domain Similarity Local Scaling (CSLS)
+	Since the embedding space is of high dimension and the nearest neighbour search is performed here, so that a few embeddings embedding will become the nearest neighbour of many data pointsto The obtained is known to suffer from the hubness problem,
+	
+	
+	\subsubsection{Model Selection}
+	Since the cross-lingual embedding training is under the unsupervised setting, We do not know the word translation accuracy, otherwise if we have the validation data, that means we will have parallel data, against the unsupervised idea. To address this issue, we must select from the property of data or the loss of the neural network as the unsupervised criterion. However in the experiments we find that the accuracy of the discriminator always stays at a high level no matter how is the word translation accuracy. 
+	
+	

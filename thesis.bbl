@@ -1,0 +1,22 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Artetxe et~al.(2017)Artetxe, Labaka, Agirre, and
+  Cho]{artetxe2017unsupervised}
+Mikel Artetxe, Gorka Labaka, Eneko Agirre, and Kyunghyun Cho.
+\newblock Unsupervised neural machine translation.
+\newblock \emph{arXiv preprint arXiv:1710.11041}, 2017.
+
+\bibitem[Mikolov et~al.(2013)Mikolov, Sutskever, Chen, Corrado, and
+  Dean]{mikolov2013distributed}
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg~S Corrado, and Jeff Dean.
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  3111--3119, 2013.
+
+\end{thebibliography}
