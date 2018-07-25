@@ -94,10 +94,21 @@
 	Discriminator is trained to discriminate between elements randomly sampled from ${WF}$ and ${E}$ and generator ${W}$ is trained to prevent the discriminator from making accurate prediction\\
 	
 	The training algorithm follows the standard procedure of deep adversarial networks(GAN) of Goodfellow \cite{bibid}: the discriminator and generator are trained iteratively with the stochastic gradient descent to minimize the ${L_D}$ and ${L_w}$
+
+	Let ${=\{ x_1, \cdots, x_n\}}$ and ${ = \{ y_i, \cdots , y_m\}}$ be the two sets of $n$ and $m$ word embeddings from a source and a target language separately, We refer the discriminator parameters as ${\theta_D}$.The discriminator is a multi-layer neural network trained to discriminate the transformed source word embedding from the target word embedding, while the mapping $W$, simply a linear transformation, is trained to fooling discriminator. In the two-player game, we are supposed to learn the mapping from source embedding space to the target space.
+	Discriminator objective  
+	\[ L_D(\theta_D | W) =  -\frac{1}{n} \sum_{i=1}^{n} \log P_{\theta_D}(source = 1| Wf_i) - \frac{1}{m} \sum_{i=1}^{m} \log P_{\theta_D}(source=0| e_i) \]	
 	
-	Cross-domain Similarity Local Scaling (CSLS)
+	Mapping objective 
+	\[ L_W(W|\theta_D) =  -\frac{1}{n} \sum_{i=1}^{n}\log P_{\theta_D}(source=0|W f_i) - \frac{1}{m} \sum_{i=1}^{m} \log P_{\theta_D}(source = 1 | e_i) \]
+	
+	
+	\subsection{Cross-domain Similarity Local Scaling (CSLS)}
+	The CSLS as described by \cite{conneau2017word}, can be written as:
+	\[ CSLS(\bm{e}, \bm{f}) = 2 cos(\bm{e}, \bm{y}) - \frac{1}{K} \sum_{\bm{e^{\prime}} \in N(\bm{e})} cos(\bm{f}, \bm{e^{\prime}})- \frac{1}{K} \sum_{\bm{f^{\prime}} \in N(\bm{e})} cos(\bm{f^{\prime}}, \bm{e}) \]
 	Since the embedding space is of high dimension and the nearest neighbour search is performed here, so that a few embeddings embedding will become the nearest neighbour of many data pointsto The obtained is known to suffer from the hubness problem,
 	
+
 	
 	\subsubsection{Model Selection}
 	Since the cross-lingual embedding training is under the unsupervised setting, We do not know the word translation accuracy, otherwise if we have the validation data, that means we will have parallel data, against the unsupervised idea. To address this issue, we must select from the property of data or the loss of the neural network as the unsupervised criterion. However in the experiments we find that the accuracy of the discriminator always stays at a high level no matter how is the word translation accuracy. 

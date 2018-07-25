@@ -4,20 +4,29 @@
 \BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 4
 \BOOKMARK [1][]{section.1.1}{1.1 Neural Network Lexicon}{chapter.1}% 5
 \BOOKMARK [1][]{section.1.2}{1.2 Cross-lingual Word Embedding}{chapter.1}% 6
-\BOOKMARK [0][]{chapter.2}{2 Word Embedding}{}% 7
-\BOOKMARK [1][]{section.2.1}{2.1 Monolingual Embedding}{chapter.2}% 8
-\BOOKMARK [1][]{section.2.2}{2.2 Cross-lingual Word Embedding}{chapter.2}% 9
-\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Supervised Learning}{section.2.2}% 10
-\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Unsupervised Learning}{section.2.2}% 11
-\BOOKMARK [0][]{chapter.3}{3 Sentence Translation}{}% 12
-\BOOKMARK [1][]{section.3.1}{3.1 Context-aware Beam Search}{chapter.3}% 13
-\BOOKMARK [2][]{subsection.3.1.1}{3.1.1 Language Model}{section.3.1}% 14
-\BOOKMARK [2][]{subsection.3.1.2}{3.1.2 Beam Search}{section.3.1}% 15
-\BOOKMARK [1][]{section.3.2}{3.2 Denoising Autoencoder}{chapter.3}% 16
-\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Reordering Noise}{section.3.2}% 17
-\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Insertion Noise}{section.3.2}% 18
-\BOOKMARK [2][]{subsection.3.2.3}{3.2.3 Deletion Noise}{section.3.2}% 19
-\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 20
-\BOOKMARK [0][]{chapter*.7}{List of Figures}{}% 21
-\BOOKMARK [0][]{chapter*.8}{List of Tables}{}% 22
-\BOOKMARK [0][]{chapter*.9}{Bibliography}{}% 23
+\BOOKMARK [0][]{chapter.2}{2 Machine Translation}{}% 7
+\BOOKMARK [1][]{section.2.1}{2.1 Rule-based machine translation}{chapter.2}% 8
+\BOOKMARK [1][]{section.2.2}{2.2 Statistical machine translation}{chapter.2}% 9
+\BOOKMARK [1][]{section.2.3}{2.3 Neural machine translation}{chapter.2}% 10
+\BOOKMARK [1][]{section.2.4}{2.4 Unsupervised Machine Translation}{chapter.2}% 11
+\BOOKMARK [2][]{subsection.2.4.1}{2.4.1 Language Model}{section.2.4}% 12
+\BOOKMARK [2][]{subsection.2.4.2}{2.4.2 Back Translation}{section.2.4}% 13
+\BOOKMARK [2][]{subsection.2.4.3}{2.4.3 Shared Latent Representations}{section.2.4}% 14
+\BOOKMARK [0][]{chapter.3}{3 Word Embedding}{}% 15
+\BOOKMARK [1][]{section.3.1}{3.1 Monolingual Embedding}{chapter.3}% 16
+\BOOKMARK [1][]{section.3.2}{3.2 Cross-lingual Word Embedding}{chapter.3}% 17
+\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Supervised Learning}{section.3.2}% 18
+\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Unsupervised Learning}{section.3.2}% 19
+\BOOKMARK [2][]{subsection.3.2.3}{3.2.3 Cross-domain Similarity Local Scaling \(CSLS\)}{section.3.2}% 20
+\BOOKMARK [0][]{chapter.4}{4 Sentence Translation}{}% 21
+\BOOKMARK [1][]{section.4.1}{4.1 Context-aware Beam Search}{chapter.4}% 22
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Language Model}{section.4.1}% 23
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Beam Search}{section.4.1}% 24
+\BOOKMARK [1][]{section.4.2}{4.2 Denoising Autoencoder}{chapter.4}% 25
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Reordering Noise}{section.4.2}% 26
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Insertion Noise}{section.4.2}% 27
+\BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Deletion Noise}{section.4.2}% 28
+\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 29
+\BOOKMARK [0][]{chapter*.11}{List of Figures}{}% 30
+\BOOKMARK [0][]{chapter*.12}{List of Tables}{}% 31
+\BOOKMARK [0][]{chapter*.13}{Bibliography}{}% 32

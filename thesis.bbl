@@ -5,11 +5,12 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Artetxe et~al.(2017)Artetxe, Labaka, Agirre, and
-  Cho]{artetxe2017unsupervised}
-Mikel Artetxe, Gorka Labaka, Eneko Agirre, and Kyunghyun Cho.
-\newblock Unsupervised neural machine translation.
-\newblock \emph{arXiv preprint arXiv:1710.11041}, 2017.
+\bibitem[Conneau et~al.(2017)Conneau, Lample, Ranzato, Denoyer, and
+  J{\'e}gou]{conneau2017word}
+Alexis Conneau, Guillaume Lample, Marc'Aurelio Ranzato, Ludovic Denoyer, and
+  Herv{\'e} J{\'e}gou.
+\newblock Word translation without parallel data.
+\newblock \emph{arXiv preprint arXiv:1710.04087}, 2017.
 
 \bibitem[Mikolov et~al.(2013)Mikolov, Sutskever, Chen, Corrado, and
   Dean]{mikolov2013distributed}
