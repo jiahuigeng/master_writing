@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.7.17)  19 AUG 2018 14:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.7.17)  19 AUG 2018 15:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2385,7 +2385,7 @@ chapter 3.
 
 
 ]
-<./figures/crossembedding.png, id=309, 1534.73375pt x 792.9625pt>
+<./figures/crossembedding.png, id=310, 1534.73375pt x 792.9625pt>
 File: ./figures/crossembedding.png Graphic file (type png)
 <use ./figures/crossembedding.png>
 Package pdftex.def Info: ./figures/crossembedding.png  used on input line 47.
@@ -2400,7 +2400,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 68--70
 
  []
 
-<./figures/iter1.png, id=322, 604.2575pt x 472.76625pt>
+<./figures/iter1.png, id=323, 604.2575pt x 472.76625pt>
 File: ./figures/iter1.png Graphic file (type png)
 <use ./figures/iter1.png>
 Package pdftex.def Info: ./figures/iter1.png  used on input line 76.
@@ -2439,7 +2439,7 @@ chapter 4.
 
 
 ] [16] [17]
-<./figures/nmt.png, id=381, 1167.36125pt x 829.0975pt>
+<./figures/nmt.png, id=382, 1167.36125pt x 829.0975pt>
 File: ./figures/nmt.png Graphic file (type png)
 <use ./figures/nmt.png>
 Package pdftex.def Info: ./figures/nmt.png  used on input line 85.
@@ -2450,13 +2450,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--91
  []
 
 [18]
-<./figures/attentiong.png, id=392, 1079.03125pt x 948.54375pt>
+<./figures/attentiong.png, id=393, 1079.03125pt x 948.54375pt>
 File: ./figures/attentiong.png Graphic file (type png)
 <use ./figures/attentiong.png>
 Package pdftex.def Info: ./figures/attentiong.png  used on input line 113.
 (pdftex.def)             Requested size: 341.43306pt x 300.1389pt.
  [19 <./figures/nmt.png>] [20 <./figures/attentiong.png>]
-<./figures/transformer.png, id=416, 622.325pt x 887.315pt>
+<./figures/transformer.png, id=417, 622.325pt x 887.315pt>
 File: ./figures/transformer.png Graphic file (type png)
 <use ./figures/transformer.png>
 Package pdftex.def Info: ./figures/transformer.png  used on input line 154.
@@ -2505,12 +2505,19 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 433.
  (./thesis.aux (./glossary.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 433.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 433.
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: D738EA94CBF372EF1CBD27B5792986D5;2200.
+
+
+Package rerunfilecheck Warning: File `thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `thesis.out':
+(rerunfilecheck)             Before: D738EA94CBF372EF1CBD27B5792986D5;2200
+(rerunfilecheck)             After:  AE9C4AA3E88CE0E1F4B2E109B4461148;2266.
  ) 
 Here is how much of TeX's memory you used:
- 63055 strings out of 494221
- 1447399 string characters out of 6160689
+ 63056 strings out of 494221
+ 1447415 string characters out of 6160689
  1750977 words of memory out of 5000000
  65335 multiletter control sequences out of 15000+600000
  541703 words of font info for 62 fonts, out of 8000000 for 9000
@@ -2535,10 +2542,10 @@ hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on thesis.pdf (40 pages, 1427701 bytes).
+Output written on thesis.pdf (40 pages, 1427878 bytes).
 PDF statistics:
- 571 PDF objects out of 1000 (max. 8388607)
- 492 compressed objects within 5 object streams
- 133 named destinations out of 1000 (max. 500000)
+ 572 PDF objects out of 1000 (max. 8388607)
+ 493 compressed objects within 5 object streams
+ 134 named destinations out of 1000 (max. 500000)
  313 words of extra memory for PDF output out of 10000 (max. 10000000)
 
