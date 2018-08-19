@@ -1,50 +1,54 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: glossary.aux
 The style file: plainnat.bst
 Database file #1: references.bib
+Repeated entry---line 101 of file references.bib
+ : @inproceedings{mikolov2013distributed
+ :                                      ,
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for ""
 Warning--I didn't find a database entry for "bibid"
-You've used 2 entries,
+You've used 14 entries,
             2773 wiz_defined-function locations,
-            605 strings with 5291 characters,
-and the built_in function-call counts, 1306 in all, are:
-= -- 109
-> -- 96
-< -- 1
-+ -- 32
-- -- 30
-* -- 108
-:= -- 199
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 16
-chr.to.int$ -- 2
-cite$ -- 4
-duplicate$ -- 55
-empty$ -- 89
-format.name$ -- 32
-if$ -- 272
-int.to.chr$ -- 1
+            661 strings with 7787 characters,
+and the built_in function-call counts, 8234 in all, are:
+= -- 718
+> -- 546
+< -- 9
++ -- 184
+- -- 168
+* -- 670
+:= -- 1205
+add.period$ -- 42
+call.type$ -- 14
+change.case$ -- 98
+chr.to.int$ -- 12
+cite$ -- 28
+duplicate$ -- 383
+empty$ -- 614
+format.name$ -- 182
+if$ -- 1766
+int.to.chr$ -- 3
 int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 18
-num.names$ -- 8
-pop$ -- 35
+missing$ -- 14
+newline$ -- 78
+num.names$ -- 56
+pop$ -- 215
 preamble$ -- 1
-purify$ -- 14
+purify$ -- 84
 quote$ -- 0
-skip$ -- 51
+skip$ -- 332
 stack$ -- 0
-substring$ -- 44
-swap$ -- 14
-text.length$ -- 1
+substring$ -- 300
+swap$ -- 101
+text.length$ -- 9
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 22
+type$ -- 154
 warning$ -- 0
-while$ -- 9
+while$ -- 63
 width$ -- 0
-write$ -- 32
-(There were 2 warnings)
+write$ -- 184
+(There was 1 error message)

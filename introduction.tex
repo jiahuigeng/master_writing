@@ -1,10 +1,42 @@
 
 \chapter{Introduction}
+Different from image and audio processing, objective can be the compound of sub-layer information like pixel value or ...
+Traditional language processing systems treat words as discrete atomic symbols, they assign for each word a specific id number. Such encoding are arbitrary, and it does not provide any information about the relations that may exist between individual symbols. Actually maybe 'dog' may have some common activities description as 'cat'. If we can not capture such relationship, we need to run the algorithm on much more data or need human efforts like labeling or grammar analysis since representing word as unique, discrete ids leads to data sparsity.  
+In comparison, with learning algorithm each word can be represented in high dimensional continuous space. 
+According to the distributional hypothesis, similar words tends to occurs with similar neighbors, so similar words have similar word word representation.
+
+Word embedding attached more for natural language processing, for example sentiment analysis and machine translation in recent years.
+
+
+
+\section{Related Work}
+\subsection{Word Embedding}
+There are many successful methods \cite{mikolov2013efficient} \cite{mikolov2013distributed}for continuous distributed representation of words. Exploiting word occurrence statistics, word vectors reflect the semantic similarities and dissimilarities. Similar words are close in the embedding space. \cite{pennington2014glove}
+
+ 
+\cite{bojanowski2016enriching}
+
+
+\cite{mikolov2013exploiting} first noticed that continuous word embedding space exhibits similar structures according languages, even for distant language pairs. They proposed to learn similarity by learning a linear mapping from a source to a target embedding space. They employed a parallel vocabulary of five thousand words as anchor points to learn this mapping and evaluated their approach on a word translation task.
+
+In practice, Mikolov found that the similarity cross languages can be represented by a linear transformation.\cite{xing2015normalized} showed that results can be improved by enforce an orthogonal constraint on the the linear mapping.
+
+Recently, \cite{artetxe2017learning} proposed an iterative method that align the word embedding spaces gradually. He still need a parallel vocabulary like digits or to start the procedure.
+
+\cite{cao2016distribution}
+ \cite{zhang2017adversarial} proposed a method using adversarial training without any parallel data. The discriminator tried to discriminate if the embedding from the source side and the generator aimed to learning the mapping from source embedding space to target one.
+
+
+
+\cite{conneau2017word} viewed the word translation task as a word retrieval task and find the nearest neighbor searching suffers from the hubness problem. They further proposed to use cross-domain similarity local scaling (CSLS) penalize the hubs and a validation criterion for unsupervised model selection.
 
 
 
 
-\section{Neural Network Lexicon}
 
 
-\section{Cross-lingual Word Embedding}
+
+
+
+
+

@@ -1,10 +1,10 @@
-\select@language {ngerman}
-\select@language {ngerman}
-\select@language {british}
+\babel@toc {ngerman}{}
+\babel@toc {ngerman}{}
+\babel@toc {british}{}
 \contentsline {chapter}{\nonumberline Abstract}{v}{chapter*.2}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Neural Network Lexicon}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}Cross-lingual Word Embedding}{1}{section.1.2}
+\contentsline {section}{\numberline {1.1}Related Work}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Word Embedding}{1}{subsection.1.1.1}
 \contentsline {chapter}{\numberline {2}Machine Translation}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Rule-based machine translation}{3}{section.2.1}
 \contentsline {section}{\numberline {2.2}Statistical machine translation}{3}{section.2.2}
@@ -20,21 +20,25 @@
 \contentsline {section}{\numberline {3.1}Monolingual Embedding}{7}{section.3.1}
 \contentsline {section}{\numberline {3.2}Cross-lingual Word Embedding}{9}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Supervised Learning}{9}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Unsupervised Learning}{9}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.2}Unsupervised Learning}{10}{subsection.3.2.2}
 \contentsline {subsubsection}{\nonumberline Unsupervised Initialization}{10}{section*.7}
-\contentsline {subsubsection}{\nonumberline Iterative Closest Point Method}{10}{section*.8}
-\contentsline {subsubsection}{\nonumberline Adversarial Training}{10}{section*.9}
-\contentsline {subsection}{\numberline {3.2.3}Cross-domain Similarity Local Scaling (CSLS)}{10}{subsection.3.2.3}
-\contentsline {subsubsection}{\nonumberline Model Selection}{11}{section*.10}
-\contentsline {chapter}{\numberline {4}Sentence Translation}{13}{chapter.4}
-\contentsline {section}{\numberline {4.1}Context-aware Beam Search}{13}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Language Model}{13}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Beam Search}{13}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Denoising Autoencoder}{14}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Reordering Noise}{15}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Insertion Noise}{15}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Deletion Noise}{16}{subsection.4.2.3}
-\contentsline {chapter}{\numberline {A}Appendix}{17}{appendix.A}
-\contentsline {chapter}{\nonumberline List of Figures}{19}{chapter*.11}
-\contentsline {chapter}{\nonumberline List of Tables}{21}{chapter*.12}
-\contentsline {chapter}{\nonumberline Bibliography}{23}{chapter*.13}
+\contentsline {subsubsection}{\nonumberline Iterative Closest Point Method}{12}{section*.8}
+\contentsline {subsubsection}{\nonumberline Adversarial Training}{13}{section*.9}
+\contentsline {subsection}{\numberline {3.2.3}Cross-domain Similarity Local Scaling (CSLS)}{13}{subsection.3.2.3}
+\contentsline {subsubsection}{\nonumberline Model Selection}{14}{section*.10}
+\contentsline {chapter}{\numberline {4}Sentence Translation}{15}{chapter.4}
+\contentsline {section}{\numberline {4.1}Context-aware Beam Search}{15}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Language Model}{15}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Beam Search}{15}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Denoising Autoencoder}{16}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Reordering Noise}{17}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Insertion Noise}{17}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Deletion Noise}{18}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Neural Network}{18}{section.4.3}
+\contentsline {subsubsection}{\nonumberline Seq2seq Model}{18}{section*.11}
+\contentsline {subsubsection}{\nonumberline Attention Mechanism}{19}{section*.12}
+\contentsline {subsubsection}{\nonumberline Transformer}{21}{section*.13}
+\contentsline {chapter}{\numberline {A}Appendix}{25}{appendix.A}
+\contentsline {chapter}{\nonumberline List of Figures}{27}{chapter*.14}
+\contentsline {chapter}{\nonumberline List of Tables}{29}{chapter*.15}
+\contentsline {chapter}{\nonumberline Bibliography}{31}{chapter*.16}

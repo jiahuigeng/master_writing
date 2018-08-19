@@ -1,9 +1,41 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{14}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Artetxe et~al.(2017)Artetxe, Labaka, and Agirre]{artetxe2017learning}
+Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
+\newblock Learning bilingual word embeddings with (almost) no bilingual data.
+\newblock In \emph{Proceedings of the 55th Annual Meeting of the Association
+  for Computational Linguistics (Volume 1: Long Papers)}, volume~1, pages
+  451--462, 2017.
+
+\bibitem[Artetxe et~al.(2018)Artetxe, Labaka, and Agirre]{artetxe2018robust}
+Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
+\newblock A robust self-learning method for fully unsupervised cross-lingual
+  mappings of word embeddings.
+\newblock \emph{arXiv preprint arXiv:1805.06297}, 2018.
+
+\bibitem[Bahdanau et~al.(2014)Bahdanau, Cho, and Bengio]{bahdanau2014neural}
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio.
+\newblock Neural machine translation by jointly learning to align and
+  translate.
+\newblock \emph{arXiv preprint arXiv:1409.0473}, 2014.
+
+\bibitem[Bojanowski et~al.(2016)Bojanowski, Grave, Joulin, and
+  Mikolov]{bojanowski2016enriching}
+Piotr Bojanowski, Edouard Grave, Armand Joulin, and Tomas Mikolov.
+\newblock Enriching word vectors with subword information.
+\newblock \emph{arXiv preprint arXiv:1607.04606}, 2016.
+
+\bibitem[Cao et~al.(2016)Cao, Zhao, Zhang, and Meng]{cao2016distribution}
+Hailong Cao, Tiejun Zhao, Shu Zhang, and Yao Meng.
+\newblock A distribution-based model to learn bilingual word embeddings.
+\newblock In \emph{Proceedings of COLING 2016, the 26th International
+  Conference on Computational Linguistics: Technical Papers}, pages 1818--1827,
+  2016.
 
 \bibitem[Conneau et~al.(2017)Conneau, Lample, Ranzato, Denoyer, and
   J{\'e}gou]{conneau2017word}
@@ -12,12 +44,60 @@ Alexis Conneau, Guillaume Lample, Marc'Aurelio Ranzato, Ludovic Denoyer, and
 \newblock Word translation without parallel data.
 \newblock \emph{arXiv preprint arXiv:1710.04087}, 2017.
 
-\bibitem[Mikolov et~al.(2013)Mikolov, Sutskever, Chen, Corrado, and
-  Dean]{mikolov2013distributed}
+\bibitem[Luong et~al.(2015)Luong, Pham, and Manning]{luong2015effective}
+Minh-Thang Luong, Hieu Pham, and Christopher~D Manning.
+\newblock Effective approaches to attention-based neural machine translation.
+\newblock \emph{arXiv preprint arXiv:1508.04025}, 2015.
+
+\bibitem[Mikolov et~al.(2013{\natexlab{a}})Mikolov, Chen, Corrado, and
+  Dean]{mikolov2013efficient}
+Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean.
+\newblock Efficient estimation of word representations in vector space.
+\newblock \emph{arXiv preprint arXiv:1301.3781}, 2013{\natexlab{a}}.
+
+\bibitem[Mikolov et~al.(2013{\natexlab{b}})Mikolov, Le, and
+  Sutskever]{mikolov2013exploiting}
+Tomas Mikolov, Quoc~V Le, and Ilya Sutskever.
+\newblock Exploiting similarities among languages for machine translation.
+\newblock \emph{arXiv preprint arXiv:1309.4168}, 2013{\natexlab{b}}.
+
+\bibitem[Mikolov et~al.(2013{\natexlab{c}})Mikolov, Sutskever, Chen, Corrado,
+  and Dean]{mikolov2013distributed}
 Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg~S Corrado, and Jeff Dean.
 \newblock Distributed representations of words and phrases and their
   compositionality.
 \newblock In \emph{Advances in neural information processing systems}, pages
-  3111--3119, 2013.
+  3111--3119, 2013{\natexlab{c}}.
+
+\bibitem[Pennington et~al.(2014)Pennington, Socher, and
+  Manning]{pennington2014glove}
+Jeffrey Pennington, Richard Socher, and Christopher Manning.
+\newblock Glove: Global vectors for word representation.
+\newblock In \emph{Proceedings of the 2014 conference on empirical methods in
+  natural language processing (EMNLP)}, pages 1532--1543, 2014.
+
+\bibitem[Xing et~al.(2015)Xing, Wang, Liu, and Lin]{xing2015normalized}
+Chao Xing, Dong Wang, Chao Liu, and Yiye Lin.
+\newblock Normalized word embedding and orthogonal transform for bilingual word
+  translation.
+\newblock In \emph{Proceedings of the 2015 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 1006--1011, 2015.
+
+\bibitem[Xu et~al.(2015)Xu, Ba, Kiros, Cho, Courville, Salakhudinov, Zemel, and
+  Bengio]{xu2015show}
+Kelvin Xu, Jimmy Ba, Ryan Kiros, Kyunghyun Cho, Aaron Courville, Ruslan
+  Salakhudinov, Rich Zemel, and Yoshua Bengio.
+\newblock Show, attend and tell: Neural image caption generation with visual
+  attention.
+\newblock In \emph{International conference on machine learning}, pages
+  2048--2057, 2015.
+
+\bibitem[Zhang et~al.(2017)Zhang, Liu, Luan, and Sun]{zhang2017adversarial}
+Meng Zhang, Yang Liu, Huanbo Luan, and Maosong Sun.
+\newblock Adversarial training for unsupervised bilingual lexicon induction.
+\newblock In \emph{Proceedings of the 55th Annual Meeting of the Association
+  for Computational Linguistics (Volume 1: Long Papers)}, volume~1, pages
+  1959--1970, 2017.
 
 \end{thebibliography}

@@ -71,8 +71,34 @@ They initialize the model with an inferred bilingual dictionary. They leverage s
 
 
 
+Unsupervised MT
+Learn language models ${P_s}$ and ${P_t}$ over source and target languages
 
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwResult{Unsupervised Machine Translation}
+	\KwIn{Language models ${LM_{s}}$ ${LM_t}$ over the source and target languages} 
+	\textbf{Initialize translation models:}  Leveraging ${P_s}$ and ${P_t}$, learn two initial translation models, one in each direction: ${P_{s\rightarrow t}^{(0)}}$ and ${P_{t\rightarrow s}^{(0)}}$ 
+	\BlankLine
+	\For{${k=1}$ to ${N}$}{
+		\begin{itemize}
+			\BlankLine
+			\item 	\textbf{Backtranslation:} Generate source and target sentences using the current
+			translation models ${P_{t\rightarrow s }^{(k-1)}}$ and ${P_{s \rightarrow t}^{(k-1)} }$, factoring in language models, ${P_s}$ and ${P_t}$;
+			\item 	\textbf{Train new translation models ${P_{s\rightarrow t}^{(k)}}$ and ${P_{t \rightarrow s}^{(k)}}$:} Use the generated sentences and leveraging ${P_s}$ and ${P_t}$
+		\end{itemize}
+}	
 
+	
+
+	\caption{How to write algorithms}
+\end{algorithm}
+
+Initial translation models: 
+
+Backtranslation: Generate source and target sentences using the current
+translation models ${P_{t\rightarrow s }^{(k-1)}}$ and ${P_{s \rightarrow t}^{(k-1)} }$, factoring in language models, ${P_s}$ and ${P_t}$;
+Train new translation models ${P_{s\rightarrow t}^{(k)}}$ and ${P_{t \rightarrow s}^{(k)}}$ using the generated sentences and leveraging ${P_s}$ and ${P_t}$
 
 
 

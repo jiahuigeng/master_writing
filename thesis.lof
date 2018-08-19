@@ -1,10 +1,13 @@
-\select@language {ngerman}
-\select@language {ngerman}
-\select@language {british}
+\babel@toc {ngerman}{}
+\babel@toc {ngerman}{}
+\babel@toc {british}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces A cross-lingual embedding space between German and English}}{9}{figure.3.1}
+\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces Accuracy on bilingual lexicon induction}}{11}{figure.3.2}
+\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Accuracy on bilingual lexicon induction}}{12}{figure.3.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

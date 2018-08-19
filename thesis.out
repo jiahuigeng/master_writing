@@ -2,8 +2,8 @@
 \BOOKMARK [0][]{chapter*.2}{Abstract}{}% 2
 \BOOKMARK [0][]{toc.0}{Contents}{}% 3
 \BOOKMARK [0][]{chapter.1}{1 Introduction}{}% 4
-\BOOKMARK [1][]{section.1.1}{1.1 Neural Network Lexicon}{chapter.1}% 5
-\BOOKMARK [1][]{section.1.2}{1.2 Cross-lingual Word Embedding}{chapter.1}% 6
+\BOOKMARK [1][]{section.1.1}{1.1 Related Work}{chapter.1}% 5
+\BOOKMARK [2][]{subsection.1.1.1}{1.1.1 Word Embedding}{section.1.1}% 6
 \BOOKMARK [0][]{chapter.2}{2 Machine Translation}{}% 7
 \BOOKMARK [1][]{section.2.1}{2.1 Rule-based machine translation}{chapter.2}% 8
 \BOOKMARK [1][]{section.2.2}{2.2 Statistical machine translation}{chapter.2}% 9
@@ -26,7 +26,8 @@
 \BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Reordering Noise}{section.4.2}% 26
 \BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Insertion Noise}{section.4.2}% 27
 \BOOKMARK [2][]{subsection.4.2.3}{4.2.3 Deletion Noise}{section.4.2}% 28
-\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 29
-\BOOKMARK [0][]{chapter*.11}{List of Figures}{}% 30
-\BOOKMARK [0][]{chapter*.12}{List of Tables}{}% 31
-\BOOKMARK [0][]{chapter*.13}{Bibliography}{}% 32
+\BOOKMARK [1][]{section.4.3}{4.3 Neural Network}{chapter.4}% 29
+\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 30
+\BOOKMARK [0][]{chapter*.14}{List of Figures}{}% 31
+\BOOKMARK [0][]{chapter*.15}{List of Tables}{}% 32
+\BOOKMARK [0][]{chapter*.16}{Bibliography}{}% 33
