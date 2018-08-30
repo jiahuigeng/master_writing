@@ -8,3 +8,10 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {\relax 6.1}{\ignorespaces Translation results on German$\leftrightarrow $English \texttt {newstest2016} and French$\leftrightarrow $English \texttt {newstest2014}.}}{36}{table.6.1}
+\contentsline {table}{\numberline {\relax 6.2}{\ignorespaces Word-by-word translation from German to English}}{36}{table.6.2}
+\contentsline {table}{\numberline {\relax 6.2}{\ignorespaces Word embedding vocabulary cut-off}}{37}{table.6.2}
+\contentsline {table}{\numberline {\relax 6.3}{\ignorespaces Phrase embedding vocabulary cut-off}}{37}{table.6.3}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

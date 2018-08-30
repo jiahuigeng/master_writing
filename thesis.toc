@@ -3,43 +3,63 @@
 \babel@toc {british}{}
 \contentsline {chapter}{\nonumberline Abstract}{v}{chapter*.2}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Related Work}{1}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}Word Embedding}{1}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}Outline}{2}{subsection.1.1.2}
-\contentsline {chapter}{\numberline {2}Machine Translation}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}Rule-based machine translation}{3}{section.2.1}
-\contentsline {section}{\numberline {2.2}Statistical machine translation}{3}{section.2.2}
-\contentsline {subsubsection}{\nonumberline Probabilistic Model}{4}{section*.4}
-\contentsline {subsubsection}{\nonumberline Weighted Model}{4}{section*.5}
-\contentsline {subsubsection}{\nonumberline Log-linear Model Combination}{4}{section*.6}
-\contentsline {section}{\numberline {2.3}Neural machine translation}{4}{section.2.3}
-\contentsline {section}{\numberline {2.4}Unsupervised Machine Translation}{5}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Language Model}{5}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Back Translation}{5}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Shared Latent Representations}{5}{subsection.2.4.3}
-\contentsline {chapter}{\numberline {3}Word Embedding}{7}{chapter.3}
-\contentsline {section}{\numberline {3.1}Monolingual Embedding}{7}{section.3.1}
-\contentsline {section}{\numberline {3.2}Cross-lingual Word Embedding}{9}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Supervised Learning}{9}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Unsupervised Learning}{10}{subsection.3.2.2}
-\contentsline {subsubsection}{\nonumberline Unsupervised Initialization}{10}{section*.7}
-\contentsline {subsubsection}{\nonumberline Iterative Closest Point Method}{12}{section*.8}
-\contentsline {subsubsection}{\nonumberline Adversarial Training}{13}{section*.9}
-\contentsline {subsection}{\numberline {3.2.3}Cross-domain Similarity Local Scaling (CSLS)}{13}{subsection.3.2.3}
-\contentsline {subsubsection}{\nonumberline Model Selection}{14}{section*.10}
-\contentsline {chapter}{\numberline {4}Sentence Translation}{15}{chapter.4}
-\contentsline {section}{\numberline {4.1}Context-aware Beam Search}{15}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Language Model}{15}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Beam Search}{15}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Denoising Autoencoder}{16}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Reordering Noise}{17}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Insertion Noise}{17}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Deletion Noise}{18}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}Neural Network}{18}{section.4.3}
-\contentsline {subsubsection}{\nonumberline Seq2seq Model}{18}{section*.11}
-\contentsline {subsubsection}{\nonumberline Attention Mechanism}{19}{section*.12}
-\contentsline {subsubsection}{\nonumberline Transformer}{21}{section*.13}
-\contentsline {chapter}{\numberline {A}Appendix}{25}{appendix.A}
-\contentsline {chapter}{\nonumberline List of Figures}{27}{chapter*.14}
-\contentsline {chapter}{\nonumberline List of Tables}{29}{chapter*.15}
-\contentsline {chapter}{\nonumberline Bibliography}{31}{chapter*.16}
+\contentsline {section}{\numberline {1.1}Related Work}{2}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Word Embedding}{2}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Unsupervised Machine Translation}{3}{subsection.1.1.2}
+\contentsline {section}{\numberline {1.2}Outline}{3}{section.1.2}
+\contentsline {section}{\numberline {1.3}Notation}{4}{section.1.3}
+\contentsline {chapter}{\numberline {2}Machine Translation}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Statistical Machine Translation}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Word-Based Model}{5}{subsection.2.1.1}
+\contentsline {subsubsection}{\nonumberline Zero-Order Models: IBM-1 \& IBM-2 Models}{6}{section*.4}
+\contentsline {subsubsection}{\nonumberline First-Order Model: HMM}{7}{section*.5}
+\contentsline {subsubsection}{\nonumberline Weighted Model}{7}{section*.6}
+\contentsline {subsubsection}{\nonumberline Fertility: IBM-3 Model}{7}{section*.7}
+\contentsline {subsection}{\numberline {2.1.2}Phrase-Based Model}{8}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}Neural Machine Translation}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Seq2seq Model}{9}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Attention Mechanism}{10}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Transformer}{14}{subsection.2.2.3}
+\contentsline {section}{\numberline {2.3}Unsupervised Machine Translation}{15}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Decipherment}{15}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Neural Unsupervised Machine Translation}{16}{subsection.2.3.2}
+\contentsline {subsubsection}{\nonumberline Dual Structure}{17}{section*.8}
+\contentsline {subsubsection}{\nonumberline Initialization}{17}{section*.9}
+\contentsline {subsubsection}{\nonumberline Optimization}{17}{section*.10}
+\contentsline {chapter}{\numberline {3}Word Embedding}{19}{chapter.3}
+\contentsline {section}{\numberline {3.1}Monolingual Embedding}{19}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}CBOW and Skip-gram Model}{19}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}fastText}{20}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Supervised Learning of Cross-lingual Word Embedding}{21}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}***}{22}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Orthogonal Constraints}{23}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}CSLS Loss}{23}{subsection.3.2.3}
+\contentsline {chapter}{\numberline {4}Cross-lingual Word Embedding without Parallel Data}{25}{chapter.4}
+\contentsline {section}{\numberline {4.1}Initialization}{25}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Heuristics}{26}{subsection.4.1.1}
+\contentsline {subsubsection}{\nonumberline Iterative Closest Point Method}{26}{section*.11}
+\contentsline {subsection}{\numberline {4.1.2}Adversarial autoencoder}{27}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Adversarial Training}{27}{subsection.4.1.3}
+\contentsline {subsubsection}{\nonumberline Model Selection}{28}{section*.12}
+\contentsline {section}{\numberline {4.2}Iterative Training}{28}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Self-learning with Procrustes}{28}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Data-driven Method}{28}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Word Translation Induction}{30}{section.4.3}
+\contentsline {section}{\numberline {4.4}Non-linear Mapping}{30}{section.4.4}
+\contentsline {chapter}{\numberline {5}Sentence Translation}{31}{chapter.5}
+\contentsline {section}{\numberline {5.1}Context-aware Beam Search}{31}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Language Model}{31}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Beam Search}{31}{subsection.5.1.2}
+\contentsline {section}{\numberline {5.2}Denoising Autoencoder}{32}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Reordering Noise}{33}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Insertion Noise}{33}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Deletion Noise}{34}{subsection.5.2.3}
+\contentsline {chapter}{\numberline {6}Experiments}{35}{chapter.6}
+\contentsline {section}{\numberline {6.1}Corpus Statistics}{35}{section.6.1}
+\contentsline {section}{\numberline {6.2}title}{35}{section.6.2}
+\contentsline {section}{\numberline {6.3}title}{35}{section.6.3}
+\contentsline {chapter}{\numberline {7}Conclusion}{39}{chapter.7}
+\contentsline {chapter}{\numberline {A}Appendix}{41}{appendix.A}
+\contentsline {chapter}{\nonumberline List of Figures}{43}{chapter*.13}
+\contentsline {chapter}{\nonumberline List of Tables}{45}{chapter*.14}
+\contentsline {chapter}{\nonumberline Bibliography}{47}{chapter*.15}

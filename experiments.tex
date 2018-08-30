@@ -1,0 +1,183 @@
+\chapter{Experiments}
+
+\section{Corpus Statistics}
+\begin{table}
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		\hline
+		\multirow{4}{*}{\textbf{Train}} & \textbf{}              & \textbf{German} & \textbf{English} & \textbf{French} \\ \cline{2-5} 
+		& \textbf{Sentences}     & \textbf{100M}   & \textbf{100M}    & \textbf{100M}   \\ \cline{2-5} 
+		& \textbf{Running Words} & \textbf{1880M}  & \textbf{2360M}   & \textbf{3017M}  \\ \cline{2-5} 
+		& \textbf{Vocabulary}    & \textbf{1254k}  & \textbf{523k}    & \textbf{660k}   \\ \hline
+	\end{tabular}
+	
+
+	\centering
+
+		\begin{tabular}{c|c|c|c|c|c}
+			\hline
+			\multirow{7}{*}{\textbf{Test}} & \textbf{}                      & \multicolumn{2}{c|}{\textbf{\texttt{newstest2016}}}    & \multicolumn{2}{c}{\textbf{\texttt{newstest2014}}}    \\ \cline{3-6} 
+			& \multicolumn{1}{l|}{\textbf{}} & \textbf{German}       & \textbf{English}      & \textbf{French}       & \textbf{English}      \\ \cline{2-6} 
+			& \textbf{Sentences}             & \textbf{2999}         & \textbf{2999}         & \textbf{3003}         & \textbf{3003}         \\ \cline{2-6} 
+			& \textbf{Running Words}         & \textbf{62506}        & \textbf{64619}        & \textbf{81165}        & \textbf{71290}        \\ \cline{2-6} 
+			& \textbf{Vocabulary Size}       & \textbf{11978}        & \textbf{8645}         & \textbf{10899}        & \textbf{9200}         \\ \cline{2-6} 
+			& \textbf{OOV Rates}             & \textbf{4116 (6.6\%)} & \textbf{1643 (2.5\%)} & \textbf{1731 (2.1\%)} & \textbf{1299 (1.8\%)} \\ \cline{2-6} 
+			& \textbf{LM perplexity}         & \textbf{211.0}        & \textbf{109.6}        & \textbf{51.2}         & \textbf{84.6}         \\ \hline
+			\multicolumn{4}{l}{\textbf{Search vocabulary in testing: 50k (src/tgt)}} \\
+			
+	\end{tabular}
+\end{table}
+
+\section{title}
+
+
+\begin{table}
+	
+	\caption{Translation results on German$\leftrightarrow$English \texttt{newstest2016} and French$\leftrightarrow$English \texttt{newstest2014}.}
+	\centering
+\scalebox{0.8}{
+		\begin{tabular}{>{\bfseries}l>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c}
+			\toprule
+			& de-en & en-de & fr-en & en-fr\\
+			System   & \textsc{Bleu} [\%] & \textsc{Bleu} [\%] & \textsc{Bleu} [\%] & \textsc{Bleu} [\%]\\
+			\midrule
+			Word-by-Word   & 11.1 & 6.7 & 10.6 & 7.8\\
+			\midrule
+			+ LM (5-gram) + tgt w/ high LM score for OOV  & 12.9 & 8.9 & 12.7 & 10.0\\
+			+ LM (5-gram) + copy from src for OOV		& 14.5 & 9.9 & 13.6 & 10.9\\
+			\midrule
+			\hspace{10pt}+ Denoising (RNN)  & 16.2 & 10.6 & 15.8 & 13.3 \\
+			\hspace{10pt}+ Denoising (Transformer) & \leavevmode\color{blue}{17.2} & \leavevmode\color{blue}{11.0}& \leavevmode\color{blue}{16.5} & \leavevmode\color{blue}13.9 \\
+			\midrule
+			\cite{lample2017unsupervised} & 13.3 & 9.6 & 14.3 & 15.1\\
+			\cite{artetxe2017unsupervised} & - & - & 15.6 & 15.1\\
+			\bottomrule
+		\end{tabular}
+	}
+\end{table}
+
+
+\section{title}
+	\begin{table}[!h]
+	\centering
+	\caption {Word-by-word translation from German to English}
+	\begin{tabular}{>{\bfseries}c>{\bfseries}c>{\bfseries}c}
+		\hline
+		&\textsc{Accuracy} [\%]& \textsc{Bleu} [\%] \\ \hline
+		5M & 44.9  & 9.7  \\ \hline
+		10M & 51.6 & 10.1 \\ \hline
+		50M & 59.4 & 10.8 \\ \hline
+		100M &\leavevmode\color{blue}61.2 & \leavevmode\color{blue}11.2 \\ \hline
+	\end{tabular}
+\end{table}
+
+
+
+	\begin{table}[!ht]
+	\centering
+	\scalebox{0.9}{
+		\begin{tabular}{>{\bfseries}l>{\bfseries}c>{\bfseries}c}
+			\toprule
+			\multicolumn{2}{c}{\textbf{Vocabulary}} & \textsc{Bleu} [\%] \\
+			\midrule
+			& Merges \\
+			\cmidrule{2-2}
+			\multirow{3}{*}{BPE} & 
+			20k & 10.4 \\
+			& 50k & 12.5 \\
+			& 100k & \leavevmode\color{blue}13.0 \\
+			\midrule
+			& Cross-lingual training \\
+			\cmidrule{2-2}
+			\multirow{4}{*}{Word} & 20k & 14.4\\
+			& 50k & 14.4\\
+			& 100k & \leavevmode\color{blue}14.5\\
+			& 200k & 14.4\\
+			\bottomrule
+		\end{tabular}
+	}
+	
+	
+\end{table}
+
+
+		\begin{table}[!h]
+	\centering
+	\scalebox{1}{
+		\begin{tabular}{>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}r>{\bfseries}c}
+			\toprule
+			$d_\text{per}$ & $p_\text{del}$ & $p_\text{ins}$ & $V_\text{ins}$ & \textsc{Bleu} [\%] \\
+			\midrule
+			2 & & & & 14.7\\
+			3 & & & & \leavevmode\color{blue}{14.9}\\
+			5 & & & & 14.9\\
+			\midrule
+			\multirow{2}{*}{3} & 0.1 & &  & \leavevmode\color{blue}{15.7} \\
+			& 0.3 & & & 15.1 \\
+			\midrule
+			\multirow{4}{*}{3} & \multirow{4}{*}{0.1} & \multirow{4}{*}{0.1} & 10 & 16.8 \\
+			& & & 50 & \leavevmode\color{blue}{17.2} \\
+			& & & 500 & 16.8 \\
+			& & & 5000 & 16.5\\
+			\bottomrule
+		\end{tabular}
+	}
+	\setcounter{table}{1}
+	\label{tab:denoising}
+\end{table}
+
+
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c  >{\bfseries}c}
+		\hline
+		\multicolumn{3}{c}{\multirow{2}{*}{\textbf{Vocabulary}}}                  & No LM & With LM & Denoising \\
+		\multicolumn{3}{c}{}                                         &  \textsc{Bleu} [\%]  &  \textsc{Bleu} [\%] & \textsc{Bleu} [\%]   \\ \hline
+		Word            & \multicolumn{2}{l}{}              & 11.2 & 14.5  &\leavevmode\color{blue}{ 17.2} \\
+		\hline
+		\multirow{3}{*}{\cite{mikolov2013distributed} } & \multirow{3}{*}{threshold} & 100  & 11.1 & 13.7  & 15.6 \\ \cline{3-6} 
+		&                            & 500  & 11.0 & 13.7  & 16.2 \\ \cline{3-6} 
+		&                            & 2000 & 10.7 & 14.0  &16.5 \\ \hline
+		Top frequent              & \multicolumn{1}{l}{\textbf{count}}  & 50k  & \leavevmode\color{blue}12.0 & \leavevmode\color{blue}15.7  & 16.8 \\ \hline
+	\end{tabular}
+\end{table}
+
+
+\begin{table}
+	\parbox{.5\linewidth}{
+		\centering
+		\caption{Word embedding vocabulary cut-off}
+		\begin{tabular}{>{\bfseries}c >{\bfseries}c >{\bfseries}c >{\bfseries}c } 
+			\hline
+			\textsc{Bleu} [\%]	& 20k & 50k & 100k \\
+			\hline
+			50k &	11.1  & \leavevmode\color{blue}11.3 & 11.2  \\ 
+			\hline
+			100k&	11.2  & 11.2 & 11.1 \\ 			
+			\hline
+			150k&	10.9 & 10.9 & - \\
+			\hline
+		\end{tabular}
+		
+	}
+	\hfill
+	\parbox{.5\linewidth}{
+		\centering
+		\caption{Phrase embedding vocabulary cut-off}
+		\begin{tabular}{>{\bfseries}c >{\bfseries}c >{\bfseries}c >{\bfseries}c } 
+			\hline
+			\textsc{Bleu} [\%]	& 50k & 100k & 150k \\
+			\hline
+			50k &	11.3  & - & -  \\ 
+			\hline
+			100k&	11.9  & 11.9 & - \\ 			
+			\hline
+			150k&	\leavevmode\color{blue}12.0 & 11.9 & 11.9 \\
+			\hline
+			200k & 12.0 & - & - \\
+			\hline
+		\end{tabular}
+		
+	}
+\end{table}

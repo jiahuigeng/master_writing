@@ -4,10 +4,17 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 2.1}{\ignorespaces Neural machine translation \IeC {\textendash } example of a deep recurrent architecture (\cite {luong2015effective})}}{9}{figure.2.1}
+\contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces Global attention model (\cite {luong2015effective})}}{11}{figure.2.2}
+\contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Local attention model (\cite {luong2015effective})}}{12}{figure.2.3}
+\contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces (The Transformer model architecture\cite {vaswani2017attention})}}{13}{figure.2.4}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces A cross-lingual embedding space between German and English}}{9}{figure.3.1}
-\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces Accuracy on bilingual lexicon induction}}{11}{figure.3.2}
-\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Accuracy on bilingual lexicon induction}}{12}{figure.3.3}
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces A cross-lingual embedding space between German and English (\cite {ruder2017survey})}}{21}{figure.3.1}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Accuracy on bilingual lexicon induction}}{26}{figure.4.1}
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Accuracy on bilingual lexicon induction}}{29}{figure.4.2}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

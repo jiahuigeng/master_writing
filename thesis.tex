@@ -42,7 +42,8 @@
 \pgfplotsset{compat=1.9}
 
 \usepackage[algo2e]{algorithm2e}
-
+\usepackage{indentfirst}
+\setlength{\parindent}{0em}
 \usepackage{amssymb}
 
 \usepackage{glossaries} % for the glossary of cause 
@@ -86,7 +87,7 @@
 
 \usepackage{needspace} %To prevent line break where I don't want it
 \usepackage{fix-cm} % to build huge font size
-
+\usepackage{multirow}
 
 %\usepackage{cite} %Allows citations to be broken at the end of a line
 
@@ -225,15 +226,15 @@
 {\;\newbrace[#1]\;\begin{array}{@{}l@{}}}%
 {\end{array}}
 
-\newcommand{\publicationDate}{27. M\"arz 2018}
+\newcommand{\publicationDate}{20. September 2018}
 \subject{Masterarbeit im Fach Informatik}
 \title{Unsupervised Learning of Neural Network Lexicon and
 	Cross-lingual Word Embedding}
-\newcommand{\Surname}{LastName}
-\newcommand{\Firstname}{Firstname}
+\newcommand{\Surname}{Geng}
+\newcommand{\Firstname}{Jiahui}
 \newcommand{\Aachen}{Aachen}
 \newcommand{\studentname}{\Firstname~\Surname}
-\newcommand{\MatrikelNummer}{Number}
+\newcommand{\MatrikelNummer}{365655}
 \author{\studentname}
 
 
@@ -369,7 +370,7 @@ fill=white!20]
 
 % glossary entries
 \newacronym{NMT}{NMT}{neural machine translation}
-
+\DeclareMathOperator{\E}{\mathbb{E}}
 
 \begin{document}
 
@@ -411,8 +412,14 @@ fill=white!20]
 \input{wordembedding}
 
 \glsresetall
+\input{unsupervisedlearning}
+\glsresetall
 \input{sentencetranslation}
+\glsresetall
+\input{experiments}
 
+\glsresetall
+\input{conclusion}
 
 \appendix
 \input{appendix}
@@ -425,7 +432,7 @@ fill=white!20]
 
 % \nocite{*}
 
-\printglossaries	
+
 
 \bibliographystyle{plainnat}
 \bibliography{references}

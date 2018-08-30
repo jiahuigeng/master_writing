@@ -1,16 +1,23 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Artetxe et~al.(2017)Artetxe, Labaka, and Agirre]{artetxe2017learning}
+\bibitem[Artetxe et~al.(2017{\natexlab{a}})Artetxe, Labaka, and
+  Agirre]{artetxe2017learning}
 Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
 \newblock Learning bilingual word embeddings with (almost) no bilingual data.
 \newblock In \emph{Proceedings of the 55th Annual Meeting of the Association
   for Computational Linguistics (Volume 1: Long Papers)}, volume~1, pages
-  451--462, 2017.
+  451--462, 2017{\natexlab{a}}.
+
+\bibitem[Artetxe et~al.(2017{\natexlab{b}})Artetxe, Labaka, Agirre, and
+  Cho]{artetxe2017unsupervised}
+Mikel Artetxe, Gorka Labaka, Eneko Agirre, and Kyunghyun Cho.
+\newblock Unsupervised neural machine translation.
+\newblock \emph{arXiv preprint arXiv:1710.11041}, 2017{\natexlab{b}}.
 
 \bibitem[Artetxe et~al.(2018)Artetxe, Labaka, and Agirre]{artetxe2018robust}
 Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
@@ -37,12 +44,65 @@ Hailong Cao, Tiejun Zhao, Shu Zhang, and Yao Meng.
   Conference on Computational Linguistics: Technical Papers}, pages 1818--1827,
   2016.
 
+\bibitem[Chen et~al.(2017)Chen, Liu, Cheng, and Li]{chen2017teacher}
+Yun Chen, Yang Liu, Yong Cheng, and Victor~OK Li.
+\newblock A teacher-student framework for zero-resource neural machine
+  translation.
+\newblock \emph{arXiv preprint arXiv:1705.00753}, 2017.
+
+\bibitem[Cohn and Lapata(2007)]{cohn2007machine}
+Trevor Cohn and Mirella Lapata.
+\newblock Machine translation by triangulation: Making effective use of
+  multi-parallel corpora.
+\newblock In \emph{Proceedings of the 45th Annual Meeting of the Association of
+  Computational Linguistics}, pages 728--735, 2007.
+
 \bibitem[Conneau et~al.(2017)Conneau, Lample, Ranzato, Denoyer, and
   J{\'e}gou]{conneau2017word}
 Alexis Conneau, Guillaume Lample, Marc'Aurelio Ranzato, Ludovic Denoyer, and
   Herv{\'e} J{\'e}gou.
 \newblock Word translation without parallel data.
 \newblock \emph{arXiv preprint arXiv:1710.04087}, 2017.
+
+\bibitem[Duong et~al.(2016)Duong, Kanayama, Ma, Bird, and
+  Cohn]{duong2016learning}
+Long Duong, Hiroshi Kanayama, Tengfei Ma, Steven Bird, and Trevor Cohn.
+\newblock Learning crosslingual word embeddings without bilingual corpora.
+\newblock \emph{arXiv preprint arXiv:1606.09403}, 2016.
+
+\bibitem[Gehring et~al.(2017)Gehring, Auli, Grangier, Yarats, and
+  Dauphin]{gehring2017convolutional}
+Jonas Gehring, Michael Auli, David Grangier, Denis Yarats, and Yann~N Dauphin.
+\newblock Convolutional sequence to sequence learning.
+\newblock \emph{arXiv preprint arXiv:1705.03122}, 2017.
+
+\bibitem[He et~al.(2016)He, Xia, Qin, Wang, Yu, Liu, and Ma]{he2016dual}
+Di~He, Yingce Xia, Tao Qin, Liwei Wang, Nenghai Yu, Tieyan Liu, and Wei-Ying
+  Ma.
+\newblock Dual learning for machine translation.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  820--828, 2016.
+
+\bibitem[Kim et~al.(2017)Kim, Schamper, and Ney]{kim2017unsupervised}
+Yunsu Kim, Julian Schamper, and Hermann Ney.
+\newblock Unsupervised training for large vocabulary translation using sparse
+  lexicon and word classes.
+\newblock In \emph{Proceedings of the 15th Conference of the European Chapter
+  of the Association for Computational Linguistics: Volume 2, Short Papers},
+  volume~2, pages 650--656, 2017.
+
+\bibitem[Lample et~al.(2017)Lample, Denoyer, and
+  Ranzato]{lample2017unsupervised}
+Guillaume Lample, Ludovic Denoyer, and Marc'Aurelio Ranzato.
+\newblock Unsupervised machine translation using monolingual corpora only.
+\newblock \emph{arXiv preprint arXiv:1711.00043}, 2017.
+
+\bibitem[Lample et~al.(2018)Lample, Ott, Conneau, Denoyer, and
+  Ranzato]{lample2018phrase}
+Guillaume Lample, Myle Ott, Alexis Conneau, Ludovic Denoyer, and Marc'Aurelio
+  Ranzato.
+\newblock Phrase-based \& neural unsupervised machine translation.
+\newblock \emph{arXiv preprint arXiv:1804.07755}, 2018.
 
 \bibitem[Luong et~al.(2015)Luong, Pham, and Manning]{luong2015effective}
 Minh-Thang Luong, Hieu Pham, and Christopher~D Manning.
@@ -69,12 +129,52 @@ Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg~S Corrado, and Jeff Dean.
 \newblock In \emph{Advances in neural information processing systems}, pages
   3111--3119, 2013{\natexlab{c}}.
 
+\bibitem[Nuhn and Ney(2014)]{nuhn2014decipherment}
+Malte Nuhn and Hermann Ney.
+\newblock Em decipherment for large vocabularies.
+\newblock In \emph{Proceedings of the 52nd Annual Meeting of the Association
+  for Computational Linguistics (Volume 2: Short Papers)}, volume~2, pages
+  759--764, 2014.
+
+\bibitem[Nuhn et~al.(2012)Nuhn, Mauser, and Ney]{nuhn2012deciphering}
+Malte Nuhn, Arne Mauser, and Hermann Ney.
+\newblock Deciphering foreign language by combining language models and context
+  vectors.
+\newblock In \emph{Proceedings of the 50th Annual Meeting of the Association
+  for Computational Linguistics: Long Papers-Volume 1}, pages 156--164.
+  Association for Computational Linguistics, 2012.
+
 \bibitem[Pennington et~al.(2014)Pennington, Socher, and
   Manning]{pennington2014glove}
 Jeffrey Pennington, Richard Socher, and Christopher Manning.
 \newblock Glove: Global vectors for word representation.
 \newblock In \emph{Proceedings of the 2014 conference on empirical methods in
   natural language processing (EMNLP)}, pages 1532--1543, 2014.
+
+\bibitem[Ravi and Knight(2011)]{ravi2011deciphering}
+Sujith Ravi and Kevin Knight.
+\newblock Deciphering foreign language.
+\newblock In \emph{Proceedings of the 49th Annual Meeting of the Association
+  for Computational Linguistics: Human Language Technologies-Volume 1}, pages
+  12--21. Association for Computational Linguistics, 2011.
+
+\bibitem[Ruder et~al.(2017)Ruder, Vuli{\'c}, and S{\o}gaard]{ruder2017survey}
+Sebastian Ruder, Ivan Vuli{\'c}, and Anders S{\o}gaard.
+\newblock A survey of cross-lingual word embedding models.
+\newblock \emph{arXiv preprint arXiv:1706.04902}, 2017.
+
+\bibitem[Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez,
+  Kaiser, and Polosukhin]{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  5998--6008, 2017.
+
+\bibitem[Vulic and Korhonen(2016)]{vulic2016role}
+Ivan Vulic and Anna-Leena Korhonen.
+\newblock On the role of seed lexicons in learning bilingual word embeddings.
+\newblock 2016.
 
 \bibitem[Xing et~al.(2015)Xing, Wang, Liu, and Lin]{xing2015normalized}
 Chao Xing, Dong Wang, Chao Liu, and Yiye Lin.
