@@ -4,16 +4,19 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 2.1}{\ignorespaces Neural machine translation \IeC {\textendash } example of a deep recurrent architecture (\cite {luong2015effective})}}{9}{figure.2.1}
-\contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces Global attention model (\cite {luong2015effective})}}{11}{figure.2.2}
-\contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Local attention model (\cite {luong2015effective})}}{12}{figure.2.3}
-\contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces (The Transformer model architecture\cite {vaswani2017attention})}}{13}{figure.2.4}
+\contentsline {figure}{\numberline {\relax 2.1}{\ignorespaces Neural machine translation \IeC {\textendash } example of a deep recurrent architecture (\cite {luong2015effective})}}{11}{figure.2.1}
+\contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces Global attention model (\cite {luong2015effective})}}{13}{figure.2.2}
+\contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Local attention model (\cite {luong2015effective})}}{14}{figure.2.3}
+\contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces The Transformer model architecture (\cite {vaswani2017attention})}}{16}{figure.2.4}
+\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces Illustration of unsupervised machine translation: A) the two original monolingual data; B) Initialization, the two distribution are roughly aligned; C) Denoising autoencoder, make the distribution closer to normal one in corresponding language D) Back-translation, improve the both translation model in iterative way (\cite {lample2018phrase})}}{19}{figure.2.5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces A cross-lingual embedding space between German and English (\cite {ruder2017survey})}}{21}{figure.3.1}
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Global attention model (\cite {mikolov2013efficient})}}{23}{figure.3.1}
+\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces A cross-lingual embedding space between German and English (\cite {ruder2017survey})}}{26}{figure.3.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Accuracy on bilingual lexicon induction}}{26}{figure.4.1}
-\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Accuracy on bilingual lexicon induction}}{29}{figure.4.2}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Reordering noise}}{37}{figure.5.1}
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Insertion noise}}{38}{figure.5.2}
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Deletion noise}}{39}{figure.5.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -117,18 +117,17 @@ The first successful neural machine translation , attention mechanism has lately
 	\centering
 \end{figure}
 
-The most common network structure is the encoder-decoder framework and 
-\[ p(e_1^I | f_1^J) = \prod_{t} p(e_i|e_0^{i-1}, f_1^J) = \prod_{t} {p(e_i| e_{i-1}, h_{i-1}, f_1^J)} \] 
-
-
-A basic form of NMT consists of two components: an encoder which computes a representation $\bm{s}$ for the whole source sentence and a decoder which generates one target word a a time and hence decomposes the conditional probability as:
-\[ p(e_1^I|f_1^J) = \prod_{i=1}^{I} p(e_i| e_{i-1}, \bm{s})  \]
+The most common network structure is the encoder-decoder framework, in which two recurrent neural networks work together to transform one sequence to another. An encoder condenses an input sequence into a vector, and a decoder unfolds that vector into a new sequence. The model can be expressed as:
+\[ p(e_1^I | f_1^J) = \prod_{t} p(e_i|e_0^{i-1}, f_1^J) = \prod_{i} {p(e_i|e_0^{i-1},  {\bm{s}})} \] 
+Since the decoder is actually a RNN structure, the conditional probability can be simplified as:
+\[ p(e_i|e_0^{i-1}, \bm{s}) = p(e_i| e_{i-1}, \bm{h}_{i-1}, \bm{s}) \]
+where $\bm{h}_{i-1}$ denotes the hidden state of decoder and $\bm{s}$ is the dense vector representation of source sentence.
 In more detail, the probability of decoding each word $e_i$ as:
-\[ p(e_i|e_{i-1}, \bm{s}) = softmax(g(\bm{h_i}))\]
-$g$ is trainable function which gives the probability of all target words in the vocabulary. 
-$\bm{h}_i$ is the RNN hidden unit, abstractly computed as:
+\[ p(e_i| e_{i-1}, \bm{h}_{i-1}, {\bm{s}}) = softmax(g(\bm{h_i}))\]
+$g$ is trainable function which gives the probability of all target words in the vocabulary. $\bm{h}_i$ is the RNN hidden unit, abstractly computed as:
 \[ \bm{h_i} = f(\bm{h}_{i-1}, \bm{s})\]
-where $f$ defines the transformation connecting hidden states.  
+
+ $f$ defines the transformation connecting hidden states.  \\
 
 
 
@@ -150,11 +149,11 @@ Drawbacks of the such seq2seq model:
 \end{enumerate}
 
 \subsection{Attention Mechanism}
-To solve the problem mentioned above, attention mechanism was proposed to derive a context vector ${\bm{c_t}}$ that capture the input information to help to predict the target word at time ${t}$. The basic idea is: given the target hidden state ${\bm{h_t}}$ and the source-side context vector $\bm{c_t}$, we can compute the hidden state ${\tilde{\bm{h}}_i}$ by combining the current hidden state $\bm{h_t}$ and the context vector $\bm{c_t}$:
-\[ \tilde{\bm{h}}_t = tanh(W_c[\bm{c_t}; \bm{h_t}])\]
+To solve the problem mentioned above, attention mechanism was proposed to derive a context vector ${\bm{c_i}}$ that capture the input information to help to predict the target word at the position ${i}$. The basic idea is: given the target hidden state ${\bm{h_i}}$ and the source-side context vector $\bm{c_t}$, we can compute the hidden state ${\tilde{\bm{h}}_i}$ by combining the current hidden state $\bm{h_i}$ and the context vector $\bm{c_i}$:
+\[ \tilde{\bm{h}}_i = tanh(W_c[\bm{c_i}; \bm{h_i}])\]
 
 Then the target word can be predicted by softmax function:
-\[ p(e_i| y_{\le i, x}) = softmax(W_s \tilde{\bm{h}}_t)\] 
+\[  p(e_i|e_0^{i-1}, f_1^J) = softmax(W_s \tilde{\bm{h}}_t)\] 
 
 \begin{figure}[t]
 	\includegraphics[width=12cm]{attentiong}
@@ -167,168 +166,171 @@ Then the target word can be predicted by softmax function:
 	\caption{Local attention model (\cite{luong2015effective})}
 	\centering
 \end{figure}
-The concept of attention mechanism comes first from the computer vision domain \cite{xu2015show}, when generating image captions,  The model learns to restrict attention to particular objects in the image.
+The concept of attention mechanism comes first from the computer vision domain, when generating image captions,  The model learns f to restrict attention to particular objects in the image.
+We denote the decoder RNN state as $\bm{s}_i$, the encoder hidden state over all position as $\bm{h}_j$.\\
 
-\cite{bahdanau2014neural}
 \textbf{Global attention} \\
-The global attention attend all the input words, weighted sum of 
+The global attention attend all the input words, weighted average of source hidden states (word representations):
+\[ \bm{c}_i = \sum_{j} \bm{\alpha}_i(j)\cdot  \bm{h}_j \]
+where $\bm{\alpha}_i(j)$ is the normalized attention weight that output at position $i$ is aligned with input position $j$, and it can be calculated as the following softmax like function:
 \begin{align}
-a_i(\bm{s}) = & \ \text{align}(\bm{h_i}, \bar{\bm{h}}_s) \\
-= & \ \frac{\text{exp}(\text{score}(h_i, \bar{\bm{h}}_s))}{\sum_{\bm{s}^{\prime}} \text{exp}(\text{score}(h_i, \bar{h}_s^{\prime}))}
+\bm{\alpha}_i(j) = & \ \text{align}(\bm{s}_i, {\bm{h}}_j) \\
+= & \ \frac{\text{exp\ }(\text{score \cite{xu2015show}}(\bm{s}_i, {\bm{h}}_j))}{\sum_{\bm{j}^{\prime}} \text{exp\ }(\text{score}(\bm{s}_i, {\bm{h}}_j^{\prime}))}
 \end{align}
-
+Since score function is referred as a content based function, different forms can be considered:
 \begin{equation}
-\text{score}(\bm{h_i}, \bar{\bm{h}}_s)=\left\{
+\text{score}(\bm{s_i}, {\bm{h}}_j)=\left\{
 \begin{array}{lcl}
-{\bm{h_i}}^T \bar{\bm{h}}_s & & dot\\
-{\bm{h_i}}^T W_a \bar{\bm{h}}_s & & general\\
-{\bm{v_i}}^T tanh(W_a[\bm{h_i}; \bar{\bm{h}}_s]) & & concat
+{\bm{s_i}}^T {\bm{h}}_j & & dot\\
+{\bm{s_i}}^T W_a {\bm{h}}_j & & general\\
+{\bm{v_i}}^T tanh(W_a[\bm{s_i}; {\bm{h}}_j]) & & concat
 \end{array} \right.
 \end{equation}
 
-with soft attention you need to calculate the attention over all features, however with hard attention, it is a deterministic methods so that 
-Hard attention \\
-Soft attention means when computing the distribution of the alignment, for each word in the input sentence, the model will give a probability.
+ 
+\textbf{Soft attention \& hard attention }\\
+With soft attention you need to calculate the attention over all features. While for hard attention, it is a deterministic method, instead of a weighted average, it uses $\bm{\alpha}_i$ as a sample rate to pick one feature.
+That's to say, in soft attention case: when computing the distribution of the alignment, for each word in the input sentence, the model will give a probability. Hard attention will determine a specific word from the input sentence as the alignment and force the alignment probability as ${0}$.  Hard attention mechanism works in image processing however it performs worse in text processing. Because such one-to-one alignment will produce bad translation once a mis-alignment occurs. \\
 
-In comparison with the soft attention, the hard attention will determine a specific word from the input sentence as the alignment and force the alignment probability as ${0}$.  Hard attention mechanism works in image processing however it performs worse in text processing. Because such one-to-one alignment will produce bad translation once a mis-alignment occurs. \cite{luong2015effective} 
 
+\textbf{Local attention}\\
+Since for global attention, for each target word we need to attend the whole input sentence, it is very expensive and impractical to translate longer sentences. \cite{luong2015effective}) proposed the local attention, the local attention is actually the  trade-off between soft and hard attention. \\
+For local attention, the model first generates an aligned position ${a(i)}$ for each target word at position $i$. Then the context vector ${\bm{c}_i}$ is a weighted sum within the window ${[a(i)-D, a(i)+D]}$, ${D}$ is selected empirically. The model predict the aligned  position ${p_i}$ as followed:
+\[ a(i) = S \cdot \text{sigmoid}(\bm{v}_p^T \text{tanh}(W_p \bm{h}_i))\]
 
-\textbf{Local attention }\\
-Since for global attention, for each target word we need to attend the whole input sentence, it is very expensive and impractical to translate longer sentences. Proposed the local attention, the local attention is actually the  tradeoff between soft and hard attention, Soft attention tries to place attention over the whole image "softly" while select one patch of the image to attend. The hard attention need more complicated techniques like variance reduction or reinforcement learning though need less computation when inference.
-
-Local attention: the model first generate an aligned position ${p_i}$ for word at the position ${i}$. Then the context vector ${\bm{c}_i}$ is a weighted sum within the window ${[p_i-D, p_i+D]}$, ${D}$ is selected empirically. The model predict the aligned  position ${p_i}$ as followed:
-\[ p_i = S \cdot \text{sigmoid}(\bm{v}_p^T \text{tanh}(W_p \bm{h}_i))\]
-
-${W_p}$ and ${\bm{v}_p}$ are the model parameters which will be learned to predict positions.
-To favor the words near position ${p_i}$, we place a Gaussian distribution which centered at ${p_i}$.
-\[\bm{a}_i(s) = \text{align}(\bm{h}_i, \bar{\bm{h}}_s)\text{exp}\Big(-\frac{(s-p_i)^2}{2 \sigma^2}\Big) \]
+${W_p}$ and ${\bm{v}_p}$ are the model parameters which will be learned to predict positions. $S$ is the source sentence length. As a result of sigmoid function, $a(i) \in [0, S]$. To favor the words near position ${a(i)}$, they place a Gaussian distribution which centered at ${a(i)}$.
+\[\bm{\alpha}_i(j) = \text{align}(\bm{s}_i, {\bm{h}}_j) \cdot \text{exp\ }\Big(-\frac{(j-a(i))^2}{2 \sigma^2}\Big) \]
 
 \subsection{Transformer}
 \begin{figure}[t]
 	\includegraphics[width=10cm]{transformer}
-	\caption{(The Transformer model architecture\cite{vaswani2017attention})}
+	\caption{The Transformer model architecture (\cite{vaswani2017attention})}
 	\centering
 \end{figure}
-As the illustration above, the long-short term memory (LSTM) and gated recurrent units (GRU) have achieved state of the art in sequence modling and machine translation problem. However the RNN models also have some disadvantages, because of its sequential nature, it is more difficult to fully take advantage of the modern computing devices uch GPU and TPU, which excel at parallel computation not sequential processing.
+The RNN encoder-decoder models have achieved state of the art in sequence modeling and machine translation problem. However such RNN models also have some disadvantages, because of their inherently sequential computation which prevents parallelization across elements of the input sequence. That means it is more difficult to fully take advantage of the modern computing devices like GPU and TPU. Convolutional \cite{gehring2017convolutional} and fully-attentional feed-forward architectures like Transformer \cite{vaswani2017attention} models are proposed as alternatives for RNNs. \\
+
+\textbf{Dot-Product Attention}
+Given a query $\bm{q}$ and a set of key-value $(\bm{k}-\bm{v})$ pairs, the output is weighted average of values, where the weight of each value is computed by inner product of query and corresponding key. The queries and keys are of the same dimension ${d_k}$, values are of dimension ${d_v}$. Actually, for better understanding, the query $\bm{q}$  can be considered as the decoder state $\bm{s}_i$ and key $\bm{k}$ and values $\bm{v}$ can be considered as the encoder state $\bm{h}_j$ in previous attention model. Then the attention of query $\bm{q}$ on all $(\bm{k}-\bm{v})$ pairs are:
+\[ A(\bm{q}, K, V) = \sum_{i}{ \frac{\exp\ ({\bm{q}\cdot \bm{k}_i})}{\sum_{j} \exp\ {\bm{q}\cdot \bm{k}_j} } \cdot \bm{v}_i}\]
+When we stack the queries ${\bm{q}}$ to ${Q}$:
+\[ A(Q, K, V) = \text{softmax}(QK^T)V\]
+
+As ${d_k}$ get larger, the variance of ${q^T k}$ get larger.  The softmax become very peaked and the gradient get smaller. To counteract this effect, we scaled the dot products by ${\frac{1}{\sqrt{d_k}}}$, we get
+
+\[ Attention(Q,K,V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V\]
+The shape of resulting matrix is $n_q \times d_v$\\
+
+\textbf{Multi-head attention}\\
+ First map $Q$, $K$, $V$ into $h$ many lower dimension spaces via linear mapping matrix. Here $h$ is the number of heads. Then apply attention and concatenate the outputs. \\
+Suppose the original dimensions of queries, keys, values are ${d_{m}}$. We the number of heads is ${h}$, then we set ${d_k = d_v = d_{m}/h}$. With ${i \in 1 \cdots h}$ different matrix ${W_i^Q \in R^{d_{m}\times d_k}}$ ${W_i^K \in R^{d_{m}\times d_k}}$ ${W_i^V \in R^{d_{m}\times d_k}}$ and ${W^O \in R^{d_{m}\times d_k}}$.
+
+\[ \text{MultiHead}(Q, K, V) = Concat(h\text{head}_1, \cdots, \text{head}_h)W^O \]
+\[\text{head}_i = Attention(QW_i^Q, KW_i^K, VW_i^V) \]
+
+where  $\text{head}_i \in \mathbb{R}^{n_q \times d_k}$,  ${\text{Multihead}(Q,K,V) \in \mathbb{R}^{n_q \times d_m}}$\\
 
 
-Dot-Product Attention
-a query q and a set of key-value (k-v) pairs to an output, the weight of the each value is the inner product of the query and corresponding key.
-Queries and keys are of the same dimension ${d_k}$, values are of dimension ${d_v}$, than the attention of query on all (k-v) pairs are:
-
-\[ A(q, K, V) = \sum_{i}{ \frac{e^{q\cdot k_i}}{\sum_{j} e^{q\cdot k_j} v_i}}\]
-When we stack the queries ${q}$ to ${Q}$:
-\[ A(Q, K, V) = softmax(QK^T)V\]
-
-As ${d_k}$ get larger, the variance of ${q^T k}$ get larger.  The softmax become very peaked and the gradient get smaller. To counteract this effect, we scaled the dot products by ${\frac{1}{\sqrt{d_k}}}$.
-
-\[ Attention(Q,K,V) = softmax(\frac{QK^T}{\sqrt{d_k}})V\]
-
-
-multi-head attention: first map $Q$,$K$,$V$ into $h$ many lower dimension spaces via linear mapping matrix. Then apply attention and concatenate the outputs. 
-Suppose the original dimensions of queries, keys, values are ${d_model}$. We the number of heads is ${h}$, then ${d_k = d_v = d_{model}/h}$. With ${i \in 1 \cdots h}$ different matrix ${W_i^Q \in R^{d_{model}\times d_k}}$ ${W_i^K \in R^{d_{model}\times d_k}}$ ${W_i^V \in R^{d_{model}\times d_k}}$ and ${W^O \in R^{d_{model}\times d_k}}$.
-
-\[ MultiHead(Q, K, V) = Concat(head_1, \cdots, head_h)W^O \]
-\[head_i = Attention(QW_i^Q, KW_i^K, VW_i^V) \]
+There are three attention types in the transformer model:
+\begin{itemize}
+	\item encoder-decoder attention\\
+	the queries come from the previous decoder layer, the keys and values are just the output of decoder. This works as the attention mechanism in the seq2seq model, it allow the decoder to align all positions in the input sequence with different weights
+	\item encoder self-attention\\
+	all queries, keys, values come from the encoder layer, each position allows to attend to all positions before that position
+	\item decoder self-attention\\
+	similar to encoder attention, each position is allowed to attend to position before and including that position
+\end{itemize}
+.
 
 
-Transformer reduce the training complexity to a constant ${O(1)}$ number of operations.
-
-
-
-The encoder-decoder attention: the queries come from the previous decoder layer, the keys and values are just the output of decoder. This works as the attention mechanism in the seq2seq model, it allow the decoder to align all positions in the input sequence with different weights
-
-encoder self-attention: all queries, keys, values come from the encoder layer, each position allows to attend to all positions before that position.
-
-decoder self-attention: similar to encoder attention, each position is allowed to attend to position before and including that position.
-
-
-Positional Encoding
+\textbf{Positional Encoding}\\
 Since there is no RNN or CNN structures in transformer model, we need also need to make use of sequence information for seq2seq learning. We need inject position information into the embedding.
-\[PE_{(pos, 2i)} = sin(pos/ 10000 ^{2i / d_{model}})\]
-\[ PE_{(pos, 2i+1)} = cos(pos / 10000^{2i/d_{model}})\]
+\[PE_{(\text{pos}, 2i)} = sin(\text{pos}/ 10000 ^{2i / d_{m}})\]
+\[ PE_{(\text{pos}, 2i+1)} = cos(\text{pos} / 10000^{2i/d_{m}})\]
 
 
-where pos is the position and $i$ is the dimension. That is, each dimension of 
+where pos is the position and $i$ is the dimension. That is, each dimension of the positional encoding corresponding to a sinusoid.
 
 \section{Unsupervised Machine Translation}
-
+give the first results for training a full translation model from non-parallel data, and use this model to translate previously-unseen text. The proposed problem named "deciperment" has received a lot of attention. This model contains many statistical methods, like EM algorithm or Bayesian method. However, this method is limited to rather short sentences and simplistic setting. With the development of neural machine translation, the end-to-end method performs better and easier to tune without much specific linguistic knowledge. The Idea is similar to dual learning framework except that in dual learning model, gradients are backpropagated through the reverse model and pretrain using a relative large parallel data as a warm start. The neural model mapping the sentences from monolingual corpora into the same latent space, By learning to reconstruct in both languages from the shared feature space. The translation model in both direction will be improved synchronously with the back-translation.
 
 \subsection{Decipherment}
+For simplification, we use $\bm{e}, \bm{f}$ instead of $e_1^M, f_1^N$ to describe the sentence pairs. IBM model tries to maximize the probability with hidden alignment model
+\[ \argmax{\theta} \prod_{\bm{e}, \bm{f}} {P_{\theta}(\bm{f}|\bm{e})} = \argmax{\theta} \prod_{\bm{e}, \bm{f}} \sum_{a} P_{\theta}(\bm{f}, a| \bm{e})  \]
+While for unsupervised case, we train 
+\[ \argmax{\theta} \prod_{\bm{f}}P_{\theta}(\bm{f})= \argmax{\theta} \prod_{\bm{f}} \sum_{\bm{e}} P(\bm{e}) \cdot P_{\theta}(\bm{f}|\bm{e})\]
 
-\[ \argmax{\theta} \prod_{f} \sum_{e} P(e) \cdot P_{\theta}(f|e)\]
+for hidden alignments: \[ \argmax{\theta} \prod_{\bm{f}} \sum_{\bm{e}} P(\bm{e}) \cdot \sum_{a} P_{\theta}(\bm{e},a|\bm{e}) \]
 
-for hidden alignments: \[ \argmax{\theta} \prod_{f} \sum_{e} P(e) \cdot \sum_{a} P_{\theta}(f,a|e) \]
-
-
-Propose a simple generative story for MT without parallel data. The model accounts for word substitutions, insertions, deletions and local reordering during the translation process but does not incorporate fertilities or global re-ordering.
+Since the model is very complicated, more assumptions are added to the model. The model accounts for word substitutions, insertions, deletions and local reordering during the translation process but does not incorporate fertilities or global re-ordering.\\
 
 The generative process:
 \begin{enumerate}
-	\item Generate an English sentence $e_1^N$ with probability $P(e)$.
+	\item Generate an English sentence $\bm{e}$ with probability $P(\bm{e})$.
 	\item Insert a NULL word at any position in the English sentence with uniform probability.
 	\item For each English word token $e_i$ (including NULLs), choose a foreign word translation $f_i$, with probability $P_{\theta}(f_i| e_i)$, the foreign word may be NULL.
 	\item Swap any pair of adjacent foreign words $f_{i-1}, f_i$, with probability ${P_{\theta}(swap)}$. 
 	\item Output the foreign string $f_1^M$, skipping over NULLs.
 \end{enumerate}
 
-use the Expectation Maximization (EM) algorithm to estimate $\theta$ in order to maximize likelihood of the foreign corpus. Finally use the Viterbi algorithm to decode the foreign corpus. and Produce an English translation $e_1^N$ that maximizes ${P(e_1^N)\cdot P_{\theta}(f_1^M | e_1^N)}$ but EM training face some problems, EM cannot scale to such large vocabulary sizes, need to instantiate the entire channel and resulting derivation lattice before we can run EM, this is too big to be stored in memory. Introduce iterative EM: identify the top K frequent word types in both the English and foreign data. Replace all the other word tokens with ‘UNK’, use EM algorithm to train this model to maximize likelihood of cipher data. Then extend the vocabulary size from K to 2K and so on.
-Iterative EM
-\cite{nuhn2012deciphering}
-%Since it is not feasible to deal with the full parameter table, add more constraints: for each foreign word ${f}$, number the candidates words ${e^{\prime}}$ with $p(f|e^{\prime}) > 0$ is below a fixed value, he tries to determine the set of active lexicon entries by exploiting monolingual context similarity. Further in his work, to speed up the computation speed. Beam search: look at $B_{LM}$ many successor words ${e_{n+1}}$ with highest LM probability ${p_{LM}(e_{n+1}| e_n)}$ and $B_{lex}$ many successor words with high probability ${p_{lex}(f_{n+1}|e_{n+1})}}$.
-Altogether only look at ${B_{LM}+B_{lex}}$ many successor states.
-\cite{nuhn2014decipherment}
 
-
-\cite{gehring2017convolutional}
 \subsection{Neural Unsupervised Machine Translation}
+
+\begin{figure}[h]
+	\includegraphics[width=14cm]{unmt}
+	\caption{Illustration of unsupervised machine translation: A) the two original monolingual data; B) Initialization, the two distribution are roughly aligned; C) Denoising autoencoder, make the distribution closer to normal one in corresponding language D) Back-translation, improve the both translation model in iterative way (\cite{lample2018phrase})}
+
+\end{figure}
+
+%The key idea is to build a common latent space between the two languages (or domains) and to learn to translate by reconstructing in both domains according to two principles. 
+
+
+
+%They initialize the model with an inferred bilingual dictionary. They leverage strong language model: denoising autoencoder,  third, they implemented the back translation: the key idea is to train two translation models which translate in contrary directions at the same time. The last property is that the models constrain the latent representations produced by the encoder to be shared between the two languages. The encoders will encoder the input into a common latent representation space independent of the language. The decoder plays the role of translator and will try to learn to improve the translation quality with the help of back translation mechanism.
+
+\textbf{Dual Structure}\\
+Dual structure is inspired by the observation: any machine translation has a dual task: e.g. German-to-English translation (primal) and English-to-German translation (dual). Dual tasks can form a closed loop and generate informative  feedback signals to for both translation models. Based on the feedback signals generated during this process, and leverage language model, we can minimize the reconstruction error of the original sentences. We can iteratively update the two models until convergence.   \cite{he2016dual} trained two agents to translate in opposite directions (e.g. French $\rightarrow$ English and English $\rightarrow$ French), and make them teach each other through a reinforcement learning process. While promising, this approach still requires a parallel corpus for a warm start. \cite{lample2018phrase} simplified the structure, in the proposed model, the gradients will not be back-propagated through the reverse model, but only make use of the back-translation. The training process as followed:
 
 \begin{algorithm}[H]
 	\SetAlgoLined
-	\KwResult{Unsupervised Machine Translation}
-	\KwIn{Language models ${LM_{s}}$ ${LM_t}$ over the source and target languages} 
-	\textbf{Initialize translation models:}  Leveraging ${P_s}$ and ${P_t}$, learn two initial translation models, one in each direction: ${P_{s\rightarrow t}^{(0)}}$ and ${P_{t\rightarrow s}^{(0)}}$ 
-	\BlankLine
-	\For{${k=1}$ to ${N}$}{
-		\begin{itemize}
-			\BlankLine
-			\item   \textbf{Backtranslation:} Generate source and target sentences using the current
-			translation models ${P_{t\rightarrow s }^{(k-1)}}$ and ${P_{s \rightarrow t}^{(k-1)} }$, factoring in language models, ${P_s}$ and ${P_t}$;
-			\item   \textbf{Train new translation models ${P_{s\rightarrow t}^{(k)}}$ and ${P_{t \rightarrow s}^{(k)}}$:} Use the generated sentences and leveraging ${P_s}$ and ${P_t}$
-		\end{itemize}
-	}   
+	\textbf{Language models:} Learn language models $P_s$, $P_t$ over source and target languages;\\
+	\textbf{Initial translation model:}  Leveraging $P_s$, $P_t$, lean two initial translation models in each direction: $P_{s\rightarrow t}^{(0)}$, ${P_{t \rightarrow s}^{(0)}}$;\\
+	\For{k = 1 to N}{
+		\textbf{Back-translation:} Generate source and target sentences using the current translation models $P_{t\rightarrow s}^{(k-1)}$ and $P_{s\rightarrow t}^{(k-1)}$, leverading $P_s$, $P_t$;\\
+		\textbf{Retrain:} Train new translation models $P_{t\rightarrow s}^{(k)}$ and $P_{s\rightarrow t}^{(k)}$ using the generated sentences and leverading $P_s$, $P_t$;
+	}
+	\caption{Unsupervised Machine Translation}
 \end{algorithm}
-The key idea is to build a common latent space between the two languages (or domains) and to learn to translate by reconstructing in both domains according to two principles. 
 
 
 
-They initialize the model with an inferred bilingual dictionary. They leverage strong language model: denoising autoencoder,  third, they implemented the back translation: the key idea is to train two translation models which translate in contrary directions at the same time. The last property is that the models constrain the latent representations produced by the encoder to be shared between the two languages. The encoders will encoder the input into a common latent representation space independent of the language. The decoder plays the role of translator and will try to learn to improve the translation quality with the help of back translation mechanism.
-
-\subsubsection{Dual Structure}
-made an important contribution. They train two agents to translate in opposite directions (e.g. French $\rightarrow$ English and English $\rightarrow$ French), and make them teach each other through a reinforcement learning process. While promising, this approach still requires a parallel corpus for a warm start.
-
-\subsubsection{Initialization}
-\textbf{Denoising autoencoder} Initialize the algorithm by using a naive unsupervised translation model based on a word-by-word translation of the sentence with a bilingual lexicon derived from the same monolingual data. While such initial "word-by-word" translation maybe poor if languages or corpora are not closely related, it still preserves some of the original semantics
+\textbf{Initialization}\\
+If without enough information to start the dual machine translation system, it will be hard for the system to catch the meaningful signals and then it will take much more iterations. However if we initialize the system by a naive a word-by-word translation of the sentence, where the bilingual lexicon are derived from the same monolingual data. While such initial "word-by-word" translation maybe poor if languages or corpora are not closely related, it still preserves some of the original semantics. Such word-by-word translation can already achieve several BLEU scores.\\
 %\log P_{t\rightarrow t}(e|\text{noise}(e)
 %\log P_{s\rightarrow s}(f|\text{noise}(f)) 
-\subsubsection{Optimization}
-\textbf{Denoising autoencoder}\\
-by minimization 
-\[ L^{auto} = \mathbb{E}_{e\sim E}[-\log P_{t\rightarrow t}(e|\text{noise}(e)] + \mathbb{E}_{f\sim F} [-\log P_{s\rightarrow s}(f|\text{noise}(f))]\]
-where $s$ $P_{s\rightarrow s}$ and $P_{t\rightarrow t}$ are the composition of encoder and decoder both operating in the source and target sides, respectively.
-\textbf{Back-Translation}\\
-Since we have dual structure for bi-directional translation, we denote the sentence that translated by intermediate target-to-source translation model as $u(y)$, similarly denote the sentence translated by source-to-target model as $v(x)$, so $u(y)$ should in source language and $v(x)$ should in target language. The pairs $(x, v(x))$, $(u(y), y)$ constitute synthetic parallel  sentences. They can be used to train the two machine translation models by minimizing the back-translation loss:
-\[ L^{back} = \mathbb{E}_{y\sim T} [-\log P_{s\rightarrow t}(y|u(y))] +  \mathbb{E}_{x\sim S} [-\log P_{t\rightarrow s}(x|v(x))]\]
 
-The objective functipn minimized at every iteration of stochastic gradient descent is simply the sum of $L^{auto}$ and $L^{back}$. 
-\textbf{Shared Latent Representation} 
-A shared encoder representation actis like an interlingua, which is translated in the decoder corresponding language regardless less of the input source language.  
+\textbf{Shared Latent Representation} \\
+A shared encoder representation actis like an interlingua, which is translated in the decoder corresponding language regardless less of the input source language. Since the only supervision information only comes from the monolingual data. The model learn to translate by learning to reconstruct in both language from this shared space.\\
+There are two different methods to learn the shared feature space:
 \begin{itemize}
 	\item Shared encoder
 	The system use only one encoder that is shared by both languages involved. The universal encoder is aimed to produce a language independent representation of the input language but the decoder should separately translate then into corresponding language.
 	\item Adversarial training
 	Train discriminator to classify between the encoding of source and target sentences. The discriminator operates on the output of the encoder, the encoder is trained instead to fool the discriminator. 
 \end{itemize}
+
+
+\textbf{Optimization}\\
+When minimizing the loss function, gradients will not be back propagated through the reverse model which generate the data. Instead the objective function minimized at every iteration is the sum of $L^{auto}$ and $L^{back}$
+\begin{itemize}
+	\item Denoising autoencoder loss
+	\[ L^{auto} = \mathbb{E}_{\bm{e}\sim E}[-\log P_{t\rightarrow t}(\bm{e}|\text{noise}(\bm{e})] + \mathbb{E}_{\bm{f}\sim F} [-\log P_{s\rightarrow s}(\bm{f}|\text{noise}(\bm{f}))]\]
+	where $s$ $P_{s\rightarrow s}$ and $P_{t\rightarrow t}$ are the composition of encoder and decoder both operating in the source and target sides, respectively
+	\item Back-translation loss
+	\[ L^{back} = \mathbb{E}_{\bm{e}\sim T} [-\log P_{s\rightarrow t}(\bm{e}|u(\bm{e}))] +  \mathbb{E}_{\bm{f}\sim S} [-\log P_{t\rightarrow s}(\bm{f}|v(\bm{f}))]\]
+	 we denote the sentence that translated by intermediate target-to-source translation model as $u(y)$, similarly denote the sentence translated by source-to-target model as $v(x)$, so $u(y)$ should in source language and $v(x)$ should in target language. The pairs $(x, v(x))$, $(u(y), y)$ constitute synthetic parallel  sentences.
+\end{itemize}
+
+
 
 
 

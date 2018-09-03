@@ -1,85 +1,98 @@
 \chapter{Cross-lingual Word Embedding without Parallel Data}
+Proposed cross-lingual embedding learning requires several thousands of word pairs as anchors to learn the mapping with good generalization ability to predict for unseen word. But as for low-source language, dictionary of good quality is not readily available. This motivates more and more works on unsupervised cross-lingual word embedding learning, if the unsupervised method works, the word-level or grammar-level properties will be better captured, since it enables the knowledge transfer for those less-studied languages.
 
-Learning a good mapping still need seed word translation pairs as cross-lingual supervision signals. For example in the first work use five thousand seeds to train the linear mapping. \cite{vulic2016role} shows that a seed dictionary of at least hundreds are need for the model to generalize.
-\cite{zhang2017adversarial} proposed an adversarial autoencoder, using the generator $G$ to implement the mapping so that the transformed source embedding similar to the corresponding target embedding, and the discriminator $D$ strives to distinguish the target embedding from the transformed source embedding. \cite{conneau2017word} simplifies the structure
-
-
-However, large dictionary is also not readily available for many language pairs.
-
-Several unsupervised learning algorithms are studies   
-
-
-
-
-\begin{figure}[t]
-	\includegraphics[width=12cm]{iter1}
-	\centering
-	\caption{Accuracy on bilingual lexicon induction}
-\end{figure}	
-
-
-
-
-
-
-
+%\begin{figure}[t]
+%	\includegraphics[width=12cm]{iter1}
+%	\centering
+%	\caption{Accuracy on bilingual lexicon induction}
+%\end{figure}	
+%
+%
+%
+%
+%
+%
+%
 \section{Initialization}
-\cite{artetxe2018robust}.\\As it can be clearly observed that, the self learning algorithm can effectively learn the mapping between the source and target distribution even starts with a small dictionary size and the final accuracy when the algorithm converges are nearly the same level. However when start randomly without any support of dictionary, the framework does not work. In order to realize a fully unsupervised learning, we need to design heuristics to build the seed dictionary.
+ \cite{vulic2016role} shows that a seed dictionary of at least hundreds are need for the model to generalize. \cite{DBLP:journals/corr/abs-1801-06126}
+ proposed an approach which first use PCA to realize an approximate alignment, then use mini-batch cycle iterative closest point to learn the mapping.  
+\cite{zhang2017adversarial} proposed an adversarial autoencoder, using the generator $G$ to implement the mapping so that the transformed source embedding similar to the corresponding target embedding, and the discriminator $D$ strives to distinguish the target embedding from the transformed source embedding. \cite{conneau2017word} simplifies the structure and proposed an unsupervised criterion that is highly correlated with the quality of the mapping which can be used as stop criterion and to select the best hyper-parameters.
+%
+%As it can be clearly observed from the figure below that, the self learning algorithm can effectively learn the mapping between the source and target distribution even starts with a small dictionary size and the final accuracy when the algorithm converges are nearly the same level. However when start randomly without any support of dictionary, the framework does not work. In order to realize a fully unsupervised learning, we need to design heuristics to build the seed dictionary.
+%
+%For total unsupervised learning, there is no direct alignment between the languages. 	The most challenge for unsupervised learning is the initialization. As proved in the experiment of \cite{}, the self-learning framework can work even with a small dictionary set, however the model cannot work without such dictionary as hint.  So it is important to find heuristic methods to initialize the model.
+%
+%Several models are proposed:
+%Based on matrices ${M_E = EE^T}$, ${M_F = FF^T}$, we can exploit latent information to reduce the mismatch. Assume that, the words in the source and target set are most common. For a specific word, the corresponding line in ${M_E}$ demonstrates the distribution of similarity in the source vocabulary. ${M_E}$, ${M_F}$ can be nearly equivalent up to a permutation of the words. 
+%Instead of explore all the probability of permutation, he first sorts the values in each row of ${M_F}$ and ${M_E}$
+%
+%Assume the SVD of ${E = USV^T}$,  the similarity ${M_E = US^2U^T}$. In practice, he computed sorted ${1}$, ${2}$	yielding the matrix ${E^{\prime}}$ , ${F^{\prime}}$ and used to build the initial solution for self-learning.
 
-For total unsupervised learning, there is no direct alignment between the languages. 	The most challenge for unsupervised learning is the initialization. As proved in the experiment of \cite{}, the self-learning framework can work even with a small dictionary set, however the model cannot work without such dictionary as hint.  So it is important to find heuristic methods to initialize the model.
+\subsection{Iterative Closest Point Method}
 
-Several models are proposed:
-Based on matrices ${M_E = EE^T}$, ${M_F = FF^T}$, we can exploit latent information to reduce the mismatch. Assume that, the words in the source and target set are most common. For a specific word, the corresponding line in ${M_E}$ demonstrates the distribution of similarity in the source vocabulary. ${M_E}$, ${M_F}$ can be nearly equivalent up to a permutation of the words. 
-Instead of explore all the probability of permutation, he first sorts the values in each row of ${M_F}$ and ${M_E}$
-
-Assume the SVD of ${E = USV^T}$,  the similarity ${M_E = US^2U^T}$. In practice, he computed sorted ${1}$, ${2}$	yielding the matrix ${E^{\prime}}$ , ${F^{\prime}}$ and used to build the initial solution for self-learning.
-
-\subsection{Heuristics}
-\subsubsection{Iterative Closest Point Method}
-Assume that many language pairs share same principle axes of variation. We do the approximate distribution alignment with PCA.
-For each language, we first select most frequent word vector,center the data and project it to the top ${p}$ principle components. We denote the projected language representation as 	${P_l \in {R}^{N * p}}$
-Propose a method first learn ${T_{ef}}$ and ${T_{fe}}$ for ${E \rightarrow F}$ and ${F \rightarrow E}$ , we include the cycle-constraints ensure that a word ${f}$ transformed into joint embedding space and transformed back is unchanged. 
-
-
+The method assumes that many language pairs share some principle axes of variation. For each language, first select most frequent word vector,center the data and project it to the top ${p}$ principle components.
+%Propose a method first learn ${T_{ef}}$ and ${T_{fe}}$ for ${E \rightarrow F}$ and ${F \rightarrow E}$ , we include the cycle-constraints ensure that a word ${f}$ transformed into joint embedding space and transformed back is unchanged. 
+The normal Iterative Closest Point (ICP) is unidirectional, the Mini-batch Cycle ICP (MBC-ICP) includes cycle-constrains ensuring that a word transformed to another language could also be transformed back and stay unchanged. Each iteration the final MBC-ICP algorithm can describled as: 
+ 
 \begin{enumerate}
-	\item For each ${e_i}$, find the nearest ${W_{fe} f_j}$.  denote as ${f(e_i)}$
-	\item For each ${f_j}$, find the nearest ${W_{ef} e_i}$, denote as ${e(f_j)}$
-	\item For all mini-barches of ${e_i}$ and ${f_j}$ in epoch, iterative optimize ${T_{ef}}$ and ${T_{fe}}$ on: \\
-	${ \sum_{i} {\lVert e_i - W_{fe} f(e_i)\rVert} + \sum_j {\rVert f_j - W_{ef} e(f_j)\rVert} + \lambda {\sum_i}{\lVert e_i- W_{fe} W_{ef} e_i \rVert}  +  \lambda \sum_j {\lVert f_j - W_{ef} W_{fe} f_j \rVert}}$
+	\item For each target word ${e}$, find the nearest ${W_{s\rightarrow t} f(e)}$, denote the source word ${f(e)}$
+	\item For each source word ${f}$, find the nearest ${W_{t\rightarrow s} e(f)}$, denote the target word ${e(f)}$
+	\item Optimize ${W_{e\rightarrow f}}$ and ${W_{f\rightarrow e}}$: 
+	\begin{align*}
+		\mathcal{L} = &  \sum_{e} {\lVert e - W_{s\rightarrow t} f(e)\rVert} + \sum_f {\rVert f - W_{t \rightarrow s} e(f)\rVert} \\ 
+		& + \lambda {\sum_e}{\lVert e - W_{s\rightarrow t} W_{t\rightarrow s} e \rVert}  +  \lambda \sum_f {\lVert f - W_{t\rightarrow s} W_{s \rightarrow t} f \rVert}
+	\end{align*}
+
 \end{enumerate}
-\subsection{Adversarial autoencoder}
-The intuition can be formalized as the minimax game with the value function:
-\begin{align*}
-	V(D, G) = & E_{e\sim {p_e}}[\log D(e)] + E_{f \sim {p_f}} [\log (1-D(G(f)))]
-\end{align*}
-As a generic binary classifier, a feed-forward neural network with one hidden layer is used to parameterize the discriminator $D$, and its loss function is the usual cross-entropy loss.
-\[L_D = -\log D(f) - \log (1-D(G(e)))\]
-After the generator $G$ transforms a source word embedding $e$ into a target language representation $Gf$, we should be able to reconstruct the source word embedding $f$ by mapping back with $G^T$. We therefore introduce the reconstruction loss measured by cosine similarity:
-\[ L_R = -\cos (f, G^TG))\]
-Note that this loss will be minimized if $G$ is orthogonal. With this term included, the loss function for the generator becomes
-\[ L_G = -\log D(G(x)) - \lambda \cos(f, G^TGf)\]
-where $\lambda$ is a hyper-parameter that balances the two terms. 
-\subsection{Adversarial Training}
-Discriminator is trained to discriminate between elements randomly sampled from ${Wf_i}$ and ${e_j}$ and generator ${W}$ is trained to prevent the discriminator from making accurate prediction\\
-
-The training algorithm follows the standard procedure of deep adversarial networks(GAN) of Goodfellow \cite{bibid}: the discriminator and generator are trained iteratively with the stochastic gradient descent to minimize the ${L_D}$ and ${L_w}$
-
+\subsection{Adversarial training}
+Generative adversarial networks are a class of artificial intelligence algorithm used in unsupervised learning. The objective of generative network (generator) is to increase the error rate of the discriminative network (discriminator) while the discriminator discriminates between instances from the true data distribution and candidates produced by the generator. 
+Following this principle, the generator tries to learning to mapping from the source embedding space to target embedding space, so that the discriminator while could be a deep neural network cannot distinguish the data source. \\
 Let ${=\{ x_1, \cdots, x_n\}}$ and ${ = \{ y_i, \cdots , y_m\}}$ be the two sets of $n$ and $m$ word embeddings from a source and a target language separately, We refer the discriminator parameters as ${\theta_D}$.The discriminator is a multi-layer neural network trained to discriminate the transformed source word embedding from the target word embedding, while the mapping $W$, simply a linear transformation, is trained to fooling discriminator. In the two-player game, we are supposed to learn the mapping from source embedding space to the target space.
+
+In the first adversarial training method for cross-lingual word embedding, the objective of the two networks are as followed:\\
 Discriminator objective  
 \[ L_D(\theta_D | W) =  -\frac{1}{n} \sum_{i=1}^{n} \log P_{\theta_D}(source = 1| Wf_i) - \frac{1}{m} \sum_{i=1}^{m} \log P_{\theta_D}(source=0| e_i) \]	
+Generator objective 
+\[ L_W(W|\theta_D) =  -\frac{1}{n} \sum_{i=1}^{n}\log P_{\theta_D}(source=0|W f_i)  \]
 
-Mapping objective 
+To relax the orthogonal constraint, the authors introduce the adversarial autoencoder, after the mapping $W $from source embedding space to target embedding space, the source embedding should also be mapping back with $W^T$, therefore, they introduce the reconstruction loss as 
+\[ L_W(W|\theta_D) =  -\frac{1}{n} \sum_{i=1}^{n} \{\log P_{\theta_D}(source=0|W f_i) -  \lambda \cos (f_i, W^T W f_i)\}\]
+
+In \cite{conneau2017word} work, they just take a symmetric loss for the generator loss and achieve better results:
 \[ L_W(W|\theta_D) =  -\frac{1}{n} \sum_{i=1}^{n}\log P_{\theta_D}(source=0|W f_i) - \frac{1}{m} \sum_{i=1}^{m} \log P_{\theta_D}(source = 1 | e_i) \]
+
+
+
+
 
 \subsubsection{Model Selection}
 Since the cross-lingual embedding training is under the unsupervised setting, We do not know the word translation accuracy, otherwise if we have the validation data, that means we will have parallel data, against the unsupervised idea. To address this issue, we must select from the property of data or the loss of the neural network as the unsupervised criterion. However in the experiments we find that the accuracy of the discriminator always stays at a high level no matter how is the word translation accuracy. 
 
 All these methods can be use to find meaningful word pairs in both languages. For further refinement we can use the induced dictionary to start the iterative self-learning algorithm. 
-\section{Iterative Training}
-\subsection{Self-learning with Procrustes}
-Self-learning framework\\
 
-\begin{figure}[ht]
+\section{Nearest Neighbor Search}
+\textbf{Hubness Problem}\\
+Points are tending to be nearest neighbors of many points in high-dimensional space. Since we use nearest neighbor search, those points (hubs) will harm the search accuracy.\\
+
+\textbf{Inverted Softmax}\\
+The confidence of choosing a target word as translation of a source word can be considered as softmax-like normalized probability
+\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  s(e,f)\Big)}}{\sum_{e^{\prime}} {\exp{\Big(\beta \cdot s(e^{\prime}, f)\Big)}}} \]
+where the $s(\cdot)$ is the score function we can define ourselves.
+we learn the "temperature" $\beta$ by maximizing the log probability over the training dictionary. 
+\[ \argmax{\beta} \sum_{e,f} \ln p(e|f)  \]
+
+The author observed that, if we invert the softmax and normalizing the probability over all the source words rather than target words, the hubness problem could be mitigated:
+\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  s(e,f)\Big)}}{\alpha \  \sum_{f^{\prime}} {\exp{\Big(\beta \cdot s(e, f^{\prime})\Big)}}}\]\\
+
+
+\textbf{Cross-domain Similarity Local Scaling}\\
+We denote ${N(f)}$ the set of ${K}$ nearest neighbors of points of the mapped $f$ in the target embedding space, and ${N(e)}$ the nearest neighbors of mapped ${e}$ in the source embedding space. We consider the mean cosine similarity as hub-ness:
+\[ r(f)= \frac{1}{K} \sum_{e^{\prime} \in N(f)} \cos(e^{\prime}, Wf)\]
+So in this way we penalize the hub points:
+\[ CSLS(\bm{e}, \bm{f}) = 2 cos(\bm{e}, \bm{y}) - \frac{1}{K} \sum_{\bm{e^{\prime}} \in N(\bm{e})} cos(\bm{f}, \bm{e^{\prime}})- \frac{1}{K} \sum_{\bm{f^{\prime}} \in N(\bm{e})} cos(\bm{f^{\prime}}, \bm{e}) \]
+With the nearest neighbor search we can evaluate the performance of learned mapping, by checking if the nearest neighbors of the source word are also in the candidates in a open word translation dictionary dataset.\\
+\section{Iterative Training}
+\begin{figure}[h]
 	\centering
 	\begin{minipage}{.7\linewidth}
 		\begin{algorithm}[H]
@@ -94,19 +107,17 @@ Self-learning framework\\
 				
 			}
 			
-			\caption{Self-learning framework}
+			\caption{Iterative training procedure}
 		\end{algorithm}
 	\end{minipage}
 \end{figure}
+Assume that with the initialization step we can already get roughly aligned distribution of the source and target embedding, and we can use this mapping to learn a good dictionary (word pairs). Since the quality of dictionary gets improved, we can further learn a better mapping, consequently, such process can be repeated iteratively until convergence criterion is met.
+\subsection{Self-learning with Procrustes}
+For self-learning frame work, we compute the optimal dictionary based on the mapped source word embeddings and target word embeddings. To sure the quality of the small dictionary, we choose only top frequent words for both languages and only bidirectional translations are kept. We even filter the dictionary with some threshold.
 
 
-\begin{figure}[t]
-	\includegraphics[width=12cm]{iter1}
-	\centering
-	\caption{Accuracy on bilingual lexicon induction}
-\end{figure}
 \subsection{Data-driven Method}
-Training procedure:
+Since we have large monolingual data and one of the tasks to evaluate the cross-lingual word embedding is build machhine translation system based on these cross-lingual embeddings. We make use of the language model and improve also the translation quality simultaneously. We can set the source from the translation, build the dictionary from the word translation pairs, in detail the training procedure are as followed:
 \begin{enumerate}
 	\item translate corpus according to current mapping, get the word pairs $D$
 	\item train the network with $D$ to minimize the mapping distance
@@ -121,16 +132,7 @@ Training procedure:
 		\end{array} \right\} 
 		\Rightarrow D
 		\]
-
+Previously, the objective we want to minimize is the mean square error of the mapped embeddings. By training the mapping with neural network we can define different loss functions according to specific features
 		\[\mathcal{L} = \sum_{(f,e)\in D} {\lVert Wf - e \rVert}^2  \]
 
-\section{Word Translation Induction}
-The CSLS as described by \cite{conneau2017word}, can be written as:
-\[ CSLS(\bm{e}, \bm{f}) = 2 cos(\bm{e}, \bm{y}) - \frac{1}{K} \sum_{\bm{e^{\prime}} \in N(\bm{e})} cos(\bm{f}, \bm{e^{\prime}})- \frac{1}{K} \sum_{\bm{f^{\prime}} \in N(\bm{e})} cos(\bm{f^{\prime}}, \bm{e}) \]
-Since the embedding space is of high dimension and the nearest neighbour search is performed here, so that a few embeddings embedding will become the nearest neighbour of many data pointsto The obtained is known to suffer from the hubness problem, 
-We denote ${N_Y(x)}$ the set of ${K}$ nearest neighbors of points in the target embedding space, and ${N_X(y)}$ the nearest neighbors of ${y}$ in the source embedding space. 
-So in this way we penalize the hub points
-A good initialization is import for ICP methods, so begin with the projected data, and initialize transformation ${T_{ef}}$ and ${T_{fe}}$ with the identity matrix.
-After several iterations of, the estimated transformation becomes quite reliable.  Then use this transformation to find the matches.
 
-\section{Non-linear Mapping}

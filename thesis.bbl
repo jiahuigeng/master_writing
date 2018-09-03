@@ -5,6 +5,14 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[Adams et~al.(2017)Adams, Makarucha, Neubig, Bird, and
+  Cohn]{adams2017cross}
+Oliver Adams, Adam Makarucha, Graham Neubig, Steven Bird, and Trevor Cohn.
+\newblock Cross-lingual word embeddings for low-resource language modeling.
+\newblock In \emph{Proceedings of the 15th Conference of the European Chapter
+  of the Association for Computational Linguistics: Volume 1, Long Papers},
+  volume~1, pages 937--947, 2017.
+
 \bibitem[Artetxe et~al.(2017{\natexlab{a}})Artetxe, Labaka, and
   Agirre]{artetxe2017learning}
 Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
@@ -19,18 +27,6 @@ Mikel Artetxe, Gorka Labaka, Eneko Agirre, and Kyunghyun Cho.
 \newblock Unsupervised neural machine translation.
 \newblock \emph{arXiv preprint arXiv:1710.11041}, 2017{\natexlab{b}}.
 
-\bibitem[Artetxe et~al.(2018)Artetxe, Labaka, and Agirre]{artetxe2018robust}
-Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
-\newblock A robust self-learning method for fully unsupervised cross-lingual
-  mappings of word embeddings.
-\newblock \emph{arXiv preprint arXiv:1805.06297}, 2018.
-
-\bibitem[Bahdanau et~al.(2014)Bahdanau, Cho, and Bengio]{bahdanau2014neural}
-Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio.
-\newblock Neural machine translation by jointly learning to align and
-  translate.
-\newblock \emph{arXiv preprint arXiv:1409.0473}, 2014.
-
 \bibitem[Bojanowski et~al.(2016)Bojanowski, Grave, Joulin, and
   Mikolov]{bojanowski2016enriching}
 Piotr Bojanowski, Edouard Grave, Armand Joulin, and Tomas Mikolov.
@@ -44,11 +40,10 @@ Hailong Cao, Tiejun Zhao, Shu Zhang, and Yao Meng.
   Conference on Computational Linguistics: Technical Papers}, pages 1818--1827,
   2016.
 
-\bibitem[Chen et~al.(2017)Chen, Liu, Cheng, and Li]{chen2017teacher}
-Yun Chen, Yang Liu, Yong Cheng, and Victor~OK Li.
-\newblock A teacher-student framework for zero-resource neural machine
-  translation.
-\newblock \emph{arXiv preprint arXiv:1705.00753}, 2017.
+\bibitem[Cheng et~al.(2016)Cheng, Xu, He, He, Wu, Sun, and Liu]{cheng2016semi}
+Yong Cheng, Wei Xu, Zhongjun He, Wei He, Hua Wu, Maosong Sun, and Yang Liu.
+\newblock Semi-supervised learning for neural machine translation.
+\newblock \emph{arXiv preprint arXiv:1606.04596}, 2016.
 
 \bibitem[Cohn and Lapata(2007)]{cohn2007machine}
 Trevor Cohn and Mirella Lapata.
@@ -82,6 +77,12 @@ Di~He, Yingce Xia, Tao Qin, Liwei Wang, Nenghai Yu, Tieyan Liu, and Wei-Ying
 \newblock Dual learning for machine translation.
 \newblock In \emph{Advances in Neural Information Processing Systems}, pages
   820--828, 2016.
+
+\bibitem[Hoshen and Wolf(2018)]{DBLP:journals/corr/abs-1801-06126}
+Yedid Hoshen and Lior Wolf.
+\newblock An iterative closest point method for unsupervised word translation.
+\newblock \emph{CoRR}, abs/1801.06126, 2018.
+\newblock URL \url{http://arxiv.org/abs/1801.06126}.
 
 \bibitem[Kim et~al.(2017)Kim, Schamper, and Ney]{kim2017unsupervised}
 Yunsu Kim, Julian Schamper, and Hermann Ney.
