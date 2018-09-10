@@ -107,28 +107,28 @@ The generative process:
 However, this method is limited to rather short sentences and simplistic settings.
 \section{Neural Machine Translation}
 Neural machine translation (NMT) has recently become the dominant method for machine translation task. In comparison to the traditional statistical machine translation (SMT), NMT systems are trained end-to-end, taking advantages of the continuous representation of the hidden states that greatly alleviate the sparsity problem and make better use of more contextual information. Besides this, traditional phrase-based machine translation, which consists of several models that are tuned separately, neural machine translation tries to build a more general neural network model which can directly output translations given input, it contains only one single model, and only one single training criterion. \\
-The first successful neural machine translation, attention mechanism has lately been used to improve neural machine translation by selectively focusing on parts of the source sentence during translation. The inherently sequential nature precludes parallelization within training examples. Convolutinoal sequential to sequence (ConvSeq2seq) and Transformer architectures are brought forward  for significantly more parallelization during training to better exploit the GPU hardware and these models can reach a new state of the art in
+\cite{sutskever2014sequence} first use a multi-layer Long Short-Term Memory (LSTM) to to train the machine translation system, attention mechanism has lately been used to improve neural machine translation by selectively focusing on parts of the source sentence during translation. The inherently sequential nature precludes parallelization within training examples. Convolutinoal sequence to sequence (ConvSeq2seq) and Transformer architectures are brought forward  for significantly more parallelization during training to better exploit the GPU hardware and these models can reach a new state of the art in
 translation quality.
 
 
-\subsection{Basic Model}
+\subsection{Encoder-Decoder Framework}
 \begin{figure}[t]
 	\includegraphics[width=12cm]{nmt}
 	\caption{ Neural machine translation – example of a deep recurrent architecture (\cite{luong2015effective})}
 	\centering
 \end{figure}
 
-The most common network structure is the encoder-decoder framework, in which two recurrent neural networks work together to transform one sequence to another. An encoder condenses an input sequence into a vector, and a decoder unfolds that vector into a new sequence. The model can be expressed as:
-\[ p(e_1^I | f_1^J) = \prod_{t} p(e_i|e_0^{i-1}, f_1^J) = \prod_{i} {p(e_i|e_0^{i-1},  {\bm{s}})} \] 
-Since the decoder is actually a RNN structure, the conditional probability can be simplified as:
-\[ p(e_i|e_0^{i-1}, \bm{s}) = p(e_i| e_{i-1}, \bm{h}_{i-1}, \bm{s}) \]
-where $\bm{h}_{i-1}$ denotes the hidden state of decoder and $\bm{s}$ is the dense vector representation of source sentence.
-In more detail, the probability of decoding each word $e_i$ as:
-\[ p(e_i| e_{i-1}, \bm{h}_{i-1}, {\bm{s}}) = softmax(g(\bm{h_i}))\]
-$g$ is trainable function which gives the probability of all target words in the vocabulary. $\bm{h}_i$ is the RNN hidden unit, abstractly computed as:
-\[ \bm{h_i} = f(\bm{h}_{i-1}, \bm{s})\]
+The most common network structure is the encoder-decoder framework, in which two recurrent neural networks work together to transform one sequence to another. An encoder condenses an input sequence into a vector $\bm{c}$, and a decoder unfolds that vector into a new sequence. The model can be expressed as:
+\[ p(e_1^I | f_1^J) = \prod_{i} p(e_i|e_0^{i-1}, f_1^J) = \prod_{i} {p(e_i|e_0^{i-1},  {\bm{c}})} \] 
 
- $f$ defines the transformation connecting hidden states.  \\
+%The final hidden and cell state from the encoder is used to initialize the state of the decoder. This means every time that the encoder model encodes an input sequence, the final internal states of the encoder model are used as the starting point for outputting the first character in the output sequence.
+ The RNN decoder predicts the next word on the basis of the internal states and the previous word. In more detail, one can parameterize the probability of decoding each word $e_i$ as:
+ \[ p(e_i|e_0^{i-1},  {\bm{c}}) = \text{softmax}(g(\bm{s_i}))\]
+ with $g$ being the transformation function that outputs a vocabulary-size vector. Here $\bm{s}_i$ is the RNN hidden state, updated as:
+\[ \bm{s}_i = f(\bm{s}_{i-1}, \bm{c})\]
+
+It is common in neural machine translation systems to use a beam-search to sample the probabilities for the words in the sequence output by the model. The wider the beam width, the more exhaustive the search, and, it is believed, the better the results.\\
+
 
 
 
@@ -143,32 +143,49 @@ $g$ is trainable function which gives the probability of all target words in the
 %\[ \bm{\tilde{h_{t}}} = tanh(\bm{W_{c}[c_t; h_t]}) \]
 %\[p(y_t| y_{<t}, x) = \text{softmax}(\bm{W_s \tilde{h_t}})\]
 
-Drawbacks of the such seq2seq model:
+\textbf{Drawbacks}:
 \begin{enumerate}
 	\item The model compresses all information from the input sentence into a hidden vector ${1}$, while ignores the length of input sentence, when the length of input sentence get very long, even longer than the training sentences, it becomes harder to extract specific information for predicting the target word, the performance will get worse.
 	\item It's not suitable to assign the same weight to all input words, one target word corresponds usually to one or several words in the input sentence. Treating all words equally does not distinguish the source information and influence the performance badly.
+
 \end{enumerate}
 
 \subsection{Attention Mechanism}
-To solve the problem mentioned above, attention mechanism was proposed to derive a context vector ${\bm{c_i}}$ that capture the input information to help to predict the target word at the position ${i}$. The basic idea is: given the target hidden state ${\bm{h_i}}$ and the source-side context vector $\bm{c_t}$, we can compute the hidden state ${\tilde{\bm{h}}_i}$ by combining the current hidden state $\bm{h_i}$ and the context vector $\bm{c_i}$:
-\[ \tilde{\bm{h}}_i = tanh(W_c[\bm{c_i}; \bm{h_i}])\]
+Alignment is the problem in machine translation that identifies which parts of the input sequence are relevant to each word in the output, whereas translation is the process of using the relevant information to select the appropriate output.
+\cite{bahdanau2014neural} introduce an extension to the encoder-decoder model which learns to alignment and translate jointly. Each time the model predicts the next target word, it softly searches for a set of positions in a source sentence where the most relevant information is concentrated. The model then predicts a target word based on the context vectors associated with these source positions and all the previous generated target words.\\
+Described in formula, attention mechanism derives a context vector ${\bm{c}_i}$ that capture the input information to help to predict the target word at the position ${i}$. Given the target hidden state ${\bm{s}_i}$ and the source-side context vector $\bm{c}_i$, we can compute the hidden state ${\tilde{\bm{s}}_i}$ by combining the current hidden state $\bm{s}_i$ and the context vector $\bm{c_i}$:
+\[ \tilde{\bm{s}}_i = tanh(W_c[\bm{c}_i; \bm{s}_i])\]
 
-Then the target word can be predicted by softmax function:
-\[  p(e_i|e_0^{i-1}, f_1^J) = softmax(W_s \tilde{\bm{h}}_t)\] 
+Then the target word is correspondingly predicted by softmax function:
+\[  p(e_i|e_0^{i-1}, f_1^J) = softmax(W_s \tilde{\bm{s}}_i)\] 
+%\begin{figure}
+%	\begin{minipage}[h]{0.5\textwidth}
+%		\includegraphics[width=\textwidth]{attentiong.png}
+%		\caption{Picture 1}
+%		\label{fig:1}
+%	\end{minipage}
+%	
+%	\begin{minipage}[h]{0.5\textwidth}
+%		includegraphics[width=textwidth]{attentionl.png}
+%		\caption{Picture 2}
+%		\label{fig:2}
+%	\end{minipage}
+%\end{figure}
 \begin{figure}
-	\begin{minipage}[h]{0.5\textwidth}
-		\includegraphics[width=\textwidth]{attentiong}
-		\caption{Picture 1}
-		\label{fig:1}
-	\end{minipage}
-	
-	\begin{minipage}[h]{0.5\textwidth}
-		includegraphics[width=textwidth]{attentionl}
-		\caption{Picture 2}
-		\label{fig:2}
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{attentiong}
+		\captionof{figure}{Global attention}
+		\label{fig:test1}
+	\end{minipage}%
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=1\linewidth]{attentionl}
+		\captionof{figure}{Local attention}
+		\label{fig:test2}
 	\end{minipage}
 \end{figure}
-
 %\begin{figure}[t]
 %	\includegraphics[width=6cm]{attentiong}
 %	\caption{Global attention model (\cite{luong2015effective})}
@@ -180,16 +197,15 @@ Then the target word can be predicted by softmax function:
 %	\caption{Local attention model (\cite{luong2015effective})}
 %	\centering
 %\end{figure}
-The concept of attention mechanism comes first from the computer vision domain, when generating image captions,  The model learns f to restrict attention to particular objects in the image.
-We denote the decoder RNN state as $\bm{s}_i$, the encoder hidden state over all position as $\bm{h}_j$.\\
+
 
 \textbf{Global attention \& Local attention } \\
-The global attention attend all the input words, weighted average of source hidden states (word representations):
-\[ \bm{c}_i = \sum_{j} \bm{\alpha}_i(j)\cdot  \bm{h}_j \]
-where $\bm{\alpha}_i(j)$ is the normalized attention weight that output at position $i$ is aligned with input position $j$, and it can be calculated as the following softmax like function:
+\textbf{Global attention} attends all the input words, weighted average of source hidden states (word representations):
+\[ \bm{c}_i = \sum_{j} \bm{\alpha}(j|i)\cdot  \bm{h}_j \]
+where $\bm{\alpha}(j|i)$ is the normalized attention weight that output at position $i$ is aligned with input position $j$, and it can be calculated as the following softmax-like function:
 \begin{align}
-\bm{\alpha}_i(j) = & \ \text{align}(\bm{s}_i, {\bm{h}}_j) \\
-= & \ \frac{\text{exp\ }(\text{score \cite{xu2015show}}(\bm{s}_i, {\bm{h}}_j))}{\sum_{\bm{j}^{\prime}} \text{exp\ }(\text{score}(\bm{s}_i, {\bm{h}}_j^{\prime}))}
+\bm{\alpha}(j|i) = & \ \text{align}(\bm{s}_i, {\bm{h}}_j) \\
+= & \ \frac{\text{exp\ }(\text{score}(\bm{s}_i, {\bm{h}}_j))}{\sum_{\bm{j}^{\prime}} \text{exp\ }(\text{score}(\bm{s}_i, {\bm{h}}_j^{\prime}))}
 \end{align}
 Since score function is referred as a content based function, different forms can be considered:
 \begin{equation}
@@ -203,9 +219,9 @@ Since score function is referred as a content based function, different forms ca
 
 
 
-Since for global attention, for each target word we need to attend the whole input sentence, it is very expensive and impractical to translate longer sentences. \cite{luong2015effective}) proposed the local attention, the local attention is actually the  trade-off between soft and hard attention. \\
-For local attention, the model first generates an aligned position ${a(i)}$ for each target word at position $i$. Then the context vector ${\bm{c}_i}$ is a weighted sum within the window ${[a(i)-D, a(i)+D]}$, ${D}$ is selected empirically. The model predict the aligned  position ${p_i}$ as followed:
-\[ a(i) = S \cdot \text{sigmoid}(\bm{v}_p^T \text{tanh}(W_p \bm{h}_i))\]
+For global attention, for each target word we need to attend the whole input sentence, it is very expensive and impractical to translate longer sentences. \cite{luong2015effective}) proposed the local attention, the local attention is actually the  trade-off between soft and hard attention. \\
+\textbf{Local attention} first predicts an aligned position ${a(i)}$ for each target word at position $i$. Then the context vector ${\bm{c}_i}$ is a weighted sum within the window ${[a(i)-D, a(i)+D]}$, ${D}$ is selected empirically. The model predict the aligned  position ${p_i}$ as followed:
+\[ a(i) = S \cdot \text{sigmoid}(\bm{v}_p^T \text{tanh}(W_p \bm{s}_i))\]
 
 ${W_p}$ and ${\bm{v}_p}$ are the model parameters which will be learned to predict positions. $S$ is the source sentence length. As a result of sigmoid function, $a(i) \in [0, S]$. To favor the words near position ${a(i)}$, they place a Gaussian distribution which centered at ${a(i)}$.
 \[\bm{\alpha}_i(j) = \text{align}(\bm{s}_i, {\bm{h}}_j) \cdot \text{exp\ }\Big(-\frac{(j-a(i))^2}{2 \sigma^2}\Big) \]
@@ -248,7 +264,6 @@ There are three attention types in the transformer model:
 	\item decoder self-attention\\
 	similar to encoder attention, each position is allowed to attend to position before and including that position
 \end{itemize}
-.
 
 
 \textbf{Positional Encoding}\\
@@ -259,13 +274,14 @@ Since there is no RNN or CNN structures in transformer model, we need also need 
 
 where pos is the position and $i$ is the dimension. That is, each dimension of the positional encoding corresponding to a sinusoid.
 
-\section{Unsupervised Machine Translation}
+
+
+
+
+
+\section{Neural Unsupervised Machine Translation}
 give the first results for training a full translation model from non-parallel data, and use this model to translate previously-unseen text. The proposed problem named "deciperment" has received a lot of attention. This model contains many statistical methods, like EM algorithm or Bayesian method. However, this method is limited to rather short sentences and simplistic setting. With the development of neural machine translation, the end-to-end method performs better and easier to tune without much specific linguistic knowledge. The Idea is similar to dual learning framework except that in dual learning model, gradients are backpropagated through the reverse model and pretrain using a relative large parallel data as a warm start. The neural model mapping the sentences from monolingual corpora into the same latent space, By learning to reconstruct in both languages from the shared feature space. The translation model in both direction will be improved synchronously with the back-translation.
 
-
-
-
-\subsection{Neural Unsupervised Machine Translation}
 
 \begin{figure}[h]
 	\includegraphics[width=14cm]{unmt}

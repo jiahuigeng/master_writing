@@ -63,7 +63,16 @@ first observe that word embeddings trained separately on monolingual corpora exh
 	
 
 \subsection{Training Algorithm}
-According to the training method we can divide the supervised method into three:
+Most training methods can be divided into joint training approaches and mapping-based approaches. , .   first train monolingual word representations on corresponding corpus separately. Then mappings are learned to project different embeddings into the shared space. They learn the transformation from word alignments or bilingual dictionaries. Some works focus on learning the mapping from the source embedding space to the target embedding space. The criterion is to minimize the mean squared error between the transformed source embeddings and the target embeddings. Another type like CCA-based mapping use canonical correlation analysis (CCA) to project words from two languages into a shared embedding space (). \\
+\textbf{Joint Training Approaches}\\
+Joint training means to optimize the source and target embeddings objectives $\mathcal{L(\cdot)}$ jointly with the cross-lingual regularization term $\Omega(\cdot)$. 
+\[ \mathcal{L} =  \mathcal{L}_{\text{skip-gram}}^e + \mathcal{L}_{\text{skip-gram}}^f + \lambda \cdot \Omega(\cdot)  \]
+where the first two losses are exact the same as those in monolingual embedding training. While the $\Omega(\cdot)$  encourages the similar words representations to be similar for words that are related across different languages.
+
+Different cross-lingual regularization terms are proposed to optimize the cross-lingual embeddings (\cite{coulmance2016trans}, \cite{luong2015bilingual}, \cite{gouws2015bilbowa}). For example, \cite{gouws2015bilbowa} models it as: 
+\[ \Omega_{\text{BilBOWA}} = {\lVert \frac{1}{I}  \sum_{e_i \in e_1^I} \bm{e}_i - \frac{1}{J} \sum_{f_j \in f_1^J} \bm{f}_j\rVert}^2 \]
+where $\bm{f}_j$ and $\bm{e}_i$ are the word embeddings for words in parallel source and target sentences. Instead of relying on expensive word alignments which minimize the distance that aligned to each other, they minimize the distance between the mean of the word representations in the aligned sentences. 
+
 \textbf{Mapping-based Approaches}: \\
 First train monolingual word embeddings independently on large monolingual corpora and then find the most suitable transformation matrix that maps the embeddings into a shared embedding space. The mapping is trained based on bilingual dictionary.
 
@@ -71,7 +80,7 @@ Multilingual learning can be categorized into mapping-based approaches and regul
 
 The regularization-based approaches involve the multilingual constraint in the objective function for learning the embedding, adds an extra term that reflects the distances of some pairs of semantically related words from different languages into the objective function. 
 
-\section{Canonical Correlation Analysis (CCA)}
+\subsubsection{Canonical Correlation Analysis (CCA)}
 
 let $E \in \mathbb{R}^{m \times d_1}$ and $F \in \mathbb{R}^{n \times d_2}$ be word embeddings of two different vocabularies where rows represent words. Since the two vocabularies are of different sizes and there might be not exist translation of every word. Let $\bm{e}$,$\bm{f}$ be two corresponding vectors from , and be the two projection directions. Then the projected vectors are:
 \[ \] 
@@ -86,7 +95,7 @@ and the correlation between the projected vectors can be written as:
  Using these two prokection vectors we can project the entire vocabularies of the two languages  
  
  
-\subsection{Deep Canonical Correlation Analysis}
+\textbf{Deep Canonical Correlation Analysis}
 A linear feature mapping is often not sufficiently powerful to faithfully capture the hidden, non-linear relations within the data. proposed a non-linear extension of CCA using deep neural networks. In this model, two neural networks are used to extract features from each voew, and trained to maximize the correlations between outputs in the two views, measured by a linear CCA steo with projection mappings the neural network weights and linear projections are optimized together using the objective 
 \[ \]
 %where $W_f$ and $W_e$ are the weights of the two networks and ${}$ ${}$, ${}$ are covariance matrices computed for   in the ssame way as CCA. The final transformation is the composition of the neural network ans CCA projection,　$\bm{u}^T \bm{f}$ for the view. The algorithm does not have a closed-form solution but the parameters can be learned via gradient-based optimization with mini-batch stochastic gradient descent .
@@ -118,7 +127,7 @@ Xing \cite{ } showed that the results are improved when we constrain the ${W}$ t
 
 The problem then is simplified as the Procrustes problem and there exists a closed-form solution obtained from the SVD of ${EF^T}$
 
-\subsection{Orthogonal Constraints}
+\textbf{Orthogonal Constraints}
 Starting from \cite{mikolov2013exploiting}, the mapping from source embedding space to target embedding space can be represented as a linear repression. The objective can be defined as:
 \[ \min_{W} \sum_{i} {\lvert Wf - e  \rVert}^2 \]
 Since we retrieve the word translation according to cosine similarity, it's better to solve the problem by redefine the optimization function using the cosine distance:
@@ -127,7 +136,7 @@ This is equivalent to minimizing the (squared) Frobenius norm of the residual ma
 \[ W^* = \argmin{W} {\lVert WF - E \rVert}^2_F \]
 The problem boils down to the Procrustes problem which has a closed form solution obtained from the singular value decomposition (SVD).
 \[W* = = UV^T , \quad U\Sigma V^T = SVD(EF^T) \]
-\subsection{CSLS Loss}
+\textbf{CSLS Loss}
 Inspired from the work of \cite{conneau2017word}, where the dictionary inducted from CSLS loss: ${\bm{e}}$
 \[ CSLS(\bm{e} ,\bm{f}) = -2 cos(\bm{e}, \bm{f}) + \frac{1}{k} \sum_{\bm{e}^{\prime} \in N_{\bm{e}}(\bm{f})} {cos(\bm{e}^{\prime}, \bm{f})}+ \frac{1}{k}  \sum_{\bm{f}^{\prime} \in N_{\bm{f}}(\bm{e})   } {cos(\bm{f}^{\prime}, \bm{e})}\]
 since we have ${cos(\bm{We}, \bm{f}) = \bm{e}^T \bm{W}^T \bm{f}}$

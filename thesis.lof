@@ -1,14 +1,14 @@
-\babel@toc {ngerman}{}
-\babel@toc {ngerman}{}
-\babel@toc {british}{}
+\select@language {ngerman}
+\select@language {ngerman}
+\select@language {british}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {\relax 2.1}{\ignorespaces Illustration of IBM-3 model (\cite {koehn2009statistical})}}{7}{figure.2.1}
 \contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces Neural machine translation \IeC {\textendash } example of a deep recurrent architecture (\cite {luong2015effective})}}{10}{figure.2.2}
-\contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Picture 1}}{12}{figure.2.3}
-\contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces Picture 2}}{12}{figure.2.4}
-\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces The Transformer model architecture (\cite {vaswani2017attention})}}{14}{figure.2.5}
+\contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Global attention}}{12}{figure.2.3}
+\contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces Local attention}}{12}{figure.2.4}
+\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces The Transformer model architecture (\cite {vaswani2017attention})}}{13}{figure.2.5}
 \contentsline {figure}{\numberline {\relax 2.6}{\ignorespaces Illustration of unsupervised machine translation: A) the two original monolingual data; B) Initialization, the two distribution are roughly aligned; C) Denoising autoencoder, make the distribution closer to normal one in corresponding language D) Back-translation, improve the both translation model in iterative way (\cite {lample2018phrase})}}{16}{figure.2.6}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Global attention model (\cite {mikolov2013efficient})}}{19}{figure.3.1}

@@ -1,1 +1,5 @@
 2018-07-23.10-15-40 mv Machine\ Translation.tex machinetranslation.tex
+2018-09-10.09-01-16 git reset --hard
+2018-09-10.09-01-26 git pull
+2018-09-10.15-29-46 cat grid.en-de.iter.1000.lr.0.005.o5620719  | grep "csls_knn_10 - Precision at k = 1:"
+2018-09-10.15-53-55 subl
