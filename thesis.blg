@@ -11,45 +11,45 @@ I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for ""
 Warning--I didn't find a database entry for "bibid"
 Warning--empty journal in vulic2016role
-You've used 29 entries,
+You've used 30 entries,
             2773 wiz_defined-function locations,
-            735 strings with 11026 characters,
-and the built_in function-call counts, 17033 in all, are:
-= -- 1492
-> -- 1149
-< -- 25
-+ -- 386
-- -- 354
-* -- 1371
-:= -- 2503
-add.period$ -- 90
-call.type$ -- 29
-change.case$ -- 205
-chr.to.int$ -- 26
-cite$ -- 59
-duplicate$ -- 782
-empty$ -- 1258
-format.name$ -- 393
-if$ -- 3659
+            740 strings with 11121 characters,
+and the built_in function-call counts, 17325 in all, are:
+= -- 1514
+> -- 1159
+< -- 26
++ -- 390
+- -- 357
+* -- 1386
+:= -- 2551
+add.period$ -- 93
+call.type$ -- 30
+change.case$ -- 208
+chr.to.int$ -- 27
+cite$ -- 61
+duplicate$ -- 802
+empty$ -- 1290
+format.name$ -- 397
+if$ -- 3720
 int.to.chr$ -- 4
 int.to.str$ -- 1
-missing$ -- 29
-newline$ -- 154
-num.names$ -- 116
-pop$ -- 449
+missing$ -- 31
+newline$ -- 159
+num.names$ -- 120
+pop$ -- 461
 preamble$ -- 1
-purify$ -- 176
+purify$ -- 179
 quote$ -- 0
-skip$ -- 685
+skip$ -- 697
 stack$ -- 0
-substring$ -- 586
-swap$ -- 200
+substring$ -- 588
+swap$ -- 201
 text.length$ -- 20
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 319
+type$ -- 325
 warning$ -- 1
-while$ -- 132
+while$ -- 135
 width$ -- 0
-write$ -- 379
+write$ -- 391
 (There was 1 error message)

@@ -53,19 +53,43 @@ Suppose in this way we denote a word ${w}$ as ${G_{w}}$ the set of character ${n
 	
 	Cross-lingual word embeddings are appealing due to two main factors: they enable not only cross-lingual semantics, reasoning about word meaning in multilingual contexts, for example, we can induce the bilingual dictionary by calculating the cross-lingual word similarities, but also knowledge transfer between languages, most importantly between rich-resource and lean-resource languages (\cite{adams2017cross}). 
 
-	In the thesis, I assume there are two set of embeddings ${e}$, ${f}$trained separately on monolingual data.  The propose of cross-lingual word embedding training is to learn such a mapping ${W \in }$ from source embedding space to target embedding space, so $Wf_i, e_j$ in the same embedding space and for all corresponding word pairs, we need to optimize the mapping ${W}$, so that" 
+	In the thesis, I assume there are two set of embeddings ${e}$, ${f}$trained separately on monolingual data.  The propose of cross-lingual word embedding training is to learn such a mapping ${W \in }$ from source embedding space to target embedding space, so $Wf_i, e_j$ in the same embedding space and for all corresponding word pairs, we need to optimize the mapping ${W}$, so that"
+	 
+	
 	\[ \arg\min_{W \in R^{d \times d}} \sum_{i} \lVert Wf_i - e_i \rVert \]
 	where $d$ is the dimension of embeddings, and the distance ${\lVert Wf_i - e_i \rVert}$ can be different types. We prefer the Euclidean distance.  
 
 first observe that word embeddings trained separately on monolingual corpora exhibits isomorphic structure across languages, as illustrated in Figure {}. That means we can create a connection between source embedding and target embedding even with simple linear mapping. This has far-reaching implication on low-resource scenarios {}{}{}, because word embedding requires only plain text to train, which is the most abundant form of linguistic resource.
 	
 
-\subsection{***}
+\subsection{Training Algorithm}
 According to the training method we can divide the supervised method into three:
+\textbf{Mapping-based Approaches}: \\
+First train monolingual word embeddings independently on large monolingual corpora and then find the most suitable transformation matrix that maps the embeddings into a shared embedding space. The mapping is trained based on bilingual dictionary.
 
 Multilingual learning can be categorized into mapping-based approaches and regularization-based approaches. In the mapping-based approaches, the embedding is performed for each language individually with monolingual data, and then the mapping are learned using multilingual data to represent the relation between the languages. One method is to learn the linear mapping projection, another is to learn mappings that project word vectors of all languages to a common low-dimension space, where the correlation of the multilingual word pairs is maximized with the canonical correlation analysis (CCA). The advantages of approach is that it is very fast to learn the embedding alignments. The main draw back of this approach is that it is not clear if a single transformation whether linear or nonlinear can capture the relationship between all words in different languages.
 
 The regularization-based approaches involve the multilingual constraint in the objective function for learning the embedding, adds an extra term that reflects the distances of some pairs of semantically related words from different languages into the objective function. 
+
+\section{Canonical Correlation Analysis (CCA)}
+
+let $E \in \mathbb{R}^{m \times d_1}$ and $F \in \mathbb{R}^{n \times d_2}$ be word embeddings of two different vocabularies where rows represent words. Since the two vocabularies are of different sizes and there might be not exist translation of every word. Let $\bm{e}$,$\bm{f}$ be two corresponding vectors from , and be the two projection directions. Then the projected vectors are:
+\[ \] 
+and the correlation between the projected vectors can be written as:
+ \[\rho(\bm{f}^{\prime}, \bm{e}^{\prime}) = \frac{\mathbb{E[(\bm{f})(\bm{e})]}}{\sqrt{\mathbb{E[(\bm{f})^2]} \sqrt{\bm{E(\bm{e})^2}}}}\] 
+ \[ \frac{\bm{u}^T\Sigma_{fe} \bm{v}}{\sqrt{\bm{u}^T \Sigma_{ff}\bm{u}} \sqrt{\bm{v}^T\Sigma_{ee}\bm{v}}} \]
+ 
+ where $\Sigma_P{fe}$ and $\Sigma_{ff}$ are the cross-view and within 
+ 
+ CCA maximizes $\rho$ for the given set of vectors ${}$ and ${}$ and outputs two projection matrix :
+ 
+ Using these two prokection vectors we can project the entire vocabularies of the two languages  
+ 
+ 
+\subsection{Deep Canonical Correlation Analysis}
+A linear feature mapping is often not sufficiently powerful to faithfully capture the hidden, non-linear relations within the data. proposed a non-linear extension of CCA using deep neural networks. In this model, two neural networks are used to extract features from each voew, and trained to maximize the correlations between outputs in the two views, measured by a linear CCA steo with projection mappings the neural network weights and linear projections are optimized together using the objective 
+\[ \]
+%where $W_f$ and $W_e$ are the weights of the two networks and ${}$ ${}$, ${}$ are covariance matrices computed for   in the ssame way as CCA. The final transformation is the composition of the neural network ans CCA projection,　$\bm{u}^T \bm{f}$ for the view. The algorithm does not have a closed-form solution but the parameters can be learned via gradient-based optimization with mini-batch stochastic gradient descent .
 %\begin{enumerate}
 %	\item Mapping based approaches\\
 %	First train the monolingual word embedding separately and then seek the seed dictionary to learn the mapping. 
@@ -74,14 +98,19 @@ The regularization-based approaches involve the multilingual constraint in the o
 %	\item Joint methods\\
 %	Take the parallel text as input and minimize the source and target language losses jointly with the cross-lingual regularization term
 %\end{enumerate}
-Max-margin hinge loss (MMHL)
-learn word embeddings by train a model to output a higher score for a correct word sequence than for an incorrect one. 
-%\[\mathbb{L}^{MMHL} = \sum_{s \]
-Jointly optimize the monolingual objective ${\mathbb{L(\cdot)}}$, with the cross-lingual objective enforced as a cross-lingual regularizer. need to define a cross-lingual regularization term ${\Omega(\cdot)}$ to constrain monolingual models as they are jointly being trained over the context
+
 
 The joint formulation of the learning objective provided as:
 \[ J = \mathcal{L}^s + \mathcal{L}^t + \Omega(s,t) \]
-where ${\mathbb{L}^s}$ and ${\mathbb{L}^t}$ are monolingual objectives in each language optimized jointly with the cross-lingual regularization objective. 
+where ${\mathbb{L}^s}$ and ${\mathbb{L}^t}$ are monolingual objectives in each language optimized jointly with the cross-lingual regularization objective.
+
+exact cross-lingual objective as follows:
+\begin{align*}
+	 \Omega(E, F) = & \sum_{i} \sum_{j} a_{ij} {\lvert \bm{e}_i - \bm{f}_j \rvert}^2 \\
+	= & (E - F)^2 A (E - F)
+\end{align*}
+where subscript A indicates that the alignments are fixed. A captures the relationships between all source and target vocabularies.
+
 A dictionary is necessary for learning the cross-lingual word embedding. 
 minimizing the distance in a bilingual dictionary.\\
 

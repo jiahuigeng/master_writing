@@ -11,42 +11,44 @@
 \BOOKMARK [1][]{section.2.1}{2.1 Statistical Machine Translation}{chapter.2}% 11
 \BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Word-Based Model}{section.2.1}% 12
 \BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Phrase-Based Model}{section.2.1}% 13
-\BOOKMARK [1][]{section.2.2}{2.2 Neural Machine Translation}{chapter.2}% 14
-\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Seq2seq Model}{section.2.2}% 15
-\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Attention Mechanism}{section.2.2}% 16
-\BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Transformer}{section.2.2}% 17
-\BOOKMARK [1][]{section.2.3}{2.3 Unsupervised Machine Translation}{chapter.2}% 18
-\BOOKMARK [2][]{subsection.2.3.1}{2.3.1 Decipherment}{section.2.3}% 19
-\BOOKMARK [2][]{subsection.2.3.2}{2.3.2 Neural Unsupervised Machine Translation}{section.2.3}% 20
+\BOOKMARK [2][]{subsection.2.1.3}{2.1.3 Decipherment}{section.2.1}% 14
+\BOOKMARK [1][]{section.2.2}{2.2 Neural Machine Translation}{chapter.2}% 15
+\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Basic Model}{section.2.2}% 16
+\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Attention Mechanism}{section.2.2}% 17
+\BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Transformer}{section.2.2}% 18
+\BOOKMARK [1][]{section.2.3}{2.3 Unsupervised Machine Translation}{chapter.2}% 19
+\BOOKMARK [2][]{subsection.2.3.1}{2.3.1 Neural Unsupervised Machine Translation}{section.2.3}% 20
 \BOOKMARK [0][]{chapter.3}{3 Word Embedding}{}% 21
 \BOOKMARK [1][]{section.3.1}{3.1 Monolingual Embedding}{chapter.3}% 22
 \BOOKMARK [2][]{subsection.3.1.1}{3.1.1 CBOW and Skip-gram Model}{section.3.1}% 23
 \BOOKMARK [2][]{subsection.3.1.2}{3.1.2 FastText}{section.3.1}% 24
 \BOOKMARK [1][]{section.3.2}{3.2 Cross-lingual Word Embedding}{chapter.3}% 25
-\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 ***}{section.3.2}% 26
-\BOOKMARK [2][]{subsection.3.2.2}{3.2.2 Orthogonal Constraints}{section.3.2}% 27
-\BOOKMARK [2][]{subsection.3.2.3}{3.2.3 CSLS Loss}{section.3.2}% 28
-\BOOKMARK [0][]{chapter.4}{4 Cross-lingual Word Embedding without Parallel Data}{}% 29
-\BOOKMARK [1][]{section.4.1}{4.1 Initialization}{chapter.4}% 30
-\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Iterative Closest Point Method}{section.4.1}% 31
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Adversarial training}{section.4.1}% 32
-\BOOKMARK [1][]{section.4.2}{4.2 Nearest Neighbor Search}{chapter.4}% 33
-\BOOKMARK [1][]{section.4.3}{4.3 Iterative Training}{chapter.4}% 34
-\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Self-learning with Procrustes}{section.4.3}% 35
-\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Data-driven Method}{section.4.3}% 36
-\BOOKMARK [0][]{chapter.5}{5 Sentence Translation}{}% 37
-\BOOKMARK [1][]{section.5.1}{5.1 Context-aware Beam Search}{chapter.5}% 38
-\BOOKMARK [2][]{subsection.5.1.1}{5.1.1 Language Model}{section.5.1}% 39
-\BOOKMARK [2][]{subsection.5.1.2}{5.1.2 Beam Search}{section.5.1}% 40
-\BOOKMARK [1][]{section.5.2}{5.2 Denoising Neural Network}{chapter.5}% 41
-\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Denoising Auto-encoder}{section.5.2}% 42
-\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Noise Model}{section.5.2}% 43
-\BOOKMARK [0][]{chapter.6}{6 Experiments}{}% 44
-\BOOKMARK [1][]{section.6.1}{6.1 Corpus Statistics}{chapter.6}% 45
-\BOOKMARK [1][]{section.6.2}{6.2 title}{chapter.6}% 46
-\BOOKMARK [1][]{section.6.3}{6.3 title}{chapter.6}% 47
-\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 48
-\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 49
-\BOOKMARK [0][]{chapter*.9}{List of Figures}{}% 50
-\BOOKMARK [0][]{chapter*.10}{List of Tables}{}% 51
-\BOOKMARK [0][]{chapter*.11}{Bibliography}{}% 52
+\BOOKMARK [2][]{subsection.3.2.1}{3.2.1 Training Algorithm}{section.3.2}% 26
+\BOOKMARK [1][]{section.3.3}{3.3 Canonical Correlation Analysis \(CCA\)}{chapter.3}% 27
+\BOOKMARK [2][]{subsection.3.3.1}{3.3.1 Deep Canonical Correlation Analysis}{section.3.3}% 28
+\BOOKMARK [2][]{subsection.3.3.2}{3.3.2 Orthogonal Constraints}{section.3.3}% 29
+\BOOKMARK [2][]{subsection.3.3.3}{3.3.3 CSLS Loss}{section.3.3}% 30
+\BOOKMARK [0][]{chapter.4}{4 Cross-lingual Word Embedding without Parallel Data}{}% 31
+\BOOKMARK [1][]{section.4.1}{4.1 Initialization}{chapter.4}% 32
+\BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Iterative Closest Point Method}{section.4.1}% 33
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Adversarial training}{section.4.1}% 34
+\BOOKMARK [1][]{section.4.2}{4.2 Nearest Neighbor Search}{chapter.4}% 35
+\BOOKMARK [1][]{section.4.3}{4.3 Iterative Training}{chapter.4}% 36
+\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Self-learning with Procrustes}{section.4.3}% 37
+\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Data-driven Method}{section.4.3}% 38
+\BOOKMARK [0][]{chapter.5}{5 Sentence Translation}{}% 39
+\BOOKMARK [1][]{section.5.1}{5.1 Context-aware Beam Search}{chapter.5}% 40
+\BOOKMARK [2][]{subsection.5.1.1}{5.1.1 Language Model}{section.5.1}% 41
+\BOOKMARK [2][]{subsection.5.1.2}{5.1.2 Beam Search}{section.5.1}% 42
+\BOOKMARK [1][]{section.5.2}{5.2 Denoising Neural Network}{chapter.5}% 43
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Denoising Auto-encoder}{section.5.2}% 44
+\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Noise Model}{section.5.2}% 45
+\BOOKMARK [0][]{chapter.6}{6 Experiments}{}% 46
+\BOOKMARK [1][]{section.6.1}{6.1 Corpus Statistics}{chapter.6}% 47
+\BOOKMARK [1][]{section.6.2}{6.2 title}{chapter.6}% 48
+\BOOKMARK [1][]{section.6.3}{6.3 title}{chapter.6}% 49
+\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 50
+\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 51
+\BOOKMARK [0][]{chapter*.7}{List of Figures}{}% 52
+\BOOKMARK [0][]{chapter*.8}{List of Tables}{}% 53
+\BOOKMARK [0][]{chapter*.9}{Bibliography}{}% 54
