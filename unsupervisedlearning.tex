@@ -1,5 +1,7 @@
 \chapter{Cross-lingual Word Embedding without Parallel Data}
-Proposed cross-lingual embedding learning requires several thousands of word pairs as anchors to learn the mapping with good generalization ability to predict for unseen word. But as for low-source language, dictionary of good quality is not readily available. This motivates more and more works on unsupervised cross-lingual word embedding learning, if the unsupervised method works, the word-level or grammar-level properties will be better captured, since it enables the knowledge transfer for those less-studied languages.
+%Proposed cross-lingual embedding learning requires several thousands of word pairs as anchors to learn the mapping with good generalization ability to predict for unseen word. But as for low-source language, dictionary of good quality is not readily available. This motivates more and more works on unsupervised cross-lingual word embedding learning, if the unsupervised method works, the word-level or grammar-level properties will be better captured, since it enables the knowledge transfer for those less-studied languages.
+
+Approaches in the previous chapter is to learn the shared embedding space for words across different languages. They all employ parallel data like small bilingual dictionary or weak supervision signals like parallel sentences. The transformation generalizes well to the whole vocabulary. Even for unseen words, we can also infer word translation of good quality. Starting from small lexicon we are able to extend the lexicon. However labeling the lexicon information manually still costs lots of labor. This motivates people to bootstrap from few seed entries. The idea behind the bootstrapping approach is to find heuristics like cognates, numbers as initialization, then iteratively expand the seed dictionary. In this chapter, some good initialization approaches will be introduced. Then the iterative training principle will be introduced. Finally I explain a novel data-driven training approach in detail.
 
 %\begin{figure}[t]
 %	\includegraphics[width=12cm]{iter1}
@@ -14,9 +16,10 @@ Proposed cross-lingual embedding learning requires several thousands of word pai
 %
 %
 \section{Initialization}
- \cite{vulic2016role} shows that a seed dictionary of at least hundreds are need for the model to generalize. \cite{DBLP:journals/corr/abs-1801-06126}
- proposed an approach which first use PCA to realize an approximate alignment, then use mini-batch cycle iterative closest point to learn the mapping.  
-\cite{zhang2017adversarial} proposed an adversarial autoencoder, using the generator $G$ to implement the mapping so that the transformed source embedding similar to the corresponding target embedding, and the discriminator $D$ strives to distinguish the target embedding from the transformed source embedding. \cite{conneau2017word} simplifies the structure and proposed an unsupervised criterion that is highly correlated with the quality of the mapping which can be used as stop criterion and to select the best hyper-parameters.
+ \cite{vulic2016role} shows that a seed dictionary of at least hundreds are need for the model to be general enough. \cite{artetxe2017learning} raise a mapping model that relies only on a small set of shared words (e.g., identically spelled words or only shared numbers) as seed for the procedure. But this approach is very dependent on the writing system, only works for specific language pairs. Also it gets stuck in poor local optima when the initial seed cannot provide enough good information to start the system.\\
+  \cite{DBLP:journals/corr/abs-1801-06126}
+ propose an approach which first use PCA to realize an approximate alignment, then use mini-batch cycle iterative closest point to learn the mapping.  
+\cite{zhang2017adversarial} put forward an adversarial autoencoder, using the generator $G$ to implement the mapping so that the transformed source embedding similar to the corresponding target embedding, and the discriminator $D$ strives to distinguish the target embedding from the transformed source embedding. \cite{conneau2017word} simplifies the structure and proposed an unsupervised criterion that is highly correlated with the quality of the mapping which can be used as stop criterion and to select the best hyper-parameters.
 %
 %As it can be clearly observed from the figure below that, the self learning algorithm can effectively learn the mapping between the source and target distribution even starts with a small dictionary size and the final accuracy when the algorithm converges are nearly the same level. However when start randomly without any support of dictionary, the framework does not work. In order to realize a fully unsupervised learning, we need to design heuristics to build the seed dictionary.
 %
@@ -29,7 +32,6 @@ Proposed cross-lingual embedding learning requires several thousands of word pai
 %Assume the SVD of ${E = USV^T}$,  the similarity ${M_E = US^2U^T}$. In practice, he computed sorted ${1}$, ${2}$	yielding the matrix ${E^{\prime}}$ , ${F^{\prime}}$ and used to build the initial solution for self-learning.
 
 \subsection{Iterative Closest Point Method}
-
 The method assumes that many language pairs share some principle axes of variation. For each language, first select most frequent word vector,center the data and project it to the top ${p}$ principle components.
 %Propose a method first learn ${T_{ef}}$ and ${T_{fe}}$ for ${E \rightarrow F}$ and ${F \rightarrow E}$ , we include the cycle-constraints ensure that a word ${f}$ transformed into joint embedding space and transformed back is unchanged. 
 The normal Iterative Closest Point (ICP) is unidirectional, the Mini-batch Cycle ICP (MBC-ICP) includes cycle-constrains ensuring that a word transformed to another language could also be transformed back and stay unchanged. Each iteration the final MBC-ICP algorithm can describled as: 
@@ -70,27 +72,7 @@ Since the cross-lingual embedding training is under the unsupervised setting, We
 
 All these methods can be use to find meaningful word pairs in both languages. For further refinement we can use the induced dictionary to start the iterative self-learning algorithm. 
 
-\section{Nearest Neighbor Search}
-\textbf{Hubness Problem}\\
-Points are tending to be nearest neighbors of many points in high-dimensional space. Since we use nearest neighbor search, those points (hubs) will harm the search accuracy.\\
 
-\textbf{Inverted Softmax}\\
-The confidence of choosing a target word as translation of a source word can be considered as softmax-like normalized probability
-\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  s(e,f)\Big)}}{\sum_{e^{\prime}} {\exp{\Big(\beta \cdot s(e^{\prime}, f)\Big)}}} \]
-where the $s(\cdot)$ is the score function we can define ourselves.
-we learn the "temperature" $\beta$ by maximizing the log probability over the training dictionary. 
-\[ \argmax{\beta} \sum_{e,f} \ln p(e|f)  \]
-
-The author observed that, if we invert the softmax and normalizing the probability over all the source words rather than target words, the hubness problem could be mitigated:
-\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  s(e,f)\Big)}}{\alpha \  \sum_{f^{\prime}} {\exp{\Big(\beta \cdot s(e, f^{\prime})\Big)}}}\]\\
-
-
-\textbf{Cross-domain Similarity Local Scaling}\\
-We denote ${N(f)}$ the set of ${K}$ nearest neighbors of points of the mapped $f$ in the target embedding space, and ${N(e)}$ the nearest neighbors of mapped ${e}$ in the source embedding space. We consider the mean cosine similarity as hub-ness:
-\[ r(f)= \frac{1}{K} \sum_{e^{\prime} \in N(f)} \cos(e^{\prime}, Wf)\]
-So in this way we penalize the hub points:
-\[ CSLS(\bm{e}, \bm{f}) = 2 cos(\bm{e}, \bm{y}) - \frac{1}{K} \sum_{\bm{e^{\prime}} \in N(\bm{e})} cos(\bm{f}, \bm{e^{\prime}})- \frac{1}{K} \sum_{\bm{f^{\prime}} \in N(\bm{e})} cos(\bm{f^{\prime}}, \bm{e}) \]
-With the nearest neighbor search we can evaluate the performance of learned mapping, by checking if the nearest neighbors of the source word are also in the candidates in a open word translation dictionary dataset.\\
 \section{Iterative Training}
 \begin{figure}[h]
 	\centering
@@ -136,3 +118,36 @@ Previously, the objective we want to minimize is the mean square error of the ma
 		\[\mathcal{L} = \sum_{(f,e)\in D} {\lVert Wf - e \rVert}^2  \]
 
 
+\textbf{Translation}
+Since we use the pseudo parallel data (source sentence and word-by-word target translation sentence), we can exploit the context information from language model to select the word translation candidate. Beam search with language model is implemented here. More details about sentence translation will be explained next chapter.
+
+
+\textbf{Training}
+It's common to set the training objective of neural mapping as the squared error of the Euclidean distance. This is also exact the same objective of Procrustes analysis, when seed dictionary is available. However, in some papers, cosine similarity loss is suggested since it is used for monolingual word embedding training. It's would be better to keep consistent.  \\
+As mentioned previously, with orthogonal constraint, the problem can be viewed as an orthogonal Procrustes problem, which has a closed form solution and can be computed in linear time related to the vocabulary size. The orthogonality ensures the monolingual quality of the monolingual embeddings is preserved. In preserves the dot product of vectors and the $l_2$ distance.  In our experiments, we find the orthogonal constraint make the training procedure converge successfully, especially when at the beginning stage.
+In this work, the orthogonal constraint is added during the training process. In detail, we use projected gradient descent to training the neural network, alternating the training and the orthogonal constraining by:
+\[ W \leftarrow (1+\beta) W - \beta(WW^\top)W\]
+
+\textbf{Evaluation}\\
+In this thesis, the metrics of the cross-lingual word embedding is to retrieve the translation of given source words. We report the word translation accuracy measured on top-1 prediction for word pairs with 1500 distinct source words.\\
+When infering word translation, we face the hubness problem.
+\textbf{Hubness Problem}\\
+Points are tending to be nearest neighbors of many points in high-dimensional space. Since we use nearest neighbor search, those points (hubs) will harm the search accuracy.\\
+There are two approaches to handle this issue.
+\textbf{Inverted Softmax}\\
+The confidence of choosing a target word as translation of a source word can be considered as softmax-like normalized probability
+\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  \text{score}(e,f)\Big)}}{\sum_{e^{\prime}} {\exp{\Big(\beta \cdot \text{score}(e^{\prime}, f)\Big)}}} \]
+where the $\text{score}(\cdot)$ is the score function we can define ourselves.
+we learn the "temperature" $\beta$ by maximizing the log probability over the training dictionary. 
+\[ \argmax{\beta} \sum_{e,f} \ln p(e|f)  \]
+
+The author observed that, if we invert the softmax and normalizing the probability over all the source words rather than target words, the hubness problem could be mitigated:
+\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  \text{score}(e,f)\Big)}}{\alpha \  \sum_{f^{\prime}} {\exp{\Big(\beta \cdot \text{score}(e, f^{\prime})\Big)}}}\]\\
+
+
+\textbf{Cross-domain Similarity Local Scaling}\\
+We denote ${\mathcal{N}_e(\bm{f})}$ the set of ${k}$ nearest neighbors of points of the mapped $\bm{f}$ in the target embedding space, and ${\mathcal{N}_f(\bm{e})}$ the nearest neighbors of mapped ${\bm{e}}$ in the source embedding space. We consider the mean cosine similarity as hub-ness:
+\[ r(\bm{f})= \frac{1}{K} \sum_{\bm{e}^{\prime} \in \mathcal{N}_e(\bm{f})} \cos(\bm{e}^{\prime}, W\bm{f})\]
+So in this way we penalize the hub points:
+\[ CSLS(\bm{e}, \bm{f}) = 2 \cos(\bm{e}, \bm{f}) - \frac{1}{k} \sum_{\bm{e^{\prime}} \in \mathcal{N}_e(\bm{f})} \cos(\bm{f}, \bm{e^{\prime}})- \frac{1}{k} \sum_{\bm{f^{\prime}} \in \mathcal{N}_f(\bm{e})} cos(\bm{f^{\prime}}, \bm{e}) \]
+With the nearest neighbor search we can evaluate the performance of learned mapping, by checking if the nearest neighbors of the source word are also in the candidates in a open word translation dictionary dataset.\\

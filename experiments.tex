@@ -1,7 +1,7 @@
 \chapter{Experiments}
 
 \section{Corpus Statistics}
-\begin{table}
+\begin{table}[H]
 	\centering
 	\begin{tabular}{c|c|c|c|c}
 		\hline
@@ -11,34 +11,150 @@
 		& \textbf{Vocabulary}    & \textbf{1254k}  & \textbf{523k}    & \textbf{660k}   \\ \hline
 	\end{tabular}
 	
+\end{table}
 
+\begin{table}[H]
 	\centering
-
-		\begin{tabular}{c|c|c|c|c|c}
-			\hline
-			\multirow{7}{*}{\textbf{Test}} & \textbf{}                      & \multicolumn{2}{c|}{\textbf{\texttt{newstest2016}}}    & \multicolumn{2}{c}{\textbf{\texttt{newstest2014}}}    \\ \cline{3-6} 
-			& \multicolumn{1}{l|}{\textbf{}} & \textbf{German}       & \textbf{English}      & \textbf{French}       & \textbf{English}      \\ \cline{2-6} 
-			& \textbf{Sentences}             & \textbf{2999}         & \textbf{2999}         & \textbf{3003}         & \textbf{3003}         \\ \cline{2-6} 
-			& \textbf{Running Words}         & \textbf{62506}        & \textbf{64619}        & \textbf{81165}        & \textbf{71290}        \\ \cline{2-6} 
-			& \textbf{Vocabulary Size}       & \textbf{11978}        & \textbf{8645}         & \textbf{10899}        & \textbf{9200}         \\ \cline{2-6} 
-			& \textbf{OOV Rates}             & \textbf{4116 (6.6\%)} & \textbf{1643 (2.5\%)} & \textbf{1731 (2.1\%)} & \textbf{1299 (1.8\%)} \\ \cline{2-6} 
-			& \textbf{LM perplexity}         & \textbf{211.0}        & \textbf{109.6}        & \textbf{51.2}         & \textbf{84.6}         \\ \hline
-			\multicolumn{4}{l}{\textbf{Search vocabulary in testing: 50k (src/tgt)}} \\
-			
+	
+	\begin{tabular}{c|c|c|c|c|c}
+		\hline
+		\multirow{7}{*}{\textbf{Test}} & \textbf{}                      & \multicolumn{2}{c|}{\textbf{\texttt{newstest2016}}}    & \multicolumn{2}{c}{\textbf{\texttt{newstest2014}}}    \\ \cline{3-6} 
+		& \multicolumn{1}{l|}{\textbf{}} & \textbf{German}       & \textbf{English}      & \textbf{French}       & \textbf{English}      \\ \cline{2-6} 
+		& \textbf{Sentences}             & \textbf{2999}         & \textbf{2999}         & \textbf{3003}         & \textbf{3003}         \\ \cline{2-6} 
+		& \textbf{Running Words}         & \textbf{62506}        & \textbf{64619}        & \textbf{81165}        & \textbf{71290}        \\ \cline{2-6} 
+		& \textbf{Vocabulary Size}       & \textbf{11978}        & \textbf{8645}         & \textbf{10899}        & \textbf{9200}         \\ \cline{2-6} 
+		& \textbf{OOV Rates}             & \textbf{4116 (6.6\%)} & \textbf{1643 (2.5\%)} & \textbf{1731 (2.1\%)} & \textbf{1299 (1.8\%)} \\ \cline{2-6} 
+		& \textbf{LM perplexity}         & \textbf{211.0}        & \textbf{109.6}        & \textbf{51.2}         & \textbf{84.6}         \\ \hline
+		\multicolumn{4}{l}{\textbf{Search vocabulary in testing: 50k (src/tgt)}} \\
+		
+	\end{tabular}
+\end{table}
+\section{Cross-lingual Word Embedding}
+\subsection{Baseline}
+\subsubsection{Corpus Size for Monolingual Embedding}
+\begin{table}[H]
+	\begin{tabular}{llcccccccc}
+		\hline
+		\multicolumn{2}{c}{\multirow{2}{*}{}}          & \multicolumn{4}{c}{De-En} & \multicolumn{4}{c}{En-De} \\ \cline{3-10} 
+		\multicolumn{2}{c}{}                           & 5M        & 10M        & 50M        & 100M       & 5M        & 10M        & 50M        & 100M       \\ \hline
+		\multirow{3}{*}{Supervised}   & Procrustes-NN   &           &            &            &            &           &            &            &            \\ \cline{2-10} 
+		& Procrustes-ISF  &           &            &            &            &           &            &            &            \\ \cline{2-10} 
+		& Procrustes-CSLS &           &            &            &            &           &            &            &            \\ \hline
+		\multirow{4}{*}{Unsupervised} & Adv-NN          &           &            &            &            &           &            &            &            \\ \cline{2-10} 
+		& Adv-CSLS        &           &            &            &            &           &            &            &            \\ \cline{2-10} 
+		& Adv-Refine-NN   &           &            &            &            &           &            &            &            \\ \cline{2-10} 
+		& Adv-Refine-CSLS &           &            &            &            &           &            &            &            \\ \hline
 	\end{tabular}
 \end{table}
 
-\section{title}
+\subsubsection{Vocabulary Size for Word Translation}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccccc}
+		\hline
+		Accuracy(\%) & 50k & 100k & 150k & 200k & No Cutoff \\ \hline
+		50k          &     &      &      &      &           \\ \hline
+		100k         &     &      &      &      &           \\ \hline
+		150k         &     &      &      &      &           \\ \hline
+		200k         &     &      &      &      &           \\ \hline
+		No Cutoff    &     &      &      &      &           \\ \hline
+	\end{tabular}
+\end{table}
+
+\subsection{Data-driven Approach}
+\textbf{Different Learning Rate Scheduler}\\
+\subsubsection{Different Learning Rate Scheduler}
+\begin{itemize}
+	\item Start from Initial Learning Rate
+	\begin{itemize}
+		\item German $\rightarrow$ English
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{cccccc}
+				\hline
+				Accuracy (\%) & 100   & 500   & 1k    & 2k    & 5k    \\ \hline
+				0.01          & 1.00  & 6.01  & 24.21 & 28.37 & 42.71 \\ \hline
+				0.005         & 0.85  & 5.47  & 7.71  & 17.12 & 38.78 \\ \hline
+				0.001         & 1.23  & 7.32  & 14.88 & 15.34 & 27.45 \\ \hline
+				0.0005        & 1.54  & 45.26 & 49.88 & 54.43 & 54.97 \\ \hline
+				0.0001        & 36.23 & 58.09 & 60.14 & 60.37 & 58.67 \\ \hline
+			\end{tabular}
+		\end{table}
+		\item English $\rightarrow$ German
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{cccc}
+				\hline
+				Accuracy (\%) & 1k   & 2k   & 5k      \\ \hline
+				0.01          & 10.02  & 16.50  & 23.36 \\ \hline
+				0.005       & 47.65 & 22.28 & 24.21 \\ \hline
+				0.001        & 24.44 & 24.98 & 26.75 \\ \hline
+				0.0005          & 54.82  & 55.67  & 48.44 \\ \hline
+				0.00001        & 59.21 & 58.98 & 56.90 \\ \hline
+			\end{tabular}
+		\end{table}	
+		\item 	Learning Rate Decay
+		
+	\end{itemize}
+	\item Inherit Last Learning Rate
+	\begin{itemize}
+		\item 50k 
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{cccc}
+				\hline
+				Accuracy (\%) & 1k   & 2k   & 5k      \\ \hline
+				0.01          & 7.79  & 4.70  & 6.01 \\ \hline
+				0.005       & 3.39 & 12.03 & 8.94 \\ \hline
+				0.001        & 5.40 & 11.49 & 18.89 \\ \hline
+				0.0005          & 5.78  & 8.33  & 10.25 \\ \hline
+				0.00001        & 51.50 & 37.63 & 15.27 \\ \hline
+			\end{tabular}
+		\end{table}	
+		\item 50k 2 epochs
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		Accuracy (\%) & 0.5   & 0.7   & 0.9   \\ \hline
+		0.01          & 3.78  & 1.39  & 1.31  \\ \hline
+		0.005         & 4.39  & 3.31  & 14.73 \\ \hline
+		0.001         & 5.63  & 10.56 & 13.72 \\ \hline
+		0.0005        & 7.56  & 6.71  & 10.64 \\ \hline
+		0.0001        & 55.51 & 56.36 & 57.59 \\ \hline
+	\end{tabular}
+\end{table}	
+		\item 200k
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		Accuracy (\%) & 0.5   & 0.7   & 0.9   \\ \hline
+		0.01          & 3.24  & 2.08  & 0.46  \\ \hline
+		0.005         & 5.32  & 12.72 & 1.23  \\ \hline
+		0.001         & 4.55  & 8.02  & 17.27 \\ \hline
+		0.0005        & 6.71  & 6.94  & 6.79  \\ \hline
+		0.0001        & 57.83 & 57.83 & 57.67 \\ \hline
+	\end{tabular}
+\end{table}			
+			
+	\end{itemize}
+\end{itemize}
 
 
-\begin{table}
+
+
+\section{Unspervised Machine Translation}
+
+
+\subsection{Comprehensive Table}
+\begin{table}[H]
 	
-	\caption{Translation results on German$\leftrightarrow$English \texttt{newstest2016} and French$\leftrightarrow$English \texttt{newstest2014}.}
+%	\caption{Translation results on German$\leftrightarrow$English \texttt{newstest2016} and French$\leftrightarrow$English \texttt{newstest2014} }
 	\centering
 \scalebox{0.8}{
 		\begin{tabular}{>{\bfseries}l>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c}
 			\toprule
-			& de-en & en-de & fr-en & en-fr\\
+			& De-En & En-De & Fr-En & En-Fr\\
 			System   & \textsc{Bleu} [\%] & \textsc{Bleu} [\%] & \textsc{Bleu} [\%] & \textsc{Bleu} [\%]\\
 			\midrule
 			Word-by-Word   & 11.1 & 6.7 & 10.6 & 7.8\\
@@ -57,7 +173,7 @@
 \end{table}
 
 
-\section{title}
+
 	\begin{table}[!h]
 	\centering
 	\caption {Word-by-word translation from German to English}
@@ -72,8 +188,9 @@
 \end{table}
 
 
-
-	\begin{table}[!ht]
+\subsection{BPE vs Word}
+Byte pair encoding (BPE) is a simple data compression technique for word segmentation. It allows for the representation of an open vocabulary through a fixed-size vocabulary of variable-character sequences, making it very suitable word segmentation strategy for neural network models. It helps to reduce the vocabulary size and they eliminate the presence of unknown words in the output translation. We use BPE to represent the mapping between languages. 
+	\begin{table}[h]
 	\centering
 	\scalebox{0.9}{
 		\begin{tabular}{>{\bfseries}l>{\bfseries}c>{\bfseries}c}
@@ -95,13 +212,14 @@
 			& 200k & 14.4\\
 			\bottomrule
 		\end{tabular}
-	}
-	
+	}\\
+
+As the experiments results demonstrated above, the BPE performs worse than word in this unsupervised learning scenario. It might be difficult to learn the translation relationship between subword units. 
 	
 \end{table}
+\subsection{Artificial Noise}
 
-
-		\begin{table}[!h]
+	\begin{table}[H]
 	\centering
 	\scalebox{1}{
 		\begin{tabular}{>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}r>{\bfseries}c}
@@ -128,7 +246,12 @@
 
 
 
-\begin{table}[]
+
+
+
+\subsection{Phrase Embedding}
+
+\begin{table}[h]
 	\centering
 	\begin{tabular}{>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c  >{\bfseries}c}
 		\hline
@@ -144,7 +267,9 @@
 \end{table}
 
 
-\begin{table}
+
+\subsection{Vocabulary Cutoff in Translation}
+\begin{table}[h]
 	\parbox{.5\linewidth}{
 		\centering
 		\caption{Word embedding vocabulary cut-off}

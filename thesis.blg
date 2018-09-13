@@ -1,5 +1,5 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: glossary.aux
 The style file: plainnat.bst
@@ -12,48 +12,46 @@ Repeated entry---line 287 of file references.bib
  : @article{bahdanau2014neural
  :                            ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for ""
-Warning--I didn't find a database entry for "bibid"
 Warning--empty journal in vulic2016role
-You've used 34 entries,
+You've used 38 entries,
             2773 wiz_defined-function locations,
-            757 strings with 11746 characters,
-and the built_in function-call counts, 19199 in all, are:
-= -- 1686
-> -- 1243
-< -- 28
-+ -- 419
-- -- 381
-* -- 1526
-:= -- 2815
-add.period$ -- 105
-call.type$ -- 34
-change.case$ -- 228
-chr.to.int$ -- 30
-cite$ -- 69
-duplicate$ -- 908
-empty$ -- 1460
-format.name$ -- 425
-if$ -- 4134
+            775 strings with 12499 characters,
+and the built_in function-call counts, 21596 in all, are:
+= -- 1905
+> -- 1381
+< -- 32
++ -- 465
+- -- 423
+* -- 1708
+:= -- 3153
+add.period$ -- 118
+call.type$ -- 38
+change.case$ -- 254
+chr.to.int$ -- 34
+cite$ -- 77
+duplicate$ -- 1026
+empty$ -- 1652
+format.name$ -- 473
+if$ -- 4664
 int.to.chr$ -- 5
 int.to.str$ -- 1
-missing$ -- 35
-newline$ -- 179
-num.names$ -- 136
-pop$ -- 507
+missing$ -- 39
+newline$ -- 200
+num.names$ -- 152
+pop$ -- 565
 preamble$ -- 1
-purify$ -- 195
+purify$ -- 217
 quote$ -- 0
-skip$ -- 776
+skip$ -- 880
 stack$ -- 0
-substring$ -- 660
-swap$ -- 227
-text.length$ -- 22
+substring$ -- 764
+swap$ -- 261
+text.length$ -- 25
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 369
+type$ -- 413
 warning$ -- 1
-while$ -- 153
+while$ -- 174
 width$ -- 0
-write$ -- 441
+write$ -- 495
 (There were 2 error messages)

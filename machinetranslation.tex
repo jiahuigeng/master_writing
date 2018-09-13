@@ -234,36 +234,42 @@ ${W_p}$ and ${\bm{v}_p}$ are the model parameters which will be learned to predi
 \end{figure}
 The RNN encoder-decoder models have achieved state of the art in sequence modeling and machine translation problem. However such RNN models also have some disadvantages, because of their inherently sequential computation which prevents parallelization across elements of the input sequence. That means it is more difficult to fully take advantage of the modern computing devices like GPU and TPU. Convolutional \cite{gehring2017convolutional} and fully-attentional feed-forward architectures like Transformer \cite{vaswani2017attention} models are proposed as alternatives for RNNs. \\
 
-\textbf{Dot-Product Attention}
-Given a query $\bm{q}$ and a set of key-value $(\bm{k}-\bm{v})$ pairs, the output is weighted average of values, where the weight of each value is computed by inner product of query and corresponding key. The queries and keys are of the same dimension ${d_k}$, values are of dimension ${d_v}$. Actually, for better understanding, the query $\bm{q}$  can be considered as the decoder state $\bm{s}_i$ and key $\bm{k}$ and values $\bm{v}$ can be considered as the encoder state $\bm{h}_j$ in previous attention model. Then the attention of query $\bm{q}$ on all $(\bm{k}-\bm{v})$ pairs are:
-\[ A(\bm{q}, K, V) = \sum_{i}{ \frac{\exp\ ({\bm{q}\cdot \bm{k}_i})}{\sum_{j} \exp\ {\bm{q}\cdot \bm{k}_j} } \cdot \bm{v}_i}\]
-When we stack the queries ${\bm{q}}$ to ${Q}$:
-\[ A(Q, K, V) = \text{softmax}(QK^T)V\]
-
-As ${d_k}$ get larger, the variance of ${q^T k}$ get larger.  The softmax become very peaked and the gradient get smaller. To counteract this effect, we scaled the dot products by ${\frac{1}{\sqrt{d_k}}}$, we get
-
-\[ Attention(Q,K,V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V\]
-The shape of resulting matrix is $n_q \times d_v$\\
+%\textbf{Dot-Product Attention}
+%Given a query $\bm{q}$ and a set of key-value $(\bm{k}-\bm{v})$ pairs, the output is weighted average of values, where the weight of each value is computed by inner product of query and corresponding key. The queries and keys are of the same dimension ${d_k}$, values are of dimension ${d_v}$. Actually, for better understanding, the query $\bm{q}$  can be considered as the decoder state $\bm{s}_i$ and key $\bm{k}$ and values $\bm{v}$ can be considered as the encoder state $\bm{h}_j$ in previous attention model. Then the attention of query $\bm{q}$ on all $(\bm{k}-\bm{v})$ pairs are:
+%\[ A(\bm{q}, K, V) = \sum_{i}{ \frac{\exp\ ({\bm{q}\cdot \bm{k}_i})}{\sum_{j} \exp\ {\bm{q}\cdot \bm{k}_j} } \cdot \bm{v}_i}\]
+%When we stack the queries ${\bm{q}}$ to ${Q}$:
+%\[ A(Q, K, V) = \text{softmax}(QK^T)V\]
+%
+%As ${d_k}$ get larger, the variance of ${q^T k}$ get larger.  The softmax become very peaked and the gradient get smaller. To counteract this effect, we scaled the dot products by ${\frac{1}{\sqrt{d_k}}}$, we get
+%
+%\[ Attention(Q,K,V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V\]
+%The shape of resulting matrix is $n_q \times d_v$\\
+\textbf{Self-Attention}\\
+\[ \alpha_{ki} = \frac{\exp(\text{score}(\bm{h}_k, \bm{h}_i))}{\sum_{j=1}^{I} \exp((\text{score}(\bm{h}_k, \bm{h}_j)))}\]
+\[ \text{score}(\bm{h}_k, \bm{h}_i) = \bm{h}_k^\top \bm{h}_i /\sqrt{d} , \ \ \ d= \text{dim}(\bm{h}_k)\]
+\[\bm{h}_k^{\prime} = \sum_{i=1}^{I} \alpha_{ki} \cdot \bm{h}_i\]
 
 \textbf{Multi-head attention}\\
  First map $Q$, $K$, $V$ into $h$ many lower dimension spaces via linear mapping matrix. Here $h$ is the number of heads. Then apply attention and concatenate the outputs. \\
 Suppose the original dimensions of queries, keys, values are ${d_{m}}$. We the number of heads is ${h}$, then we set ${d_k = d_v = d_{m}/h}$. With ${i \in 1 \cdots h}$ different matrix ${W_i^Q \in R^{d_{m}\times d_k}}$ ${W_i^K \in R^{d_{m}\times d_k}}$ ${W_i^V \in R^{d_{m}\times d_k}}$ and ${W^O \in R^{d_{m}\times d_k}}$.
-
+The number of attention heads in Transformers impacts their ability to capture long-distance dependencies. Especially many-headed multi-head attention is essential for modeling long-distance phenomena with only self-attention.
 \[ \text{MultiHead}(Q, K, V) = Concat(h\text{head}_1, \cdots, \text{head}_h)W^O \]
 \[\text{head}_i = Attention(QW_i^Q, KW_i^K, VW_i^V) \]
 
 where  $\text{head}_i \in \mathbb{R}^{n_q \times d_k}$,  ${\text{Multihead}(Q,K,V) \in \mathbb{R}^{n_q \times d_m}}$\\
 
-
-There are three attention types in the transformer model:
-\begin{itemize}
-	\item encoder-decoder attention\\
-	the queries come from the previous decoder layer, the keys and values are just the output of decoder. This works as the attention mechanism in the seq2seq model, it allow the decoder to align all positions in the input sequence with different weights
-	\item encoder self-attention\\
-	all queries, keys, values come from the encoder layer, each position allows to attend to all positions before that position
-	\item decoder self-attention\\
-	similar to encoder attention, each position is allowed to attend to position before and including that position
-\end{itemize}
+\textbf{Encoder-Decoder Attention}
+\[ \alpha_{ki} = \frac{\exp(\text{score}(\bm{s}_k, \bm{h}_i))}{\sum_{j=1}^{I} \exp((\text{score}(\bm{s}_k, \bm{f}_j)))}\]
+\[ \text{score}(\bm{s}_k, \bm{h}_i) = \bm{s}_k^\top \bm{h}_i/\sqrt{d}, \ \ \ d= \text{dim}(\bm{s}_k)\]
+%There are three attention types in the transformer model:
+%\begin{itemize}
+%	\item encoder-decoder attention\\
+%	the queries come from the previous decoder layer, the keys and values are just the output of decoder. This works as the attention mechanism in the seq2seq model, it allow the decoder to align all positions in the input sequence with different weights
+%	\item encoder self-attention\\
+%	all queries, keys, values come from the encoder layer, each position allows to attend to all positions before that position
+%	\item decoder self-attention\\
+%	similar to encoder attention, each position is allowed to attend to position before and including that position
+%\end{itemize}
 
 
 \textbf{Positional Encoding}\\
@@ -279,15 +285,15 @@ where pos is the position and $i$ is the dimension. That is, each dimension of t
 
 
 
-\section{Neural Unsupervised Machine Translation}
-give the first results for training a full translation model from non-parallel data, and use this model to translate previously-unseen text. The proposed problem named "deciperment" has received a lot of attention. This model contains many statistical methods, like EM algorithm or Bayesian method. However, this method is limited to rather short sentences and simplistic setting. With the development of neural machine translation, the end-to-end method performs better and easier to tune without much specific linguistic knowledge. The Idea is similar to dual learning framework except that in dual learning model, gradients are backpropagated through the reverse model and pretrain using a relative large parallel data as a warm start. The neural model mapping the sentences from monolingual corpora into the same latent space, By learning to reconstruct in both languages from the shared feature space. The translation model in both direction will be improved synchronously with the back-translation.
+\subsection{Neural Unsupervised Machine Translation}
+ Although the neural machine translation systems have achieved near human-level performance on some languages, the lack of large parallel corpora poses a major challenge for many low-source languages.
+ Techniques are raised to alleviate this issue with like triangulation and semi-supervised learning techniques.  Monolingual data are leveraged to improve the quality of translation system. \\
+ Recently, several neural algorithms with fully unsupervised settings are proposed. The core ideal is very similar to the dual learning in machine translation. The systems all contain bi-directional models as sub-systems. Pseudo parallel data are created with back-translation. It turns the unsupervised problem into a supervised setting. As better translation , both sub-systems get improved synchronously.\\
+ 
+%   the end-to-end method performs better and easier to tune without much specific linguistic knowledge. The Idea is similar to dual learning framework except that in dual learning model, gradients are backpropagated through the reverse model and pretrain using a relative large parallel data as a warm start. The neural model mapping the sentences from monolingual corpora into the same latent space, By learning to reconstruct in both languages from the shared feature space. The translation model in both direction will be improved synchronously with the back-translation.
 
 
-\begin{figure}[h]
-	\includegraphics[width=14cm]{unmt}
-	\caption{Illustration of unsupervised machine translation: A) the two original monolingual data; B) Initialization, the two distribution are roughly aligned; C) Denoising autoencoder, make the distribution closer to normal one in corresponding language D) Back-translation, improve the both translation model in iterative way (\cite{lample2018phrase})}
 
-\end{figure}
 
 %The key idea is to build a common latent space between the two languages (or domains) and to learn to translate by reconstructing in both domains according to two principles. 
 
@@ -296,7 +302,7 @@ give the first results for training a full translation model from non-parallel d
 %They initialize the model with an inferred bilingual dictionary. They leverage strong language model: denoising autoencoder,  third, they implemented the back translation: the key idea is to train two translation models which translate in contrary directions at the same time. The last property is that the models constrain the latent representations produced by the encoder to be shared between the two languages. The encoders will encoder the input into a common latent representation space independent of the language. The decoder plays the role of translator and will try to learn to improve the translation quality with the help of back translation mechanism.
 
 \textbf{Dual Structure}\\
-Dual structure is inspired by the observation: any machine translation has a dual task: e.g. German-to-English translation (primal) and English-to-German translation (dual). Dual tasks can form a closed loop and generate informative  feedback signals to for both translation models. Based on the feedback signals generated during this process, and leverage language model, we can minimize the reconstruction error of the original sentences. We can iteratively update the two models until convergence.   \cite{he2016dual} trained two agents to translate in opposite directions (e.g. French $\rightarrow$ English and English $\rightarrow$ French), and make them teach each other through a reinforcement learning process. While promising, this approach still requires a parallel corpus for a warm start. \cite{lample2018phrase} simplified the structure, in the proposed model, the gradients will not be back-propagated through the reverse model, but only make use of the back-translation. The training process as followed:
+Dual structure is inspired by the observation: any machine translation has a dual task: e.g. German-to-English translation (primal) and English-to-German translation (dual). Dual tasks can form a closed loop and generate informative  feedback signals to for both translation models. Based on the feedback signals generated during this process, and leverage language model, we can minimize the reconstruction error of the original sentences. We can iteratively update the two models until convergence.   \cite{he2016dual} trained two agents to translate in opposite directions (e.g. French $\rightarrow$ English and English $\rightarrow$ French), and make them teach each other through a reinforcement learning process. While promising, this approach still requires a parallel corpus for a warm start. \cite{lample2018phrase} simplified the structure, in the proposed model, the gradients will not be back-propagated through the reverse model, but only make use of the back-translation. The training process as followed:\\
 
 \begin{algorithm}[H]
 	\SetAlgoLined
@@ -310,11 +316,11 @@ Dual structure is inspired by the observation: any machine translation has a dua
 \end{algorithm}
 
 
-
 \textbf{Initialization}\\
-If without enough information to start the dual machine translation system, it will be hard for the system to catch the meaningful signals and then it will take much more iterations. However if we initialize the system by a naive a word-by-word translation of the sentence, where the bilingual lexicon are derived from the same monolingual data. While such initial "word-by-word" translation maybe poor if languages or corpora are not closely related, it still preserves some of the original semantics. Such word-by-word translation can already achieve several BLEU scores.\\
+Without enough information to start the dual machine translation system, it will be hard for the system to catch the meaningful signals and then it will take much more iterations. However if we initialize the system by a naive a word-by-word translation of the sentence, where the bilingual lexicon are derived from the same monolingual data. Though such initial "word-by-word" translation maybe poor if languages or corpora are not closely related, it still preserves some  original semantics. Such word-by-word translation can actually achieve several BLEU scores.\\
 %\log P_{t\rightarrow t}(e|\text{noise}(e)
 %\log P_{s\rightarrow s}(f|\text{noise}(f)) 
+
 
 \textbf{Shared Latent Representation} \\
 A shared encoder representation actis like an interlingua, which is translated in the decoder corresponding language regardless less of the input source language. Since the only supervision information only comes from the monolingual data. The model learn to translate by learning to reconstruct in both language from this shared space.\\
@@ -325,6 +331,7 @@ There are two different methods to learn the shared feature space:
 	\item Adversarial training
 	Train discriminator to classify between the encoding of source and target sentences. The discriminator operates on the output of the encoder, the encoder is trained instead to fool the discriminator. 
 \end{itemize}
+
 
 
 \textbf{Optimization}\\
@@ -338,6 +345,11 @@ When minimizing the loss function, gradients will not be back propagated through
 	 we denote the sentence that translated by intermediate target-to-source translation model as $u(y)$, similarly denote the sentence translated by source-to-target model as $v(x)$, so $u(y)$ should in source language and $v(x)$ should in target language. The pairs $(x, v(x))$, $(u(y), y)$ constitute synthetic parallel  sentences.
 \end{itemize}
 
+\begin{figure}[H]
+	\includegraphics[width=14cm]{unmt}
+	\caption{Key techniques for neural unsupervised machine translation: A) the two original monolingual data; B) Initialization, the two distribution are roughly aligned; C) Denoising autoencoder, make the distribution closer to normal one in corresponding language D) Back-translation, improve the both translation model in iterative way (\cite{lample2018phrase})}
+	
+\end{figure}
 
 
 

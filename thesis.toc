@@ -1,6 +1,6 @@
-\select@language {ngerman}
-\select@language {ngerman}
-\select@language {british}
+\babel@toc {ngerman}{}
+\babel@toc {ngerman}{}
+\babel@toc {british}{}
 \contentsline {chapter}{\nonumberline Abstract}{v}{chapter*.2}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Related Work}{2}{section.1.1}
@@ -19,23 +19,23 @@
 \contentsline {subsection}{\numberline {2.2.1}Encoder-Decoder Framework}{10}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Attention Mechanism}{11}{subsection.2.2.2}
 \contentsline {subsection}{\numberline {2.2.3}Transformer}{14}{subsection.2.2.3}
-\contentsline {section}{\numberline {2.3}Neural Unsupervised Machine Translation}{15}{section.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Neural Unsupervised Machine Translation}{15}{subsection.2.2.4}
 \contentsline {chapter}{\numberline {3}Word Embedding}{19}{chapter.3}
 \contentsline {section}{\numberline {3.1}Monolingual Embedding}{19}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}CBOW and Skip-gram Model}{19}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}FastText}{21}{subsection.3.1.2}
 \contentsline {section}{\numberline {3.2}Cross-lingual Word Embedding}{21}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Training Algorithm}{22}{subsection.3.2.1}
-\contentsline {subsubsection}{\nonumberline Canonical Correlation Analysis (CCA)}{24}{section*.6}
+\contentsline {subsection}{\numberline {3.2.1}Training Algorithm}{21}{subsection.3.2.1}
+\contentsline {subsubsection}{\nonumberline Canonical Correlation Analysis (CCA)}{23}{section*.6}
+\contentsline {subsubsection}{\nonumberline Cross-lingual Mapping}{24}{section*.7}
 \contentsline {chapter}{\numberline {4}Cross-lingual Word Embedding without Parallel Data}{27}{chapter.4}
 \contentsline {section}{\numberline {4.1}Initialization}{27}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Iterative Closest Point Method}{27}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.1}Iterative Closest Point Method}{28}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Adversarial training}{28}{subsection.4.1.2}
-\contentsline {subsubsection}{\nonumberline Model Selection}{29}{section*.7}
-\contentsline {section}{\numberline {4.2}Nearest Neighbor Search}{29}{section.4.2}
-\contentsline {section}{\numberline {4.3}Iterative Training}{30}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Self-learning with Procrustes}{31}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Data-driven Method}{31}{subsection.4.3.2}
+\contentsline {subsubsection}{\nonumberline Model Selection}{29}{section*.8}
+\contentsline {section}{\numberline {4.2}Iterative Training}{29}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Self-learning with Procrustes}{30}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Data-driven Method}{30}{subsection.4.2.2}
 \contentsline {chapter}{\numberline {5}Sentence Translation}{33}{chapter.5}
 \contentsline {section}{\numberline {5.1}Context-aware Beam Search}{33}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Language Model}{33}{subsection.5.1.1}
@@ -45,10 +45,20 @@
 \contentsline {subsection}{\numberline {5.2.2}Noise Model}{35}{subsection.5.2.2}
 \contentsline {chapter}{\numberline {6}Experiments}{39}{chapter.6}
 \contentsline {section}{\numberline {6.1}Corpus Statistics}{39}{section.6.1}
-\contentsline {section}{\numberline {6.2}title}{39}{section.6.2}
-\contentsline {section}{\numberline {6.3}title}{39}{section.6.3}
-\contentsline {chapter}{\numberline {7}Conclusion}{43}{chapter.7}
-\contentsline {chapter}{\numberline {A}Appendix}{45}{appendix.A}
-\contentsline {chapter}{\nonumberline List of Figures}{47}{chapter*.8}
-\contentsline {chapter}{\nonumberline List of Tables}{49}{chapter*.9}
-\contentsline {chapter}{\nonumberline Bibliography}{51}{chapter*.10}
+\contentsline {section}{\numberline {6.2}Cross-lingual Word Embedding}{40}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Baseline}{40}{subsection.6.2.1}
+\contentsline {subsubsection}{\nonumberline Corpus Size for Monolingual Embedding}{40}{section*.9}
+\contentsline {subsubsection}{\nonumberline Vocabulary Size for Word Translation}{40}{section*.10}
+\contentsline {subsection}{\numberline {6.2.2}Data-driven Approach}{40}{subsection.6.2.2}
+\contentsline {subsubsection}{\nonumberline Different Learning Rate Scheduler}{40}{section*.11}
+\contentsline {section}{\numberline {6.3}Unspervised Machine Translation}{42}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Comprehensive Table}{42}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}BPE vs Word}{42}{subsection.6.3.2}
+\contentsline {subsection}{\numberline {6.3.3}Artificial Noise}{43}{subsection.6.3.3}
+\contentsline {subsection}{\numberline {6.3.4}Phrase Embedding}{43}{subsection.6.3.4}
+\contentsline {subsection}{\numberline {6.3.5}Vocabulary Cutoff in Translation}{44}{subsection.6.3.5}
+\contentsline {chapter}{\numberline {7}Conclusion}{45}{chapter.7}
+\contentsline {chapter}{\numberline {A}Appendix}{47}{appendix.A}
+\contentsline {chapter}{\nonumberline List of Figures}{49}{chapter*.12}
+\contentsline {chapter}{\nonumberline List of Tables}{51}{chapter*.13}
+\contentsline {chapter}{\nonumberline Bibliography}{53}{chapter*.14}
