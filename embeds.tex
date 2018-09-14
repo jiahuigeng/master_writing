@@ -27,7 +27,7 @@ However the normalization on the whole vocabulary is very expensive since it is 
 where ${Q_{\theta}{(D=1| w_t, w_s)}}$ is the binary logistic regression probability.
 According to  empirical results, CBOW works better on smaller datasets because CBOW smoothes over a lot of the distributional information while Skip-Gram model performs better when we have larger datasets
 
-\subsection{Enriching Embedding with Subword Information}
+\subsection{Enriching Embeddings with Subword Information}
 The training methods above treat each word as a distinct word embedding, however intuitively we can obtain more information from the morphological information of words. A subword model was proposed to try to fix such problem.The training network is similar, the model design a new presentation of the word: it adds speicial symbols $<$, ${>}$ as boundary information at the beginning and the end of a word. Then a normal word is represented as a bag of character $n$-grams . For example the word "where" and n equals 3, the it can be represented as the following 5 tri-grams: 
 \[ <wh, whe, her, ere, re>\]
 Suppose in this way for a specific word $e$ ${G_{e}}$ the set of character ${n}$-grams, we assign for each character ${n}$-gram $g$ in ${G_{e}}$ a distinct vector $\bm{v}_g$, we calculate the score function using the sum of character-level inner product of vectors:
