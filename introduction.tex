@@ -35,8 +35,16 @@ In this thesis, we use the following notations:
 \begin{itemize}
 	\item Source sentence:  ${f_1^J:= f_1 \cdots  f_j \cdots f_J}$ 
 	\item Target sentence:  ${e_1^I:= e_1 \cdots, e_i \cdots e_I}$
+	\item Parallel sentences: $(e_1^I, f_1^J)$
+	\item Probabilities of denoising autoencoders: $P_{f\rightarrow f}$, $P_{e\rightarrow e}$
+	\item Translation models for both directions: $\Theta_{f\rightarrow e}$, $\Theta_{e \rightarrow f}$
+	\item Probabilities of translation models for both directions: $P_{f\rightarrow e}$, $P_{e\rightarrow f}$
+	\item Loss for denoising autoencoder: $\mathcal{L}^{\text{auto}}$
+	\item Loss for back-translation: $\mathcal{L}^{\text{back}}$
 	\item Single character for each language: $f,e$ 
 	\item Source and target word embedding: $\bm{f}$, $\bm{e}$
+	\item Seed bilingual dictionary: $dico$ 
+	\item Corresponding embedding pair: $(\bm{f}, \bm{e})$
 	\item Source and target embedding matrices: $\bm{F}$, $\bm{E}$
 	\item Source and target Corpora: $\mathcal{F}, \mathcal{E}$
 	\item Mapping default from source to target embedding space: $W$
@@ -44,7 +52,16 @@ In this thesis, we use the following notations:
 	\item Internal states of decoder: $\bm{s}$ and $\bm{s}_i$  
 	\item Internal states of encoder: $\bm{h}$ and $\bm{h}_i$ 
 	\item Context vectors in attention mechanism: $\bm{c}$ and $\bm{c}_i$ 
-
+	\item Cross-lingual regularization term $\Omega(\cdot)$
+	\item Loss function for source and target embedding: $\mathcal{L}^f$, $\mathcal{L}^e$
+	\item Temperature in inverted softmax: $\beta$ 
+	\item General scaling parameter: $\lambda$
+	\item Scaling parameters for lexicon and languagel model respectively: $\lambda_{lex}$, $\lambda_{LM}$
+	\item Expectation: $\mathbb{E}$
+	\item Dimension of embedding: $d$
+	\item Frobenius norm: ${\lVert \cdot \rVert}_{\text{F}}$
+	\item  Manifold of orthogonal matrices: $ O_d(\mathbb{R})$
+	\item Language model for source and target size: $\textbf{LM}_f$, $\textbf{LM}_e$
 \end{itemize}
 
 

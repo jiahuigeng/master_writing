@@ -12,46 +12,49 @@ Repeated entry---line 287 of file references.bib
  : @article{bahdanau2014neural
  :                            ,
 I'm skipping whatever remains of this entry
-Warning--empty journal in vulic2016role
+Repeated entry---line 397 of file references.bib
+ : @inproceedings{pennington2014glove
+ :                                   ,
+I'm skipping whatever remains of this entry
 You've used 38 entries,
             2773 wiz_defined-function locations,
-            775 strings with 12499 characters,
-and the built_in function-call counts, 21596 in all, are:
-= -- 1905
-> -- 1381
-< -- 32
-+ -- 465
-- -- 423
-* -- 1708
-:= -- 3153
-add.period$ -- 118
+            772 strings with 12686 characters,
+and the built_in function-call counts, 22091 in all, are:
+= -- 1937
+> -- 1444
+< -- 31
++ -- 486
+- -- 444
+* -- 1765
+:= -- 3223
+add.period$ -- 116
 call.type$ -- 38
-change.case$ -- 254
+change.case$ -- 261
 chr.to.int$ -- 34
-cite$ -- 77
-duplicate$ -- 1026
-empty$ -- 1652
-format.name$ -- 473
-if$ -- 4664
+cite$ -- 76
+duplicate$ -- 1039
+empty$ -- 1675
+format.name$ -- 490
+if$ -- 4767
 int.to.chr$ -- 5
 int.to.str$ -- 1
 missing$ -- 39
-newline$ -- 200
+newline$ -- 198
 num.names$ -- 152
-pop$ -- 565
+pop$ -- 586
 preamble$ -- 1
-purify$ -- 217
+purify$ -- 224
 quote$ -- 0
-skip$ -- 880
+skip$ -- 891
 stack$ -- 0
-substring$ -- 764
-swap$ -- 261
-text.length$ -- 25
+substring$ -- 791
+swap$ -- 270
+text.length$ -- 26
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 413
-warning$ -- 1
-while$ -- 174
+warning$ -- 0
+while$ -- 177
 width$ -- 0
-write$ -- 495
-(There were 2 error messages)
+write$ -- 491
+(There were 3 error messages)

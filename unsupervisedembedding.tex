@@ -118,30 +118,7 @@ Previously, the objective we want to minimize is the mean square error of the ma
 		\[\mathcal{L} = \sum_{(f,e)\in D} {\lVert Wf - e \rVert}^2  \]
 
 
-\textbf{Translation}\\
-When inferring word translation, we use nearest neighbor search to find the candidates, where we face the hubness problem. 
-Points are tending to be nearest neighbors of many points in high-dimensional space.  Those points (hubs) will harm the search accuracy.\\
 
-There are two approaches to handle this issue.
-\begin{itemize}
-	\item Inverted Softmax\\
-	The confidence of choosing a target word as translation of a source word can be considered as softmax-like normalized probability
-	\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  \text{score}(e,f)\Big)}}{\sum_{e^{\prime}} {\exp{\Big(\beta \cdot \text{score}(e^{\prime}, f)\Big)}}} \]
-	where the $\text{score}(\cdot)$ is the score function we can define ourselves.
-	we learn the "temperature" $\beta$ by maximizing the log probability over the training dictionary. 
-	\[ \argmax{\beta} \sum_{e,f} \ln p(e|f)  \]
-	
-	The author observed that, if we invert the softmax and normalizing the probability over all the source words rather than target words, the hubness problem could be mitigated:
-	\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  \text{score}(e,f)\Big)}}{\alpha \  \sum_{f^{\prime}} {\exp{\Big(\beta \cdot \text{score}(e, f^{\prime})\Big)}}}\]
-	\item  Cross-domain Similarity Local Scaling (CSLS)\\
-	We denote ${\mathcal{N}_e(\bm{f})}$ the set of ${k}$ nearest neighbors of points of the mapped $\bm{f}$ in the target embedding space, and ${\mathcal{N}_f(\bm{e})}$ the nearest neighbors of mapped ${\bm{e}}$ in the source embedding space. We consider the mean cosine similarity as hub-ness:
-	\[ r(\bm{f})= \frac{1}{K} \sum_{\bm{e}^{\prime} \in \mathcal{N}_e(\bm{f})} \cos(\bm{e}^{\prime}, W\bm{f})\]
-	So in this way we penalize the hub points:
-	\[ CSLS(\bm{e}, \bm{f}) = 2 \cos(\bm{e}, \bm{f}) - \frac{1}{k} \sum_{\bm{e^{\prime}} \in \mathcal{N}_e(\bm{f})} \cos(\bm{f}, \bm{e^{\prime}})- \frac{1}{k} \sum_{\bm{f^{\prime}} \in \mathcal{N}_f(\bm{e})} cos(\bm{f^{\prime}}, \bm{e}) \]
-\end{itemize}
-
-
-Since we use the pseudo parallel data (source sentence and word-by-word target translation sentence), we can exploit the context information from language model to select the word translation candidate. Beam search with language model is implemented here. More details about sentence translation will be explained next chapter.\\
 
 
 \textbf{Training}\\

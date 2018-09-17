@@ -110,19 +110,6 @@ Di~He, Yingce Xia, Tao Qin, Liwei Wang, Nenghai Yu, Tieyan Liu, and Wei-Ying
 \newblock In \emph{Advances in Neural Information Processing Systems}, pages
   820--828, 2016.
 
-\bibitem[Hoshen and Wolf(2018)]{DBLP:journals/corr/abs-1801-06126}
-Yedid Hoshen and Lior Wolf.
-\newblock An iterative closest point method for unsupervised word translation.
-\newblock \emph{CoRR}, abs/1801.06126, 2018.
-\newblock URL \url{http://arxiv.org/abs/1801.06126}.
-
-\bibitem[Joulin et~al.(2018)Joulin, Bojanowski, Mikolov, and
-  Grave]{DBLP:journals/corr/abs-1804-07745}
-Armand Joulin, Piotr Bojanowski, Tomas Mikolov, and Edouard Grave.
-\newblock Improving supervised bilingual mapping of word embeddings.
-\newblock \emph{CoRR}, abs/1804.07745, 2018.
-\newblock URL \url{http://arxiv.org/abs/1804.07745}.
-
 \bibitem[Kim et~al.(2017)Kim, Schamper, and Ney]{kim2017unsupervised}
 Yunsu Kim, Julian Schamper, and Hermann Ney.
 \newblock Unsupervised training for large vocabulary translation using sparse
@@ -189,6 +176,15 @@ Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg~S Corrado, and Jeff Dean.
 \newblock In \emph{Advances in neural information processing systems}, pages
   3111--3119, 2013{\natexlab{c}}.
 
+\bibitem[Neishi et~al.(2017)Neishi, Sakuma, Tohda, Ishiwatari, Yoshinaga, and
+  Toyoda]{neishi2017bag}
+Masato Neishi, Jin Sakuma, Satoshi Tohda, Shonosuke Ishiwatari, Naoki
+  Yoshinaga, and Masashi Toyoda.
+\newblock A bag of useful tricks for practical neural machine translation:
+  Embedding layer initialization and large batch size.
+\newblock In \emph{Proceedings of the 4th Workshop on Asian Translation
+  (WAT2017)}, pages 99--109, 2017.
+
 \bibitem[Nuhn and Ney(2014)]{nuhn2014decipherment}
 Malte Nuhn and Hermann Ney.
 \newblock Em decipherment for large vocabularies.
@@ -211,6 +207,13 @@ Jeffrey Pennington, Richard Socher, and Christopher Manning.
 \newblock In \emph{Proceedings of the 2014 conference on empirical methods in
   natural language processing (EMNLP)}, pages 1532--1543, 2014.
 
+\bibitem[Qi et~al.(2018)Qi, Sachan, Felix, Padmanabhan, and Neubig]{qi2018and}
+Ye~Qi, Devendra~Singh Sachan, Matthieu Felix, Sarguna~Janani Padmanabhan, and
+  Graham Neubig.
+\newblock When and why are pre-trained word embeddings useful for neural
+  machine translation?
+\newblock \emph{arXiv preprint arXiv:1804.06323}, 2018.
+
 \bibitem[Ravi and Knight(2011)]{ravi2011deciphering}
 Sujith Ravi and Kevin Knight.
 \newblock Deciphering foreign language.
@@ -222,6 +225,13 @@ Sujith Ravi and Kevin Knight.
 Sebastian Ruder, Ivan Vuli{\'c}, and Anders S{\o}gaard.
 \newblock A survey of cross-lingual word embedding models.
 \newblock \emph{arXiv preprint arXiv:1706.04902}, 2017.
+
+\bibitem[Smith et~al.(2017)Smith, Turban, Hamblin, and
+  Hammerla]{smith2017offline}
+Samuel~L Smith, David~HP Turban, Steven Hamblin, and Nils~Y Hammerla.
+\newblock Offline bilingual word vectors, orthogonal transformations and the
+  inverted softmax.
+\newblock \emph{arXiv preprint arXiv:1702.03859}, 2017.
 
 \bibitem[Sutskever et~al.(2014)Sutskever, Vinyals, and
   Le]{sutskever2014sequence}
@@ -237,11 +247,6 @@ Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
 \newblock Attention is all you need.
 \newblock In \emph{Advances in Neural Information Processing Systems}, pages
   5998--6008, 2017.
-
-\bibitem[Vulic and Korhonen(2016)]{vulic2016role}
-Ivan Vulic and Anna-Leena Korhonen.
-\newblock On the role of seed lexicons in learning bilingual word embeddings.
-\newblock 2016.
 
 \bibitem[Xing et~al.(2015)Xing, Wang, Liu, and Lin]{xing2015normalized}
 Chao Xing, Dong Wang, Chao Liu, and Yiye Lin.
