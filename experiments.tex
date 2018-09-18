@@ -32,7 +32,7 @@
 \section{Word Translation}
 \subsection{Baseline Experiments}
  \cite{conneau2017word} release high-quality dictionaries for 12 oriented language pairs; a train and test split of 5000 and 1500 unique source words for each language pair. We train the monolingual word embedding with fastText(\cite{bojanowski2016enriching}) and compare the performances of different training methods for word retrieval upon this dataset. As demonstrated in Table , CSLS performs better than other dictionary induction methods like simple nearest neighbour search (NN)  or inverted softmax (ISF). So in all tables related to word retrieval task, CSLS is the default method if without any specification.
-\subsubsection{}
+
 \begin{table}[H]
 	\centering
 	\begin{tabular}{llccc}
@@ -46,13 +46,13 @@
 \subsubsection{Vocabulary Size for Word Translation}
 
 
-\subsection{Data-driven Approach}
-\textbf{Different Learning Rate Scheduler}\\
+\subsection{Corpus-based Approach}
+We run the novel corpus-based approach on a relative small corpus with 50k sentences using different learning rate schedulers; one is to start from initial learning rate, the other is to inherit the learning rate after the training of last batch sentences. The first learning rate scheduler always performs better than the second one. We demonstrate the results for German$\rightarrow$ English and English $\rightarrow$ German for the first scheduler. In order to lift the performance of the second scheduler, we augment training corpus by training two loops over the 50k corpus and extend the corpus size to 200k. The results get better but still worse than that with first learning rate scheduler. 
 \subsubsection{Different Learning Rate Scheduler}
 \begin{itemize}
 	\item Start from Initial Learning Rate
 	\begin{itemize}
-		\item German $\rightarrow$ English
+		\item Word translation accuracies for German$\rightarrow$English,  with different initial learning rates and sentence batch sizes.
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{cccccc}
@@ -64,8 +64,9 @@
 				0.0005        & 1.54  & 45.26 & 49.88 & 54.43 & 54.97 \\ \hline
 				0.0001        & 36.23 & 58.09 & 60.14 & 60.37 & 58.67 \\ \hline
 			\end{tabular}
+%		\caption{Word translation accuracy for German $\rightarrow$ English}
 		\end{table}
-		\item English $\rightarrow$ German
+		\item Word translation accuracy for English $\rightarrow$ German, with different initial learning rates and sentence batch sizes.
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{cccc}
@@ -77,13 +78,14 @@
 				0.0005          & 54.82  & 55.67  & 48.44 \\ \hline
 				0.00001        & 59.21 & 58.98 & 56.90 \\ \hline
 			\end{tabular}
+%		 \caption{Word translation accuracy for English $\rightarrow$ German}
 		\end{table}	
-		\item 	Learning Rate Decay
+
 		
 	\end{itemize}
 	\item Inherit Last Learning Rate
 	\begin{itemize}
-		\item 50k 
+		\item Word translation accuracy for German$\rightarrow$English with different initial learning rates and sentence batch sizes.\\
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{cccc}
@@ -95,36 +97,27 @@
 				0.0005          & 5.78  & 8.33  & 10.25 \\ \hline
 				0.00001        & 51.50 & 37.63 & 15.27 \\ \hline
 			\end{tabular}
+			%		\caption{Word translation accuracy for German$\rightarrow$English }
 		\end{table}	
-		\item 50k 2 epochs
-\begin{table}[H]
-	\centering
-	\begin{tabular}{cccc}
-		Accuracy (\%) & 0.5   & 0.7   & 0.9   \\ \hline
-		0.01          & 3.78  & 1.39  & 1.31  \\ \hline
-		0.005         & 4.39  & 3.31  & 14.73 \\ \hline
-		0.001         & 5.63  & 10.56 & 13.72 \\ \hline
-		0.0005        & 7.56  & 6.71  & 10.64 \\ \hline
-		0.0001        & 55.51 & 56.36 & 57.59 \\ \hline
-	\end{tabular}
-\end{table}	
-		\item 200k
-\begin{table}[H]
-	\centering
-	\begin{tabular}{cccc}
-		Accuracy (\%) & 0.5   & 0.7   & 0.9   \\ \hline
-		0.01          & 3.24  & 2.08  & 0.46  \\ \hline
-		0.005         & 5.32  & 12.72 & 1.23  \\ \hline
-		0.001         & 4.55  & 8.02  & 17.27 \\ \hline
-		0.0005        & 6.71  & 6.94  & 6.79  \\ \hline
-		0.0001        & 57.83 & 57.83 & 57.67 \\ \hline
-	\end{tabular}
-\end{table}			
-			
+		\item Word translation accuracy for German$\rightarrow$English with different training corpus, initial learning rate $0.0001$ and batch size $1k$\\
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{lc}
+				\hline
+				Train & Accuracy (\%) \\ \hline
+				50k   & 51.50         \\ \hline
+				50k $\times$ 2 & 55.51         \\ \hline
+				200k  & 57.87         \\ \hline
+			\end{tabular}
+			%	\caption{Word translation accuracy for German$\rightarrow$English on different training corpus}
+		\end{table}
 	\end{itemize}
+
+	
+
 \end{itemize}
 
-\begin{figure}[t]
+\begin{figure}[H]
 	\includegraphics[width=14cm]{corpus}
 	\centering
 	\caption{A cross-lingual embedding space between German and English (\cite{ruder2017survey})}
@@ -159,7 +152,7 @@
 		\end{tabular}
 	}
 \end{table}
-
+As demonstrated above, our unsupervised MT surpass the start-of-the-art unsupervised NMT in almost all cases except English$\rightarrow$French translation. Each sub-model lift the performance respectively. Copy OOV word from source sentences works better than those predicted by language model, because OOV words are usually specific name entities and LM prefers common words rather than rare words. Denoising autoencoder based on Transformer structure outputs better translation than the traditional RNN structure. 
 
 
 	\begin{table}[!h]
@@ -202,9 +195,11 @@ Byte pair encoding (BPE) is a simple data compression technique for word segment
 		\end{tabular}
 	}\\
 
-As the experiments results demonstrated above, the BPE performs worse than word in this unsupervised learning scenario. It might be difficult to learn the translation relationship between subword units. 
-	
 \end{table}
+
+
+As the experiments results demonstrated above, the BPE performs worse than word in this unsupervised learning scenario. It might be difficult to learn the translation relationship between subword units. 
+
 \subsection{Artificial Noise}
 
 	\begin{table}[H]
@@ -231,8 +226,7 @@ As the experiments results demonstrated above, the BPE performs worse than word 
 	\setcounter{table}{1}
 	\label{tab:denoising}
 \end{table}
-
-
+Each artificial noise improves the translation performance, though the permutation noise only aims at local reordering instead of global reordering.
 
 
 
@@ -254,43 +248,44 @@ As the experiments results demonstrated above, the BPE performs worse than word 
 	\end{tabular}
 \end{table}
 
+?????? not sure if I need to add this corresponding part in unsupervised cross-lingual embedding
 
 
-\subsection{Vocabulary Cutoff in Translation}
-\begin{table}[h]
-	\parbox{.5\linewidth}{
-		\centering
-		\caption{Word embedding vocabulary cut-off}
-		\begin{tabular}{>{\bfseries}c >{\bfseries}c >{\bfseries}c >{\bfseries}c } 
-			\hline
-			\textsc{Bleu} [\%]	& 20k & 50k & 100k \\
-			\hline
-			50k &	11.1  & \leavevmode\color{blue}11.3 & 11.2  \\ 
-			\hline
-			100k&	11.2  & 11.2 & 11.1 \\ 			
-			\hline
-			150k&	10.9 & 10.9 & - \\
-			\hline
-		\end{tabular}
-		
-	}
-	\hfill
-	\parbox{.5\linewidth}{
-		\centering
-		\caption{Phrase embedding vocabulary cut-off}
-		\begin{tabular}{>{\bfseries}c >{\bfseries}c >{\bfseries}c >{\bfseries}c } 
-			\hline
-			\textsc{Bleu} [\%]	& 50k & 100k & 150k \\
-			\hline
-			50k &	11.3  & - & -  \\ 
-			\hline
-			100k&	11.9  & 11.9 & - \\ 			
-			\hline
-			150k&	\leavevmode\color{blue}12.0 & 11.9 & 11.9 \\
-			\hline
-			200k & 12.0 & - & - \\
-			\hline
-		\end{tabular}
-		
-	}
-\end{table}
+%\subsection{Vocabulary Cutoff in Translation}
+%\begin{table}[h]
+%	\parbox{.5\linewidth}{
+%		\centering
+%		\caption{Word embedding vocabulary cut-off}
+%		\begin{tabular}{>{\bfseries}c >{\bfseries}c >{\bfseries}c >{\bfseries}c } 
+%			\hline
+%			\textsc{Bleu} [\%]	& 20k & 50k & 100k \\
+%			\hline
+%			50k &	11.1  & \leavevmode\color{blue}11.3 & 11.2  \\ 
+%			\hline
+%			100k&	11.2  & 11.2 & 11.1 \\ 			
+%			\hline
+%			150k&	10.9 & 10.9 & - \\
+%			\hline
+%		\end{tabular}
+%		
+%	}
+%	\hfill
+%	\parbox{.5\linewidth}{
+%		\centering
+%		\caption{Phrase embedding vocabulary cut-off}
+%		\begin{tabular}{>{\bfseries}c >{\bfseries}c >{\bfseries}c >{\bfseries}c } 
+%			\hline
+%			\textsc{Bleu} [\%]	& 50k & 100k & 150k \\
+%			\hline
+%			50k &	11.3  & - & -  \\ 
+%			\hline
+%			100k&	11.9  & 11.9 & - \\ 			
+%			\hline
+%			150k&	\leavevmode\color{blue}12.0 & 11.9 & 11.9 \\
+%			\hline
+%			200k & 12.0 & - & - \\
+%			\hline
+%		\end{tabular}
+%		
+%	}
+%\end{table}

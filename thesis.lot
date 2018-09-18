@@ -1,6 +1,6 @@
-\select@language {ngerman}
-\select@language {ngerman}
-\select@language {british}
+\babel@toc {ngerman}{}
+\babel@toc {ngerman}{}
+\babel@toc {british}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
@@ -8,9 +8,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {\relax 6.1}{\ignorespaces Word-by-word translation from German to English}}{44}{table.6.1}
-\contentsline {table}{\numberline {\relax 6.2}{\ignorespaces Word embedding vocabulary cut-off}}{46}{table.6.2}
-\contentsline {table}{\numberline {\relax 6.3}{\ignorespaces Phrase embedding vocabulary cut-off}}{46}{table.6.3}
+\contentsline {table}{\numberline {\relax 6.1}{\ignorespaces Word-by-word translation from German to English}}{45}{table.6.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

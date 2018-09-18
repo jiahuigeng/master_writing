@@ -1,7 +1,11 @@
 \chapter{Conclusion}
+%
+%
+%For unsupervised machine translation system, the context-aware beam search language model help at the lexicon choice step.\\
+%The denoising networks which aimed at the insertion/deletion/reordering noise in the word-by-word translation sentence works well for fertility and localized reordering problem. 
+%Even though BPE is known to be an effective way to overcome the rare word problem in standard NMT, BPE embedding performs worse than word embedding in our case especially when vocabulary is small.\\
+%Word-by-word translation based on cross-lingual word embedding depends highly on the frequent word mappings. We found that phrase embedding only helps in word-by-word translation with context-aware beam search, it works not as good as that under the processing of denoising autoencoder.
 
-
-For unsupervised machine translation system, the context-aware beam search language model help at the lexicon choice step.\\
-The denoising networks which aimed at the insertion/deletion/reordering noise in the word-by-word translation sentence works well for fertility and localized reordering problem. 
-Even though BPE is known to be an effective way to overcome the rare word problem in standard NMT, BPE embedding performs worse than word embedding in our case especially when vocabulary is small.\\
-Word-by-word translation based on cross-lingual word embedding depends highly on the frequent word mappings. We found that phrase embedding only helps in word-by-word translation with context-aware beam search, it works not as good as that under the processing of denoising autoencoder.
+The main contributions of this thesis are 1) a novel corpus-based training approach for cross-lingual word embeddings, 2) integration of LM and DAE to improve the unsupervised translation performance. \\
+The corpus-based approach combines the cross-lingual embedding training and a word-by-word; a simplified word based machine translation. The improvements of sub-models will feed each other to let the entire system trained to an optimum state. \\
+As to sentence translation, we achieved context-aware lexical choices using beam search and solved insertion/deletion/reordering problems using artificial noise. Actually insertion noise is a new noise type that implemented in sequential denosing tasks and we observe upto $1.5$ BLEU score improvement for translation from German to English.  Our methods do no need back-translation steps but still outputs costly unsupervised NMT systems 

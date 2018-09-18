@@ -47,15 +47,14 @@
 \BOOKMARK [1][]{section.6.1}{6.1 Corpus Statistics}{chapter.6}% 47
 \BOOKMARK [1][]{section.6.2}{6.2 Word Translation}{chapter.6}% 48
 \BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Baseline Experiments}{section.6.2}% 49
-\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Data-driven Approach}{section.6.2}% 50
+\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Corpus-based Approach}{section.6.2}% 50
 \BOOKMARK [1][]{section.6.3}{6.3 Sentence Translation}{chapter.6}% 51
 \BOOKMARK [2][]{subsection.6.3.1}{6.3.1 Comprehensive Table}{section.6.3}% 52
 \BOOKMARK [2][]{subsection.6.3.2}{6.3.2 BPE vs Word}{section.6.3}% 53
 \BOOKMARK [2][]{subsection.6.3.3}{6.3.3 Artificial Noise}{section.6.3}% 54
 \BOOKMARK [2][]{subsection.6.3.4}{6.3.4 Phrase Embedding}{section.6.3}% 55
-\BOOKMARK [2][]{subsection.6.3.5}{6.3.5 Vocabulary Cutoff in Translation}{section.6.3}% 56
-\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 57
-\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 58
-\BOOKMARK [0][]{chapter*.9}{List of Figures}{}% 59
-\BOOKMARK [0][]{chapter*.10}{List of Tables}{}% 60
-\BOOKMARK [0][]{chapter*.11}{Bibliography}{}% 61
+\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 56
+\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 57
+\BOOKMARK [0][]{chapter*.8}{List of Figures}{}% 58
+\BOOKMARK [0][]{chapter*.9}{List of Tables}{}% 59
+\BOOKMARK [0][]{chapter*.10}{Bibliography}{}% 60
