@@ -30,37 +30,21 @@
 	\end{tabular}
 \end{table}
 \section{Word Translation}
-\subsection{Baseline}
-\subsubsection{Corpus Size for Monolingual Embedding}
-\begin{table}[H]
-	\begin{tabular}{llcccccccc}
-		\hline
-		\multicolumn{2}{c}{\multirow{2}{*}{}}          & \multicolumn{4}{c}{De-En} & \multicolumn{4}{c}{En-De} \\ \cline{3-10} 
-		\multicolumn{2}{c}{}                           & 5M        & 10M        & 50M        & 100M       & 5M        & 10M        & 50M        & 100M       \\ \hline
-		\multirow{3}{*}{Supervised}   & Procrustes-NN   &           &            &            &            &           &            &            &            \\ \cline{2-10} 
-		& Procrustes-ISF  &           &            &            &            &           &            &            &            \\ \cline{2-10} 
-		& Procrustes-CSLS &           &            &            &            &           &            &            &            \\ \hline
-		\multirow{4}{*}{Unsupervised} & Adv-NN          &           &            &            &            &           &            &            &            \\ \cline{2-10} 
-		& Adv-CSLS        &           &            &            &            &           &            &            &            \\ \cline{2-10} 
-		& Adv-Refine-NN   &           &            &            &            &           &            &            &            \\ \cline{2-10} 
-		& Adv-Refine-CSLS &           &            &            &            &           &            &            &            \\ \hline
-	\end{tabular}
-\end{table}
-
-\subsubsection{Vocabulary Size for Word Translation}
-
+\subsection{Baseline Experiments}
+ \cite{conneau2017word} release high-quality dictionaries for 12 oriented language pairs; a train and test split of 5000 and 1500 unique source words for each language pair. We train the monolingual word embedding with fastText(\cite{bojanowski2016enriching}) and compare the performances of different training methods for word retrieval upon this dataset. As demonstrated in Table , CSLS performs better than other dictionary induction methods like simple nearest neighbour search (NN)  or inverted softmax (ISF). So in all tables related to word retrieval task, CSLS is the default method if without any specification.
+\subsubsection{}
 \begin{table}[H]
 	\centering
-	\begin{tabular}{cccccc}
+	\begin{tabular}{llccc}
 		\hline
-		Accuracy(\%) & 50k & 100k & 150k & 200k & No Cutoff \\ \hline
-		50k          &     &      &      &      &           \\ \hline
-		100k         &     &      &      &      &           \\ \hline
-		150k         &     &      &      &      &           \\ \hline
-		200k         &     &      &      &      &           \\ \hline
-		No Cutoff    &     &      &      &      &           \\ \hline
+		\multicolumn{2}{l}{Methods}                           & NN    & ISF   & CSLS  \\ \hline
+		Supervised                    & Procrustes             & 60.37 & 63.22 & 65.38 \\ \hline
+		\multirow{2}{*}{Unsupervised} & Adversarial            & 47.03 & 49.57 & 53.50 \\ \cline{2-5} 
+		& Adversarial+Procrustes & 61.75 & 62.68 & 64.92 \\ \hline
 	\end{tabular}
 \end{table}
+\subsubsection{Vocabulary Size for Word Translation}
+
 
 \subsection{Data-driven Approach}
 \textbf{Different Learning Rate Scheduler}\\

@@ -1,6 +1,5 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\providecommand*\new@tpo@label[2]{}
 \catcode `"\active 
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
@@ -26,9 +25,18 @@
 \providecommand\@istfilename[1]{}
 \@istfilename{thesis.ist}
 \@glsorder{word}
-\babel@aux{ngerman}{}
-\babel@aux{ngerman}{}
-\babel@aux{british}{}
+\select@language{ngerman}
+\@writefile{toc}{\select@language{ngerman}}
+\@writefile{lof}{\select@language{ngerman}}
+\@writefile{lot}{\select@language{ngerman}}
+\select@language{ngerman}
+\@writefile{toc}{\select@language{ngerman}}
+\@writefile{lof}{\select@language{ngerman}}
+\@writefile{lot}{\select@language{ngerman}}
+\select@language{british}
+\@writefile{toc}{\select@language{british}}
+\@writefile{lof}{\select@language{british}}
+\@writefile{lot}{\select@language{british}}
 \citation{conneau2017word}
 \@writefile{toc}{\contentsline {chapter}{\nonumberline Abstract}{v}{chapter*.2}}
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -107,11 +115,11 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces The Transformer model architecture (\cite  {vaswani2017attention})}}{15}{figure.2.4}}
 \citation{he2016dual}
 \@writefile{lof}{\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces Self-attention structure}}{16}{figure.2.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Unsupervised Neural Machine Translation}{16}{subsection.2.2.4}}
 \citation{he2016dual}
 \citation{lample2018phrase}
 \citation{lample2018phrase}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Unsupervised Machine Translation}}{17}{algorithm.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.4}Unsupervised Neural Machine Translation}{17}{subsection.2.2.4}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Unsupervised Machine Translation}}{18}{algorithm.1}}
 \citation{neishi2017bag}
 \citation{qi2018and}
 \citation{lample2017unsupervised}
@@ -190,11 +198,13 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Language Model}{35}{subsection.5.1.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Beam Search}{36}{subsection.5.1.2}}
 \@writefile{toc}{\contentsline {section}{\numberline {5.2}Denoising Neural Network}{36}{section.5.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Denoising Auto-encoder}{36}{subsection.5.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Denoising Auto-encoder (DAE)}{36}{subsection.5.2.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Noise Model}{37}{subsection.5.2.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces  Reordering noise}}{37}{figure.5.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Insertion noise}}{38}{figure.5.2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces  Deletion noise}}{39}{figure.5.3}}
+\citation{conneau2017word}
+\citation{bojanowski2016enriching}
 \@writefile{toc}{\contentsline {chapter}{\numberline {6}Experiments}{41}{chapter.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -202,9 +212,8 @@
 \@writefile{loa}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {6.1}Corpus Statistics}{41}{section.6.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Word Translation}{42}{section.6.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Baseline}{42}{subsection.6.2.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\nonumberline Corpus Size for Monolingual Embedding}{42}{section*.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Word Translation}{41}{section.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Baseline Experiments}{41}{subsection.6.2.1}}
 \@writefile{toc}{\contentsline {subsubsection}{\nonumberline Vocabulary Size for Word Translation}{42}{section*.7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Data-driven Approach}{42}{subsection.6.2.2}}
 \@writefile{toc}{\contentsline {subsubsection}{\nonumberline Different Learning Rate Scheduler}{42}{section*.8}}
@@ -212,16 +221,16 @@
 \citation{ruder2017survey}
 \citation{lample2017unsupervised}
 \citation{artetxe2017unsupervised}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Sentence Translation}{43}{section.6.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Comprehensive Table}{43}{subsection.6.3.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {\relax 6.1}{\ignorespaces A cross-lingual embedding space between German and English (\cite  {ruder2017survey})}}{44}{figure.6.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Sentence Translation}{44}{section.6.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Comprehensive Table}{44}{subsection.6.3.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {\relax 6.1}{\ignorespaces Word-by-word translation from German to English}}{44}{table.6.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}BPE vs Word}{44}{subsection.6.3.2}}
-\@writefile{lot}{\contentsline {table}{\numberline {\relax 6.1}{\ignorespaces Word-by-word translation from German to English}}{45}{table.6.1}}
 \citation{mikolov2013distributed}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}Artificial Noise}{46}{subsection.6.3.3}}
-\newlabel{tab:denoising}{{6.3.3}{46}{Artificial Noise}{subsection.6.3.3}{}}
-\newlabel{tab:denoising@cref}{{[subsection][3][6,3]6.3.3}{[1][45][]46}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.4}Phrase Embedding}{46}{subsection.6.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.3}Artificial Noise}{45}{subsection.6.3.3}}
+\newlabel{tab:denoising}{{6.3.3}{45}{Artificial Noise}{subsection.6.3.3}{}}
+\newlabel{tab:denoising@cref}{{[subsection][3][6,3]6.3.3}{45}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.4}Phrase Embedding}{45}{subsection.6.3.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3.5}Vocabulary Cutoff in Translation}{46}{subsection.6.3.5}}
 \@writefile{lot}{\contentsline {table}{\numberline {\relax 6.2}{\ignorespaces Word embedding vocabulary cut-off}}{46}{table.6.2}}
 \@writefile{lot}{\contentsline {table}{\numberline {\relax 6.3}{\ignorespaces Phrase embedding vocabulary cut-off}}{46}{table.6.3}}
@@ -293,7 +302,4 @@
 \bibcite{vaswani2017attention}{{36}{2017}{{Vaswani et~al.}}{{Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin}}}
 \bibcite{xing2015normalized}{{37}{2015}{{Xing et~al.}}{{Xing, Wang, Liu, and Lin}}}
 \bibcite{zhang2017adversarial}{{38}{2017}{{Zhang et~al.}}{{Zhang, Liu, Luan, and Sun}}}
-\global\csname @altsecnumformattrue\endcsname
-\global\@namedef{scr@dte@chapter@lastmaxnumwidth}{12.84798pt}
-\global\@namedef{scr@dte@section@lastmaxnumwidth}{18.37163pt}
-\global\@namedef{scr@dte@subsection@lastmaxnumwidth}{26.8883pt}
+\global\@altsecnumformattrue

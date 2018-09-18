@@ -9,7 +9,7 @@ Before we discuss the cross-lingual word embedding in this chapter, I will first
 %A large majority of cross-lingual embedding models take inspiration from and extend monolingual word embedding models to bilingual settings, or explicitly leverage monolingually trained models. As an important preliminary, we thus briefly introduce monolingual embedding models.
 Word embedding is distributed representation of word in high dimensional space. It can capture the contextual or co-occurrence information, so that similar words have similar distribution in the embedding space.  Several methods have been proven to be success like word2vec (\cite{mikolov2013efficient}) GloVe (\cite{pennington2014glove})
 \begin{figure}[h]
-	\includegraphics[width=12cm]{word2vec}
+	\includegraphics[width=12cm]{skip}
 	\caption{Global attention model (\cite{mikolov2013efficient})}
 	\centering
 \end{figure}
@@ -164,4 +164,3 @@ Now this limitation is addressed by apply a applying a corrective metric at infe
 
 
 %Since we use the pseudo parallel data (source sentence and word-by-word target translation sentence), we can exploit the context information from language model to select the word translation candidate. Beam search with language model is implemented here. More details about sentence translation will be explained next chapter.\\
-	

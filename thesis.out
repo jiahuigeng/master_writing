@@ -41,12 +41,12 @@
 \BOOKMARK [2][]{subsection.5.1.1}{5.1.1 Language Model}{section.5.1}% 41
 \BOOKMARK [2][]{subsection.5.1.2}{5.1.2 Beam Search}{section.5.1}% 42
 \BOOKMARK [1][]{section.5.2}{5.2 Denoising Neural Network}{chapter.5}% 43
-\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Denoising Auto-encoder}{section.5.2}% 44
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Denoising Auto-encoder \(DAE\)}{section.5.2}% 44
 \BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Noise Model}{section.5.2}% 45
 \BOOKMARK [0][]{chapter.6}{6 Experiments}{}% 46
 \BOOKMARK [1][]{section.6.1}{6.1 Corpus Statistics}{chapter.6}% 47
 \BOOKMARK [1][]{section.6.2}{6.2 Word Translation}{chapter.6}% 48
-\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Baseline}{section.6.2}% 49
+\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Baseline Experiments}{section.6.2}% 49
 \BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Data-driven Approach}{section.6.2}% 50
 \BOOKMARK [1][]{section.6.3}{6.3 Sentence Translation}{chapter.6}% 51
 \BOOKMARK [2][]{subsection.6.3.1}{6.3.1 Comprehensive Table}{section.6.3}% 52
