@@ -57,8 +57,8 @@
 \contentsline {section}{\numberline {6.3}Sentence Translation}{44}{section.6.3}
 \contentsline {subsection}{\numberline {6.3.1}Comprehensive Table}{44}{subsection.6.3.1}
 \contentsline {subsection}{\numberline {6.3.2}BPE vs Word}{44}{subsection.6.3.2}
-\contentsline {subsection}{\numberline {6.3.3}Artificial Noise}{45}{subsection.6.3.3}
-\contentsline {subsection}{\numberline {6.3.4}Phrase Embedding}{45}{subsection.6.3.4}
+\contentsline {subsection}{\numberline {6.3.3}Artificial Noise}{46}{subsection.6.3.3}
+\contentsline {subsection}{\numberline {6.3.4}Phrase Embedding}{46}{subsection.6.3.4}
 \contentsline {subsection}{\numberline {6.3.5}Vocabulary Cutoff in Translation}{46}{subsection.6.3.5}
 \contentsline {chapter}{\numberline {7}Conclusion}{47}{chapter.7}
 \contentsline {chapter}{\numberline {A}Appendix}{49}{appendix.A}
