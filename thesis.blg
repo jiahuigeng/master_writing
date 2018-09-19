@@ -16,45 +16,45 @@ Repeated entry---line 397 of file references.bib
  : @inproceedings{pennington2014glove
  :                                   ,
 I'm skipping whatever remains of this entry
-You've used 38 entries,
+You've used 42 entries,
             2773 wiz_defined-function locations,
-            772 strings with 12686 characters,
-and the built_in function-call counts, 22091 in all, are:
-= -- 1937
-> -- 1444
-< -- 31
-+ -- 486
-- -- 444
-* -- 1765
-:= -- 3223
-add.period$ -- 116
-call.type$ -- 38
-change.case$ -- 261
-chr.to.int$ -- 34
-cite$ -- 76
-duplicate$ -- 1039
-empty$ -- 1675
-format.name$ -- 490
-if$ -- 4767
+            788 strings with 13314 characters,
+and the built_in function-call counts, 23956 in all, are:
+= -- 2111
+> -- 1524
+< -- 36
++ -- 514
+- -- 468
+* -- 1891
+:= -- 3491
+add.period$ -- 129
+call.type$ -- 42
+change.case$ -- 281
+chr.to.int$ -- 38
+cite$ -- 84
+duplicate$ -- 1143
+empty$ -- 1843
+format.name$ -- 518
+if$ -- 5180
 int.to.chr$ -- 5
 int.to.str$ -- 1
-missing$ -- 39
-newline$ -- 198
-num.names$ -- 152
-pop$ -- 586
+missing$ -- 43
+newline$ -- 218
+num.names$ -- 168
+pop$ -- 633
 preamble$ -- 1
-purify$ -- 224
+purify$ -- 240
 quote$ -- 0
-skip$ -- 891
+skip$ -- 972
 stack$ -- 0
-substring$ -- 791
-swap$ -- 270
-text.length$ -- 26
+substring$ -- 863
+swap$ -- 295
+text.length$ -- 29
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 413
+type$ -- 457
 warning$ -- 0
-while$ -- 177
+while$ -- 195
 width$ -- 0
-write$ -- 491
+write$ -- 543
 (There were 3 error messages)

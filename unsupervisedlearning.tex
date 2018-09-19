@@ -1,30 +1,26 @@
 \chapter{Unsupervised Learning of Cross-lingual Word Embedding}
-Chapter 3 introduce the supervised learning of cross-lingual word embedding, they employ parallel data like bilingual dictionary or parallel corpora and  have shown strong results on a word retrieval task.  However, labeling the lexicon information still cost lots of labor. This motivates people to explore fully unsupervised method. In this Chapter, several unsupervised approaches will be explained including a novel data-drive approach, which is distinct from other methods by exploiting an extra language model and corpus-based instead of vocabulary-based training process. These approaches contains always a iterative training procedure. Mapping will be refined until reach an optimum value. 
+Chapter 3 introduces the supervised learning of cross-lingual word embedding, they employ parallel data like bilingual dictionary or parallel corpora and have shown strong results on a word retrieval task.  However, labeling the lexicon information still costs lots of labor. This motivates people to explore fully unsupervised method. In this chapter, several unsupervised approaches will be explained including a novel corpus-based approach, which is distinct from other methods by exploiting an extra language model and corpus-based training process. All these approaches contains an iterative training procedure. 
 \section{Initialization}
-Pre-trained monolingual embeddings capture distribution statistics for each language. These embeddings are typically not aligned between languages and ince the alignment method employed is iterative, a good initialization is a key.
-A practical approach for reducing the need of bilingual supervision is to design heuristics to build the seed dictionary. \cite{} propose to use shared words and cognates to extract the seed dictionary.This method has a deficit that it depends on the writing system.  A recent line of using adversarial training to learn a mapping, which roughly align the two distributions of embeddings is proposed.\\
+Pre-trained monolingual embeddings capture distribution information for each language. These embeddings are typically not expected to be aligned between languages A good initialization is a key to the iterative training framework.
+A practical approach for reducing the need of bilingual supervision is to design heuristics to build the seed dictionary. \cite{hauer2017bootstrapping} propose to use shared words and cognates to extract the seed dictionary. This method has a flaw that it depends on the writing system. \cite{artetxe2018robust} raise a method that using similarity matrix to capture rough cross-lingual signals.\\
 
 \subsection{Heuristics}
-The seed is constructed by identifying words with similar spelling (cognates). A relative-frequency constraint is imposed to filter out word pairs that have fully different meaning.  This noisy seed lexicon is considered as initial signal. Generate the list of words sorted by frequency first. For each of the most frequent source words, start from the top of the target word frequency list, if the normalized edit distance (NED) and absolute difference between the respective frequency ranks is within a specific threshold value, then add word pair into the seed lexicon. There is no one-to-one constraint, so both source and target words may appear multiple times in the seed. 
+The seed is constructed by identifying words with similar spelling (cognates). A relative-frequency constraint is imposed to filter out word pairs that have fully different meaning; generate the list of words by frequency first, for each source word, if there exists target word that the normalized edit distance (NED) and absolute difference between the respective frequency ranks is within a specific threshold, these two word will be added into a seed dictionary.  This noisy seed lexicon will be considered as initial signals. There is no one-to-one constraint, so both source and target words may appear multiple times in the seed. 
 
-\subsection{Adversarial Training (GANs)}
-The adversarial training was for cross-lingual embedding mapping is first proposed by {}, who combines an encoder that maps source word embeddings into the target embedding space, a decoder that reconstructs the source embeddings from the mapped embeddings and a discriminator that discruminates between the mapped embeddings and the true target embeddings. \cite{zhang2017adversarial} incorporate additional techniques like noise injections to aid the training. \cite{conneau2017word} drop the reconstruction component, regularize the mapping to be orthogonal.\\
-Let ${=\{ \bm{f}_1, \cdots, \bm{f}_\}}$ and ${ = \{ \bm{e}_i, \cdots , \bm{e}_m\}}$ be the two sets of $n$ and $m$ word embeddings from a source and a target language separately, We refer the discriminator parameters as ${\theta_D}$.The discriminator is a multi-layer neural network trained to discriminate the transformed source word embedding from the target word embedding, while the mapping $W$, simply a linear transformation, is trained to fooling discriminator. In the two-player game, we are supposed to learn the mapping from source embedding space to the target space.
-
-Generator loss 
-\[ \mathcal{L_G}(W|\theta_D) =  -\frac{1}{n} \sum_{i=1}^{n}\log P_{\theta_D}(source=0|W \bm{f}_i) - \frac{1}{m} \sum_{i=1}^{m} \log P_{\theta_D}(source = 1 | \bm{e}_i) \]
-Discriminator loss
-\[ \mathcal{L_D}(\theta_D | W) =  -\frac{1}{n} \sum_{i=1}^{n} \log P_{\theta_D}(source = 1| W\bm{f}_i) - \frac{1}{m} \sum_{i=1}^{m} \log P_{\theta_D}(source=0| \bm{e}_i) \]	
-
-%
-%These adversarial training methods are reported to be limited to closely-related languages or comparable Wikipedia corpora.
 \subsection{Similarity Matrix}
+Similarity matrix is based on a simple assumption: while the axes of the original ${\lvert \tilde{V} \rvert}$ most frequent embeddings ${F \in \mathbb{R}^{d \times {\lvert \tilde{V} \rvert} }}$ and ${E \in \mathbb{R}^{d \times {\lvert \tilde{V} \rvert} }}$  are different, but $M_F=F^{\top}F$, $M_E = E^{\top}E$ capture the similarity inner respective languages. The similarity matrices $M_F$ and $M_E$ would be equivalent up to a permutation of their rows and columns. For example, in one language, the similarity between $a,b,c$ and $i,j,k$ is as the left graph in Figure 4.1, suppose ideal the their corresponding translations are $a^{\prime},b{\prime},c{\prime}$ and $i{\prime},j{\prime},k{\prime}$, but the order differs as the middle graph. If we first sort the values in each row, it will be much easier to find the relationship between $a$ and $a^{\prime}$, etc.. They find $\sqrt{M_F}$ and $\sqrt{M_E}$ 
+work better in practice.
+\begin{figure}[H]
+	\includegraphics[width=12cm]{similarity}
+	\centering
+	\caption{Illustration of similarity matrix method}
+\end{figure}
 
-
-\section{Vocabulary-based Training}
+While the latter is far from the accurate alignment, it works well as the initialization for the iterative methods described next.
+\section{Vocabulary-based Learning}
 \subsection{Iterative Procrustes Analysis}
-After initialization, the words in the seed dictionary can be considered as temporary  anchor points for Procrustes analysis, which has been introduced in Section .
-Apply the Procrustes solution on the current seed dictionary, use the learned mapping matrix $W$ and the nearest neighbor search to construct a better seed dictionary again. Repeat this process iteratively to obtain a hopefully better mapping and dictionary each time until some convergence  criterion is met. As for the convergence criterion, the training will be stopped when the improvement on the average dot product for the induced dictionary falls below a give threshold from one iteration to the next. In practice, the threshold value is set at $1e-6$.
+After initialization, the words in the seed dictionary can be considered as temporary  anchor points for Procrustes analysis, which has been introduced in Section 3.2.1.
+Apply the Procrustes solution on the current seed dictionary, use the learned mapping matrix $W$ and dictionary induction technique to construct a better seed dictionary again. Repeat such process we suppose to obtain a hopefully better mapping and dictionary until some convergence criterion is met. The training will be stopped when the improvement on the average dot product for the induced dictionary falls below a give threshold from one iteration to the next. In practice, the threshold value is set at $1e-6$.  To prevent the mapping and dictionary from getting stuck in local optima, Mutual nearest neighbors and thresholding are used to ensure a high-quality dictionary. In the experiments we find that intersection of two unidirectional dictionaries work better than union or a unidirectional dictionary,  that is to say, the quality of dictionary plays more important role than the quantity.\\
 \begin{figure}[h]
 	\centering
 	\begin{minipage}{.7\linewidth}
@@ -43,11 +39,18 @@ Apply the Procrustes solution on the current seed dictionary, use the learned ma
 		\end{algorithm}
 	\end{minipage}
 \end{figure}
-\subsection{Seed Dictionary Induction}
-Specifically, for each word in the most frequent words, we use nearest neighbors to find best candidates. To prevent the mapping and dictionary from getting stuck in local optima, Mutual nearest neighbors and thresholding are used to ensure a high-quality dictionary. In the experiments we found that the number of word pairs in the dictionary is not so important as the dictionary quality. The bidirectional dictionary, which belongs to the intersection of two unidirectional dictionaries, work better than other set operation. 
-\section{Corpus-based Training}
+
+\subsection{Adversarial Learning (GANs)}
+The adversarial training was for cross-lingual embedding mapping is first proposed by \cite{barone2016towards}, who combines an encoder that maps source word embeddings into the target embedding space, a decoder that reconstructs the source embeddings from the mapped embeddings and a discriminator that discriminates between embeddings. \cite{zhang2017adversarial} incorporate additional techniques like noise injections to aid the training. \cite{conneau2017word} finally achieve good results by dropping the reconstruction component regularizing the mapping to be orthogonal\\
+Let ${=\{ \bm{f}_1, \cdots, \bm{f}_{{\lvert \tilde{V} \rvert}}\}}$ and ${ = \{ \bm{e}_1, \cdots , \bm{e}_{{\lvert \tilde{V} \rvert}}\}}$ be the most ${\lvert \tilde{V} \rvert}$ frequent word embeddings from source and target languages respectively. We refer the discriminator parameters as ${\theta_D}$.The discriminator is a multi-layer neural network trained to discriminate the transformed source word embedding from the target word embedding, while the mapping $W$, as simple as a linear transformation, is trained to fooling discriminator. In the two-player game, mapping from source embedding space to the target space is supposed to be learned.\\
+
+Generator loss 
+\[ \mathcal{L_G}(W|\theta_D) =  -\frac{1}{{\lvert \tilde{V} \rvert}} \sum_{n=1}^{\tilde{V}}\log P_{\theta_D}(source=0|W \bm{f}_n) - \frac{1}{\tilde{V}} \sum_{n=1}^{{\lvert \tilde{V} \rvert}} \log P_{\theta_D}(source = 1 | \bm{e}_n) \]
+Discriminator loss
+\[ \mathcal{L_D}(\theta_D | W) =  -\frac{1}{{\lvert \tilde{V} \rvert}} \sum_{n=1}^{{\lvert \tilde{V} \rvert}} \log P_{\theta_D}(source = 1| W\bm{f}_n) - \frac{1}{{\lvert \tilde{V} \rvert}} \sum_{n=1}^{{\lvert \tilde{V} \rvert}} \log P_{\theta_D}(source=0| \bm{e}_n) \]	 
+\section{Corpus-based Learning}
 \subsection{Motivation}
-The vocabulary-based training approach have maken good use to the similarity of embedding distributions. It dose not consider the semantic or contextual information when training the cross-lingual mapping. We propose to make use to corpus translation to learn the mapping, since we do not have parallel sentences and alignment information, we can build a word-based machine translation, which exploits the language model to improve the translation quality. The intuition is that if the sentence translation system, which contains lexicon model, get improved compared with the previous one, we can further learn a better mapping. Repeat this process the lexicon translation and embedding mapping will be trained alternatively, until some convergence criterion is met.  
+The vocabulary-based training approach makes good use of the  embedding distribution similarity. However, it dose not take the semantic or contextual information into consideration when training the cross-lingual mapping. We propose a novel corpus-based learning approach by integrating corpus translation task. We build a word-based machine translation, in this thesis simplified as a word-by-word translation system, which exploits dictionary induction as lexical model. The intuition is that if the translation system gets improved better translation, we can further learn a better mapping based on the word translation pairs. LM is used to improve the translation. In the closed-loop learning process by alternating corpus translation and embedding mapping learning, we are hopefully learn good mapping matrix at last. Algorithm 3 summarize such iterative framework I propose.\\
 \begin{figure}[H]
 	\centering
 	\begin{minipage}{.7\linewidth}
@@ -57,7 +60,7 @@ The vocabulary-based training approach have maken good use to the similarity of 
 			\KwIn{$E$ (target embeddings)}
 			\KwIn{$\textbf{LM}_e$ (language model)}
 			\KwIn{$\mathcal{F}$ (source corpus)}
-			\KwResult{$W (embedding mapping)$}
+			\KwResult{$W$ (embedding mapping)}
 			\While{not converge}{
 				${\ \  \mathcal{E} \leftarrow TRANSLATE(\mathcal{F}, F, E, \textbf{LM}_e)}$ 
 				${W \leftarrow LEARN\_MAPPING(\mathcal{F}, \mathcal{E})}$				
@@ -68,8 +71,8 @@ The vocabulary-based training approach have maken good use to the similarity of 
 \end{figure}
 
 %We propose to use the output word-by-word translation as the input of the mapping learning system. Assuming that the quality of word-by-word translation was indeed better than the previous one. The mapping learning system should be able to learn a better mapping and, consequently, an ever better translation the second time. The process can then be repeated iteratively to obtain a hopefully better maping and translation each time until some convergence point was met. 
-Algorithm 3 summarize this iterative framework I propose.\\
-The approach combines embedding mapping learning, dictionary induction technique and word-based machine translation, in this thesis, the word-based translation is simplified to word-by-word translation. However, the efficiency turns out to be critical for this approach. By enclosing the learning logic in a loop, the training time depends mainly on the corpus size. It will be very costly if we translate the entire source corpus. Especially at the beginning stage, the improvement of the mapping is a relative slow process and need more training iteration. It takes too long to translation the whole corpus. I propose an online training method, which can greatly improve the training efficiency. 
+
+This corpus-based approach combines mapping learning, dictionary induction and corpus translation. The efficiency turns out to be critical. Actually, the learning time depends mainly on the corpus size. It will be very costly if we translate the entire source corpus especially at the beginning stage, when the improvement of the mapping is relative slow and more training iterations are required. In order to solve this, I propose an online learning method, which can greatly improve the training efficiency. 
 
 \subsection{Online Training}
 
@@ -82,17 +85,17 @@ The approach combines embedding mapping learning, dictionary induction technique
 			\KwIn{$E$ (target embeddings)}
 			\KwIn{$\textbf{LM}_e$ (language model)}
 			\KwIn{$\mathcal{F}$ (source corpus)}
-			\KwResult{$W (embedding mapping) $}
+			\KwResult{$W$ (embedding mapping) }
 			\While{not converge}{
 				\ \ Generate batch of source sentences $\{f_1^J\}$ from $\mathcal{F}$\\
-				${\{e_1^I\} \leftarrow TRANSLATE(\{e_1^I\}, F, E, \textbf{LM}_e) }$ 
+				${\{e_1^I\} \leftarrow TRANSLATE(\{f_1^J\}, F, E, \textbf{LM}_e) }$ 
 				${W \leftarrow LEARN\_MAPPING(\{f_1^J\}, \{e_1^I\})}$				
 			}		
 			\caption{Online learning for corpus-based approach}
 		\end{algorithm}
 	\end{minipage}
 \end{figure}
-Instead of translate the entire corpus, I iterate over the corpus to generate specific number of sentences as a batch for translation. After translating, we extract the word translation pairs as seed dictionary. For more complicated word-based machine translation system, extraction will also requires the alignment information. In word-by-word translation system, we just use the translation pairs at each position. We could improve the quality of the seed dictionary by filtering pairs, which could be noise in the dictionary according to statistical information. Based on the seed dictionary we can learn the cross-lingual word embeddings using neural network trained with SGD. Further we use the mapping to infer the lexicon model for translation of next batch of sentences. In such close-loop process, mapping learning and sentence translation will be alternatively refined to an optimum state. In general, the efficiency of this online algorithm mainly depends on the corpus size and batch size of sentences, which decide directly the translation time. We can either extend the corpus size or loop over the same corpus more than once in order to enrich the data for this corpus-based approach.
+Instead of translate the entire corpus, each time I iterate over the corpus to generate specific number of sentences as a sentence batch. After translation is done, we extract the word translation pairs as seed dictionary. For more complicated word-based machine translation system, extraction will requires the alignment information. In my word-by-word translation system, I just use the word translation pairs at each position. We could improve the quality of seed dictionary by filtering the pairs, which could be noise in the dictionary according to statistical information. We train the mapping using neural network trained with SGD. Mapping learned on current sentence batch is used to induce the lexicon for translation of next sentence batch. The efficiency of this online algorithm mainly depends on the corpus size and batch size. We can either extend the corpus size or train over the same corpus more than once since this approach is data-driven method.
 
 
 \subsection{Training Details}
@@ -101,37 +104,29 @@ Instead of translate the entire corpus, I iterate over the corpus to generate sp
 	\begin{itemize}
 		 With cross-lingual word embeddings, we can directly find the word translation using nearest neighbors search. The nearest neighbor suffers from the hubness problem. As mentioned in Section 3.4, we adopt the Cross-domain Similarity Local Scaling (CSLS) from \cite{conneau2017word}. Following the authors, we set $k=10$.
 		 \item Frequency-based vocabulary cutoff\\
-		 The size of the similarity matrix grows with respect to that of the target vocabulary. This does not increase the cost of computation, but it also makes the number of possible solutions grow rapidly. In the experiments we find out that those less frequent words can be noise for when inducing the word translation. And those noise translations would have global negative influence of the translation.
-		 We propose to restrict the vocabulary size to the k-top frequent words in the source and target languages, where we found $k=50000$ can balance the efficiency and accuracy.	 
+		 The complexity for dictionary induction grows with respect to target vocabulary size. This increases not only  computation cost, but also the number of possible translations. In the experiments we find out that those less frequent words can be noise since less words are less trained. These noise word translations would have global negative influence of the sentence translation.
+		 We propose to restrict the vocabulary size to the k-top frequent words in the source and target languages, where we find $k=50000$ can balance the efficiency and accuracy.	 
 	\end{itemize}
 
 
-	\item Corpus Translation
-	Most words have multiple translations. Some are more likely than others. Also the translation depends on the context, some words are used only in certain circumstances. For example, 'home', 'house' are synonyms, but when translating 'zu Haus', we will choose 'home'.  With language model, we can choose better word translation candidates according to context words. 
-	\begin{itemize}
-		\item Language model score \\we use $5$-gram language model trained by kenlm tool.
-		\item Lexicon score\\ we use simple linear mapping $q(f,e) = \frac{d(f,e)+1}{2}$, where $d(f,e)$ is the cosine similarity between $\bm{e}$ and $\bm{f}$	
-		\item Scaling parameters for sub-models\\ 
-		\[ \hat{e}_1^J = \argmax{e_1^J} \prod_{j=1}^{J} p^{\lambda_{LM}}(e_j| e_{j-4}^{j-1}) \cdot q^{\lambda_{lex}}(f_j, e_j)\]
-		empirically set $\lambda_{lex}$ as 1 and  $\lambda_{LM}$ as 0.1
-	\end{itemize}
-	More details will be explained in Chapter 5.
+	\item Corpus Translation\\
+	Most words have multiple translations, some are more likely than others. Also the translation depends on the context. For example, 'home', 'house' are synonyms, but when translating 'zu Haus', we will choose 'home'. By integrating LM, we can choose better word translation as well as sentence translation according to contextual information. We exploit a $5$-gram LM trained by KenLM (\cite{heafield2011kenlm}) and use a linear mapping to convert the cosine similarity to lexical probability. I improve the translation efficiency greatly by implementing a context-aware beam search. More details will be explained in Chapter 5.
 	
 
 
 
 	
 	\item Optimization Objective \\
-	Suppose we have got synthetic parallel sentences from translation and according to the alignment, we have extract word translation pairs as seed dictionary $dico$, the goal the optimization is to find the best mapping so that the lexicon induction can be generalized as much as possible. The linear mapping $W \in \mathbb{R}^{d \times d}$ will be trained on the pairs to minimize a measure of discrepancy between mapped  source word embeddings and the target word embeddings.
-	\[ W = \argmin{W \in \mathbb{R}^{d \times d}} \frac{1}{n} \sum_1^n l(W\bm{f}_i, \bm{e}_i) \]
-	where $l$ is a loss function, in this thesis, I compare the results of Euclidean distance loss and cosine similarity loss 
+	Suppose we have got translation, we can extract word translation pairs as seed dictionary $dico$. The goal of optimization is to find the best mapping so that the mapping is more general to cover as much as possible lexicon with high accuracy. In this theis, linear mapping $W \in \mathbb{R}^{d \times d}$ will be trained to minimize a self-defined loss function between mapped  source word embeddings target word embeddings.
+	\[ W = \argmin{W \in \mathbb{R}^{d \times d}} \frac{1}{{\lvert \tilde{V} \rvert}} \sum_{n=1}^{\lvert \tilde{V} \rvert} l(W\bm{f}_n, \bm{e}_n) \]
+	where $l$ is a loss function, in this thesis I compare the results of Euclidean distance loss and cosine similarity loss and find the difference is small.
 	\item Orthogonal Constraint\\
-	As mentioned previously, the orthogonal preserves the quality of monolingual embeddings. It also preserves the the dot product of vectors and the $l_2$ distance. In our experiments, we find the orthogonal constraint make training procedure converge successfully, specially at the beginning stage. In this thesis, the orthogonal constraint is added during the training process; we use projected gradient descent to train the neural network by alternating the training and the orthogonal constraining:
+	As mentioned previously, the orthogonal preserves the quality of monolingual embeddings also dot product of vectors and  $l_2$ distance. In our experiments, we find the orthogonal constraint make training procedure converge successfully. In this thesis, the orthogonal constraint is added during the training process; we use projected gradient descent to train the neural network by alternating the training and the orthogonal constraining:
 \[ W \leftarrow (1+\beta) W - \beta(WW^\top)W\] 
 	where $\beta$ = 0.01  is usually found to perform well.  This method ensures that the matrix stays close to the manifold of orthogonal matrices after each update. 	
 	\item Learning Rate Scheduling\\
-	There are two different learning rate schedules for our method. Once we get the batch sentences translation, we can either train the mapping with the learning rate inheriting from last training and then decrease the learning rate, or train always with the initial learning rate and keep training and update learning rate until the learning rate has dropped to the minimal learning rate we preset. The first training schedule fits the normal online algorithm principle best but in practice we find the second schedule trains the cross-lingual embedding more efficiently which may due to the translation task differs for different batches.
+	Two different learning rate schedulers are used in this thesis. Once we get the batch sentence translation, we can either train the mapping with the learning rate inherited from last training, or train always with the initial learning rate and keep training and updating learning rate until the learning rate drops to a minimal learning rate we predefined. The first training scheduler fits the normal online algorithm principle best but in practice we find the second scheduler trains the cross-lingual embedding more efficiently.
 	\item Stop Criterion\\
-	Once the results of this approach have converged to a good point, we can break the training loop early. Several different factors can be selected as the stop criterion such as the loss in the embedding training process or statistic on the translation. In practice, we find the model selection methods provided by \cite{conneau2017word} more suitable in our case. In more detail, they use CSLS retrieval to generate the translations of 10k most frequent source words. They then compute the average cosine similarity between these deemed translations and use this average as validation metric. Empirically, they found that this simple criterion is better correlated with the performance on the evaluation tasks than those distance based criterion. This metric can also be used for hyper-parameter selection.
+	Once the results of this approach have converged to a good point, we can break the training loop early. We have considered  different factors such as the loss in the embedding training process or statistics on the translation. In practice, we find the model selection methods provided by \cite{conneau2017word} more suitable in our case. They use CSLS retrieval to generate the translations of 10k most frequent source words. And then compute the average cosine similarity between these deemed translations and use this average as validation metric. Empirically, they find that this simple criterion is better correlated with the performance on the evaluation tasks than those distance based criterion.
 \end{itemize}
 %Our method can be combined with word-based machine translation. This approach can be further improved  with more word-based machine translation model. We can also refine the 

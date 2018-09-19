@@ -10,7 +10,7 @@
 		& \textbf{Running Words} & \textbf{1880M}  & \textbf{2360M}   & \textbf{3017M}  \\ \cline{2-5} 
 		& \textbf{Vocabulary}    & \textbf{1254k}  & \textbf{523k}    & \textbf{660k}   \\ \hline
 	\end{tabular}
-	
+	\caption{1}
 \end{table}
 
 \begin{table}[H]
@@ -28,10 +28,11 @@
 		\multicolumn{4}{l}{\textbf{Search vocabulary in testing: 50k (src/tgt)}} \\
 		
 	\end{tabular}
+	\caption{2}
 \end{table}
 \section{Word Translation}
 \subsection{Baseline Experiments}
- \cite{conneau2017word} release high-quality dictionaries for 12 oriented language pairs; a train and test split of 5000 and 1500 unique source words for each language pair. We train the monolingual word embedding with fastText(\cite{bojanowski2016enriching}) and compare the performances of different training methods for word retrieval upon this dataset. As demonstrated in Table , CSLS performs better than other dictionary induction methods like simple nearest neighbour search (NN)  or inverted softmax (ISF). So in all tables related to word retrieval task, CSLS is the default method if without any specification.
+ \cite{conneau2017word} release high-quality dictionaries for 12 oriented language pairs, each language pair has a train and test split of 5000 and 1500 unique source words. We compare the performances of different training methods using word retrieval task upon this dataset. Monolingual word embeddings are with fastText(\cite{bojanowski2016enriching}). As demonstrated in Table 6.3, CSLS performs better than other dictionary induction methods: simple nearest neighbour search (NN) and inverted softmax (ISF). So in all tables related to word retrieval task, CSLS is the default method if without any specification.
 
 \begin{table}[H]
 	\centering
@@ -42,17 +43,17 @@
 		\multirow{2}{*}{Unsupervised} & Adversarial            & 47.03 & 49.57 & 53.50 \\ \cline{2-5} 
 		& Adversarial+Procrustes & 61.75 & 62.68 & 64.92 \\ \hline
 	\end{tabular}
+	\caption{3}
 \end{table}
-\subsubsection{Vocabulary Size for Word Translation}
 
 
 \subsection{Corpus-based Approach}
-We run the novel corpus-based approach on a relative small corpus with 50k sentences using different learning rate schedulers; one is to start from initial learning rate, the other is to inherit the learning rate after the training of last batch sentences. The first learning rate scheduler always performs better than the second one. We demonstrate the results for German$\rightarrow$ English and English $\rightarrow$ German for the first scheduler. In order to lift the performance of the second scheduler, we augment training corpus by training two loops over the 50k corpus and extend the corpus size to 200k. The results get better but still worse than that with first learning rate scheduler. 
+We run the novel corpus-based approach on a relative small corpus with 50k sentences using different learning rate schedulers. One is to start from initial learning rate, the other is to inherit the learning rate after the training on previous batch sentences. The first learning rate scheduler always performs better than the second one. We demonstrate the results for German$\rightarrow$ English and English $\rightarrow$ German with the first scheduler, also the performance of  German$\rightarrow$ English with second scheduler. These are trained on a relative small corpus with 50k sentences. In order to lift the performance of the second scheduler, we augment corpus by training two loops over the 50k corpus and extend the corpus size to 200k. The results get better but still not as good as first learning rate scheduler. 
 \subsubsection{Different Learning Rate Scheduler}
 \begin{itemize}
 	\item Start from Initial Learning Rate
-	\begin{itemize}
-		\item Word translation accuracies for German$\rightarrow$English,  with different initial learning rates and sentence batch sizes.
+%	\begin{itemize}
+%		\item .
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{cccccc}
@@ -64,9 +65,9 @@ We run the novel corpus-based approach on a relative small corpus with 50k sente
 				0.0005        & 1.54  & 45.26 & 49.88 & 54.43 & 54.97 \\ \hline
 				0.0001        & 36.23 & 58.09 & 60.14 & 60.37 & 58.67 \\ \hline
 			\end{tabular}
-%		\caption{Word translation accuracy for German $\rightarrow$ English}
+		\caption{Word translation accuracy for German$\rightarrow$English word retrieval with different initial learning rates and sentence batch sizes}
 		\end{table}
-		\item Word translation accuracy for English $\rightarrow$ German, with different initial learning rates and sentence batch sizes.
+%		\item Word translation accuracy for English $\rightarrow$ German, with different initial learning rates and sentence batch sizes.
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{cccc}
@@ -78,14 +79,14 @@ We run the novel corpus-based approach on a relative small corpus with 50k sente
 				0.0005          & 54.82  & 55.67  & 48.44 \\ \hline
 				0.00001        & 59.21 & 58.98 & 56.90 \\ \hline
 			\end{tabular}
-%		 \caption{Word translation accuracy for English $\rightarrow$ German}
+		 \caption{Word translation accuracy for English $\rightarrow$ German word retrieval with different initial learning rates and sentence batch sizes.}
 		\end{table}	
-
-		
-	\end{itemize}
+%
+%		
+%	\end{itemize}
 	\item Inherit Last Learning Rate
-	\begin{itemize}
-		\item Word translation accuracy for German$\rightarrow$English with different initial learning rates and sentence batch sizes.\\
+%	\begin{itemize}
+%		\item Word translation accuracy for German$\rightarrow$English with different initial learning rates and sentence batch sizes.\\
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{cccc}
@@ -97,9 +98,9 @@ We run the novel corpus-based approach on a relative small corpus with 50k sente
 				0.0005          & 5.78  & 8.33  & 10.25 \\ \hline
 				0.00001        & 51.50 & 37.63 & 15.27 \\ \hline
 			\end{tabular}
-			%		\caption{Word translation accuracy for German$\rightarrow$English }
+					\caption{Word translation accuracy for German$\rightarrow$English with different initial learning rates and sentence batch sizes. }
 		\end{table}	
-		\item Word translation accuracy for German$\rightarrow$English with different training corpus, initial learning rate $0.0001$ and batch size $1k$\\
+%		\item Word translation accuracy for German$\rightarrow$English with different training corpus, initial learning rate $0.0001$ and batch size $1k$\\
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{lc}
@@ -109,9 +110,9 @@ We run the novel corpus-based approach on a relative small corpus with 50k sente
 				50k $\times$ 2 & 55.51         \\ \hline
 				200k  & 57.87         \\ \hline
 			\end{tabular}
-			%	\caption{Word translation accuracy for German$\rightarrow$English on different training corpus}
+				\caption{ Word translation accuracy for German$\rightarrow$English with different training corpus, initial learning rate $0.0001$ and batch size $1k$}
 		\end{table}
-	\end{itemize}
+%	\end{itemize}
 
 	
 

@@ -27,34 +27,33 @@
 \BOOKMARK [0][]{chapter.4}{4 Unsupervised Learning of Cross-lingual Word Embedding}{}% 27
 \BOOKMARK [1][]{section.4.1}{4.1 Initialization}{chapter.4}% 28
 \BOOKMARK [2][]{subsection.4.1.1}{4.1.1 Heuristics}{section.4.1}% 29
-\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Adversarial Training \(GANs\)}{section.4.1}% 30
-\BOOKMARK [2][]{subsection.4.1.3}{4.1.3 Similarity Matrix}{section.4.1}% 31
-\BOOKMARK [1][]{section.4.2}{4.2 Vocabulary-based Training}{chapter.4}% 32
-\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Iterative Procrustes Analysis}{section.4.2}% 33
-\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Seed Dictionary Induction}{section.4.2}% 34
-\BOOKMARK [1][]{section.4.3}{4.3 Corpus-based Training}{chapter.4}% 35
-\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Motivation}{section.4.3}% 36
-\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Online Training}{section.4.3}% 37
-\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Training Details}{section.4.3}% 38
-\BOOKMARK [0][]{chapter.5}{5 Sentence Translation}{}% 39
-\BOOKMARK [1][]{section.5.1}{5.1 Context-aware Beam Search}{chapter.5}% 40
-\BOOKMARK [2][]{subsection.5.1.1}{5.1.1 Language Model}{section.5.1}% 41
-\BOOKMARK [2][]{subsection.5.1.2}{5.1.2 Beam Search}{section.5.1}% 42
-\BOOKMARK [1][]{section.5.2}{5.2 Denoising Neural Network}{chapter.5}% 43
-\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Denoising Auto-encoder \(DAE\)}{section.5.2}% 44
-\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Noise Model}{section.5.2}% 45
-\BOOKMARK [0][]{chapter.6}{6 Experiments}{}% 46
-\BOOKMARK [1][]{section.6.1}{6.1 Corpus Statistics}{chapter.6}% 47
-\BOOKMARK [1][]{section.6.2}{6.2 Word Translation}{chapter.6}% 48
-\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Baseline Experiments}{section.6.2}% 49
-\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Corpus-based Approach}{section.6.2}% 50
-\BOOKMARK [1][]{section.6.3}{6.3 Sentence Translation}{chapter.6}% 51
-\BOOKMARK [2][]{subsection.6.3.1}{6.3.1 Comprehensive Table}{section.6.3}% 52
-\BOOKMARK [2][]{subsection.6.3.2}{6.3.2 BPE vs Word}{section.6.3}% 53
-\BOOKMARK [2][]{subsection.6.3.3}{6.3.3 Artificial Noise}{section.6.3}% 54
-\BOOKMARK [2][]{subsection.6.3.4}{6.3.4 Phrase Embedding}{section.6.3}% 55
-\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 56
-\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 57
-\BOOKMARK [0][]{chapter*.8}{List of Figures}{}% 58
-\BOOKMARK [0][]{chapter*.9}{List of Tables}{}% 59
-\BOOKMARK [0][]{chapter*.10}{Bibliography}{}% 60
+\BOOKMARK [2][]{subsection.4.1.2}{4.1.2 Similarity Matrix}{section.4.1}% 30
+\BOOKMARK [1][]{section.4.2}{4.2 Vocabulary-based Learning}{chapter.4}% 31
+\BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Iterative Procrustes Analysis}{section.4.2}% 32
+\BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Adversarial Learning \(GANs\)}{section.4.2}% 33
+\BOOKMARK [1][]{section.4.3}{4.3 Corpus-based Learning}{chapter.4}% 34
+\BOOKMARK [2][]{subsection.4.3.1}{4.3.1 Motivation}{section.4.3}% 35
+\BOOKMARK [2][]{subsection.4.3.2}{4.3.2 Online Training}{section.4.3}% 36
+\BOOKMARK [2][]{subsection.4.3.3}{4.3.3 Training Details}{section.4.3}% 37
+\BOOKMARK [0][]{chapter.5}{5 Sentence Translation}{}% 38
+\BOOKMARK [1][]{section.5.1}{5.1 Context-aware Beam Search}{chapter.5}% 39
+\BOOKMARK [2][]{subsection.5.1.1}{5.1.1 Language Model}{section.5.1}% 40
+\BOOKMARK [2][]{subsection.5.1.2}{5.1.2 Beam Search}{section.5.1}% 41
+\BOOKMARK [1][]{section.5.2}{5.2 Denoising Neural Network}{chapter.5}% 42
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Denoising Auto-encoder \(DAE\)}{section.5.2}% 43
+\BOOKMARK [2][]{subsection.5.2.2}{5.2.2 Noise Model}{section.5.2}% 44
+\BOOKMARK [0][]{chapter.6}{6 Experiments}{}% 45
+\BOOKMARK [1][]{section.6.1}{6.1 Corpus Statistics}{chapter.6}% 46
+\BOOKMARK [1][]{section.6.2}{6.2 Word Translation}{chapter.6}% 47
+\BOOKMARK [2][]{subsection.6.2.1}{6.2.1 Baseline Experiments}{section.6.2}% 48
+\BOOKMARK [2][]{subsection.6.2.2}{6.2.2 Corpus-based Approach}{section.6.2}% 49
+\BOOKMARK [1][]{section.6.3}{6.3 Sentence Translation}{chapter.6}% 50
+\BOOKMARK [2][]{subsection.6.3.1}{6.3.1 Comprehensive Table}{section.6.3}% 51
+\BOOKMARK [2][]{subsection.6.3.2}{6.3.2 BPE vs Word}{section.6.3}% 52
+\BOOKMARK [2][]{subsection.6.3.3}{6.3.3 Artificial Noise}{section.6.3}% 53
+\BOOKMARK [2][]{subsection.6.3.4}{6.3.4 Phrase Embedding}{section.6.3}% 54
+\BOOKMARK [0][]{chapter.7}{7 Conclusion}{}% 55
+\BOOKMARK [0][]{appendix.A}{A Appendix}{}% 56
+\BOOKMARK [0][]{chapter*.7}{List of Figures}{}% 57
+\BOOKMARK [0][]{chapter*.8}{List of Tables}{}% 58
+\BOOKMARK [0][]{chapter*.9}{Bibliography}{}% 59

@@ -212,14 +212,14 @@ The RNN encoder-decoder models have achieved state of the art in sequence modeli
 \textbf{Self-Attention}\\
 self-attention sublayers employs $h$ attention heads. To form the sublayer output, results from each head are concatenated and a parameterized linear transformation is applied.\\
 Each attention head operates on an sequence of hidden states. For example in the encoder, given input $\bm{h}:=\bm{h}_1, \cdots \bm{h}_J$ of $J$, attention head computes a new sequence $\bm{h}^{\prime}:= \bm{h}_1^{\prime}, \cdots, \bm{h}_J^{\prime}$ of the same length.\\
-Each output element, $\bm{h}_i^{\prime}$ is computed as a weighted sum of a linearly transformed input elements:
-\[ \bm{h}_i^{\prime} = \sum_{j=1}^{J} \alpha_{ij}(\bm{h}_{j}W^V) \]
+Each output element, $\bm{h}_{j^{\prime}}^{\prime}$ is computed as a weighted sum of a linearly transformed input elements:
+\[ \bm{h}_{j^{\prime}}^{\prime} = \sum_{{j^{\prime}}=1}^{J} \alpha_{{j^{\prime}}j}\cdot \bm{h}_{j} \]
 
-Each weight coefficient $\alpha_{ij}$ is computed using a softmax function:
-\[\alpha_{ij} = \frac{\exp {r_{ij}}}{\sum_{k=1}^{J} \exp  {r_{ik}}}\]
-And $r_{ij}$ is computed using a compatibility function:
-\[r_{ij} = \frac{(\bm{h}_iW^Q)^{\top}(\bm{h}_jW^K)}{\sqrt{d}} \]
-where $W^K,W^Q,W^V \in \mathbb{R}^{d \times (d/h)}$ are parameter matrices that are unique per layer and attention head.
+Each weight coefficient $\alpha_{{j^{\prime}}j}$ is computed using a softmax function:
+\[\alpha_{{j^{\prime}}j} = \frac{\exp {r_{{j^{\prime}}j}}}{\sum_{{\tilde{j}}=1}^{J} \exp  {r_{{j^{\prime}}{\tilde{j}}}}}\]
+And $r_{{j^{\prime}}j}$ is computed using a compatibility function:
+\[r_{{j^{\prime}}j} = \frac{(\bm{h}_{j^{\prime}})^{\top}(\bm{h}_j)}{\sqrt{d}} \]
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=10cm]{attentionself}

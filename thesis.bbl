@@ -1,4 +1,4 @@
-\begin{thebibliography}{38}
+\begin{thebibliography}{42}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -27,11 +27,23 @@ Mikel Artetxe, Gorka Labaka, Eneko Agirre, and Kyunghyun Cho.
 \newblock Unsupervised neural machine translation.
 \newblock \emph{arXiv preprint arXiv:1710.11041}, 2017{\natexlab{b}}.
 
+\bibitem[Artetxe et~al.(2018)Artetxe, Labaka, and Agirre]{artetxe2018robust}
+Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
+\newblock A robust self-learning method for fully unsupervised cross-lingual
+  mappings of word embeddings.
+\newblock \emph{arXiv preprint arXiv:1805.06297}, 2018.
+
 \bibitem[Bahdanau et~al.(2014)Bahdanau, Cho, and Bengio]{bahdanau2014neural}
 Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio.
 \newblock Neural machine translation by jointly learning to align and
   translate.
 \newblock \emph{arXiv preprint arXiv:1409.0473}, 2014.
+
+\bibitem[Barone(2016)]{barone2016towards}
+Antonio Valerio~Miceli Barone.
+\newblock Towards cross-lingual distributed representations without parallel
+  text trained with adversarial autoencoders.
+\newblock \emph{arXiv preprint arXiv:1608.02996}, 2016.
 
 \bibitem[Bojanowski et~al.(2016)Bojanowski, Grave, Joulin, and
   Mikolov]{bojanowski2016enriching}
@@ -103,12 +115,26 @@ Stephan Gouws, Yoshua Bengio, and Greg Corrado.
 \newblock In \emph{International Conference on Machine Learning}, pages
   748--756, 2015.
 
+\bibitem[Hauer et~al.(2017)Hauer, Nicolai, and Kondrak]{hauer2017bootstrapping}
+Bradley Hauer, Garrett Nicolai, and Grzegorz Kondrak.
+\newblock Bootstrapping unsupervised bilingual lexicon induction.
+\newblock In \emph{Proceedings of the 15th Conference of the European Chapter
+  of the Association for Computational Linguistics: Volume 2, Short Papers},
+  volume~2, pages 619--624, 2017.
+
 \bibitem[He et~al.(2016)He, Xia, Qin, Wang, Yu, Liu, and Ma]{he2016dual}
 Di~He, Yingce Xia, Tao Qin, Liwei Wang, Nenghai Yu, Tieyan Liu, and Wei-Ying
   Ma.
 \newblock Dual learning for machine translation.
 \newblock In \emph{Advances in Neural Information Processing Systems}, pages
   820--828, 2016.
+
+\bibitem[Heafield(2011)]{heafield2011kenlm}
+Kenneth Heafield.
+\newblock Kenlm: Faster and smaller language model queries.
+\newblock In \emph{Proceedings of the Sixth Workshop on Statistical Machine
+  Translation}, pages 187--197. Association for Computational Linguistics,
+  2011.
 
 \bibitem[Kim et~al.(2017)Kim, Schamper, and Ney]{kim2017unsupervised}
 Yunsu Kim, Julian Schamper, and Hermann Ney.
