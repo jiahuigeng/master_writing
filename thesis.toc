@@ -46,18 +46,18 @@
 \contentsline {subsection}{\numberline {5.2.1}Denoising Auto-encoder (DAE)}{36}{subsection.5.2.1}
 \contentsline {subsection}{\numberline {5.2.2}Noise Model}{37}{subsection.5.2.2}
 \contentsline {chapter}{\numberline {6}Experiments}{41}{chapter.6}
-\contentsline {section}{\numberline {6.1}Corpus Statistics}{41}{section.6.1}
-\contentsline {section}{\numberline {6.2}Word Translation}{41}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Baseline Experiments}{41}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Corpus-based Approach}{42}{subsection.6.2.2}
-\contentsline {subsubsection}{\nonumberline Different Learning Rate Scheduler}{42}{section*.6}
-\contentsline {section}{\numberline {6.3}Sentence Translation}{44}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Comprehensive Table}{44}{subsection.6.3.1}
-\contentsline {subsection}{\numberline {6.3.2}BPE vs Word}{45}{subsection.6.3.2}
-\contentsline {subsection}{\numberline {6.3.3}Artificial Noise}{46}{subsection.6.3.3}
-\contentsline {subsection}{\numberline {6.3.4}Phrase Embedding}{46}{subsection.6.3.4}
-\contentsline {chapter}{\numberline {7}Conclusion}{47}{chapter.7}
-\contentsline {chapter}{\numberline {A}Appendix}{49}{appendix.A}
-\contentsline {chapter}{\nonumberline List of Figures}{51}{chapter*.7}
-\contentsline {chapter}{\nonumberline List of Tables}{53}{chapter*.8}
-\contentsline {chapter}{\nonumberline Bibliography}{55}{chapter*.9}
+\contentsline {section}{\numberline {6.1}Experimental Setup}{41}{section.6.1}
+\contentsline {section}{\numberline {6.2}Corpus Statistics}{42}{section.6.2}
+\contentsline {section}{\numberline {6.3}Word Transnewsteslation}{42}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Baseline Experiments}{42}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Corpus-based Approach}{42}{subsection.6.3.2}
+\contentsline {subsubsection}{\nonumberline Different Learning Rate Scheduler}{43}{section*.6}
+\contentsline {section}{\numberline {6.4}Sentence Translation}{45}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Comprehensive Table}{45}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}BPE vs Word}{46}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.3}Artificial Noise}{47}{subsection.6.4.3}
+\contentsline {chapter}{\numberline {7}Conclusion}{49}{chapter.7}
+\contentsline {chapter}{\numberline {A}Appendix}{51}{appendix.A}
+\contentsline {chapter}{\nonumberline List of Figures}{53}{chapter*.7}
+\contentsline {chapter}{\nonumberline List of Tables}{55}{chapter*.8}
+\contentsline {chapter}{\nonumberline Bibliography}{57}{chapter*.9}
