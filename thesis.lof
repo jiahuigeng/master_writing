@@ -5,7 +5,7 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {\relax 2.1}{\ignorespaces Illustration of a translation process using IBM-3 model (\cite {koehn2009statistical})}}{9}{figure.2.1}
-\contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces English$\rightarrow $ French translation\IeC {\textendash } example of a deep NMT (\cite {luong2015effective}).}}{12}{figure.2.2}
+\contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces English$\rightarrow $ French translation,, an example of deep NMT (\cite {luong2015effective}).}}{12}{figure.2.2}
 \contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Global attention (\cite {luong2015effective})}}{14}{figure.2.3}
 \contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces The Transformer model architecture (\cite {vaswani2017attention})}}{15}{figure.2.4}
 \contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces Self-attention structure}}{17}{figure.2.5}

@@ -39,9 +39,9 @@ In this chapter, we present experimental results of our proposed methods: corpus
 
 \section{Experimental Setup}
 We train monoligual word embeddings with a dimensionality of 300 using FastText (\cite{DBLP:journals/corr/BojanowskiGJM16}) for 5 epochs, only for words that have occurs at least 10 times. Our corpus-based approach is also implemented on MUSE framework (\cite{DBLP:journals/corr/abs-1710-04087}). Vocabulary sizes for source and target side are limited to 50k.
-$5$-gram LMs are trained separately using KenLM with Kneser–Ney smoothing (\cite{heafield2011kenlm}).\\
-LM supported context-aware beam search is performed among top 100 word translation candidates for each position with beam size 10.\\
-DAE is implemented in Sockeye (\cite{hieber2017sockeye}), using RNN and Transformer architectures. RNN-based DAE has 2-layer encoder and 2-layer decoder, the hidden layer size is 512. In Transfomer based DAE, encoder and decoder both have 6 layers and hidden layer size is also 512. The multi-head attention mechanism uses 6 heads. DAEs are trained on smaller monolingual corpora containing 20M sentences. \\
+$5$-gram LMs are trained separately using KenLM with Kneser–Ney smoothing (\cite{heafield2011kenlm}).
+LM supported context-aware beam search is performed among top 100 word translation candidates for each position with beam size 10.
+DAE is implemented in Sockeye (\cite{hieber2017sockeye}), using RNN and Transformer architectures. RNN-based DAE has 2-layer encoder and 2-layer decoder, the hidden layer size is 512. In Transfomer based DAE, encoder and decoder both have 6 layers and hidden layer size is also 512. The multi-head attention mechanism uses 6 heads. DAEs are trained on smaller monolingual corpora containing 20M sentences. The noise are only added in the input side. \\
 We evaluate different cross-lingual embedding learning methods on cross-lingual word retrieval tasks. The datasets are released by \cite{}, which contains dictionaries for 12 language pairs. Each test dictionary contains 1500 unique source words for evaluation.  
 \section{Word Translation}
 We conduct the cross-lingual word retrieval task on English$\leftrightarrow$German pair. Empirically, we find the best sentence batch size is 1k and the best initial lr is $0.0001$. Numbers in Table 6.3 are the accuracy results, with the same sentence batch size and initial lr. The last three rows are the baseline experiments: adversarial training, adversarial training with refinement, and supervised learning. Dictionary with 5000 unique source words are provided for supervised learning. We run the novel corpus-based approach on a relative small corpus with 50k sentences, sampled from the training corpus. We implement  different lr schedulers. The first one is to start from initial lr, the second one is to inherit the lr after the training on previous batch sentences. We demonstrate the results for German$\rightarrow$ English and English $\rightarrow$ German with the first scheduler, also the performance of  German$\rightarrow$ English with second scheduler.
@@ -63,7 +63,7 @@ We conduct the cross-lingual word retrieval task on English$\leftrightarrow$Germ
 %In general, $1k$ is a option for sentence batch size. The embedding mappings from English to German and from German to English show close results.
 %However the second Empirically, we find the best sentence batch size is 1k and initial lrscheduler inheriting last lr works not as well as the first one. We augment training data by training 2 epochs and extending the corpus to 200k sentences. The results are in Table 6.7, the sentence batch size is $1k$ and initial lr are set to $0.0001$, the best settings empirically.\\
 %	\end{itemize}
-As demonstrated in Table 6.3, the retrieval accuracy of supervised learning is the highest among the results, with iterative refinements the performance of adversarial training proposed by \cite{DBLP:journals/corr/abs-1710-04087} is very close to supervised case. \\
+As demonstrated in Table 6.3, the retrieval accuracy of supervised learning is the highest among the results, with iterative refinements the performance of adversarial training proposed by \cite{DBLP:journals/corr/abs-1710-04087} is very close to supervised training. \\
 Our corpus-based approach works well, though there is 4\% distance to supervised training. It surpasses the approach using adversarial training only. The first lr scheduler always performs better than the second one, and results for mappings from English to German and from German to English are near, this is what we have expected.  Without LM the corpus-based approach can still learn a mapping, but finally results much worse than that integrating LM.\\
 
 \begin{figure}[h]
@@ -84,7 +84,7 @@ We plot how retrieval accuracy varies w.r.t the number of training batches in Fi
 	\end{tabular}
 	\caption{Word retrieval accuracy with different training corpora}
 \end{table}
-The performance of the second scheduler gets improved when enlarging training data, but is still not so good as the first scheduler.  
+As we can see in Table 6.4, the performance of the second scheduler gets improved when enlarging training data, but is still not so good as the first scheduler.  
 
 
 \section{Sentence Translation}
@@ -248,7 +248,7 @@ $V_{ins} = 50$.
 \end{table}
 %With word2vec tool (\cite{mikolov2013distributed}) we detect phrases in the training corpus. We set threshold value to 100, 500, 2000 to make the number of phrases differs. Fewer phrases will be detected as we lift the threshold value. As to our method, we extract only bigrams that in the top 50k frequent bigrams in the training corpus. We learn phrase embedding in an unsupervised manner as normal word embedding. \\
 %As demonstrates in Table
-We examine how phrase embedding performs in MT. Phrase embedding using detection technique proposed by \cite{mikolov2013distributed} works better if we lift up the threshold value. The performance of MT gets harmed when too many phrases. And the results is even worse than word embedding.  While with our phrase detection method, BLEU of MT results is higher when using word-by-word translation and integrating LM. The final results are denoising step is not as good as word embedding. 
+We examine how phrase embedding performs in MT. Phrase embedding using detection technique proposed by \cite{mikolov2013distributed} works better if we lift up the threshold value. The performance of MT gets harmed when too many phrases. And the results is even worse than word embedding.  While with our phrase detection method, BLEU of MT results is higher when using word-by-word translation and integrating LM. However the final results after denoising step is not as good as word embedding. 
 %?????? not sure if I need to add this corresponding part in unsupervised cross-lingual embedding
 
 

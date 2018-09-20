@@ -23,19 +23,21 @@ where $e_i$ is the current word and $c$ is the size of training context. \\
 Similarly, we define the loss for CBOW model as
 \[ \mathcal{L}^e_{\text{CBOW}} = - \frac{1}{I} \sum_{i=1}^{I} \sum_{ -c \le d \le c, d\ne 0} \log\ {p(e_{i}|e_{i+d})}\]
 
-\textbf{Negtive Sampling}\\
+\textbf{Negative Sampling}\\
 The prediction probability $p(e_{i+d}|e_i)$ is defined as a softmax function:
 \[p(e_{i+d}|e_i) = \frac{\exp \{ \text{score}(e_{i+d},e_i)\} }{\sum_{e^{\prime} \in V_e}{\exp  \{ \text{score}(e^{\prime}, e) \}}}\]
 where $V_e$ is the entire vocabulary. 
 The normalization over $V_e$ is very expensive since it is calculate for all words at every training steo. Negative sampling is proposed to approximate the sofrmax to make it computationally more efficient. It trains to model to distinguish a target word from negative samples drawn from a noise distribution \text{noise}.
 \[p(e_{i+d}|e_i) = \log p(e_{i+d}=1| e_i) + \frac{1}{k} \sum_{e^{\prime} \in p_{\text{noise}}}\log p(e^{\prime}=0|e_i)\]
 where $p(\cdot| e_i)$ is a model to predict if the word is in the context of $e_i$.\\ 
+
 \textbf{Subword Information}\\
-The training methods mentioned treat each word as a distinct word embedding, however, intuitively we can obtain more information from the morphological information of words. A subword model is proposed to capture the subword informaion. The training network is still CBOW or skip-gram. Each word is represented as a bag of character-level $n$-grams and assign a distinct embedding for each character $n$-gram. Score function in the network is calculated using the sum of inner products of the subword embeddings (\cite{DBLP:journals/corr/BojanowskiGJM16}). 
+The training methods mentioned treat each word as a distinct word embedding, however, intuitively we can obtain more information from the morphological information of words. A subword model is proposed to capture the subword informaion. The training network is still CBOW or skip-gram. Each word is represented as a bag of character-level $n$-grams and assign a distinct embedding for each character $n$-gram. Score function in the network is calculated using the sum of inner products of the subword embeddings (\cite{DBLP:journals/corr/BojanowskiGJM16}). \\
+
 \subsection{GloVe}
 Global vectors(GloVe) allows us to learn word representations via matrix factorization. GloVe minimizes the difference between the dot product of the embeddings of word and its context and the logarithm of their number of co-occurrences within a certain window size:
 \[ \mathcal{L}_{GloVe}^e = \sum_{i,j=1}^{\lvert V_e \rvert} f(C_{ij})({\bm{e}_i}^{\top} \bm{e}_j - \log{C_{ij}} ) \]
-where the matrix of word-word co-occurrence counts be denoted as $C$, whose entries $C_{ij}$ tabulate the number of times word $e_j$ occurs in the context of word $e_j$ and $f(\cdot)$ is a weighting function that assigns relatively lower weight to rare and frequent co-occurrences. $V_e$ is the source vocabulary size.
+where the matrix of word-word co-occurrence counts be denoted as $C$, whose entries $C_{ij}$ tabulate the number of times word $e_j$ occurs in the context of word $e_j$ and $f(\cdot)$ is a weighting function that assigns relatively lower weight to rare and frequent co-occurrences. ${\lvert V_e \rvert}$ is the source vocabulary size.
 %Furthermore in skip-gram model, suppose given a scoring function s which maps word pairs to score in $\mathbb{R}0$ like cosine similarity, the probability can be defined as
 %\[ p(e_{i+j} | e_i)  = \frac{\exp\{s(e_{i+j}, e_j)\}}{\sum_{e^{\prime} \in V^e }{\exp\{s( e^{\prime}, e_i)\}}}\]
 %where $V^e$ is the whole vocabulary. \\
@@ -55,7 +57,7 @@ where the matrix of word-word co-occurrence counts be denoted as $C$, whose entr
 %where $\bm{e}^{\prime}$ the embedding of $e^{\prime}$
 \section{ Cross-lingual Word Embedding}
 % NLP tasks in multilingual scenarios is receiving increasing interest. The need to represent meaning and transfer knowledge in cross-lingual applications has motivated the work on cross-lingual models, which learns the representations in a joint embedding space.
-  \cite{mikolov2013exploiting}  observe that word embeddings trained separately on monolingual corpora exhibit isomorphic structure across languages, as illustrated in Figure $3.2$. That means we can create a connection between source embedding and target embedding even with simple linear mapping. This has far-reaching implication on low-resource scenarios (\cite{adams2017cross}), because word embedding training requires only plain text to train, which is the most abundant form of linguistic resource.
+  \cite{mikolov2013exploiting}  observe that word embeddings trained separately on monolingual corpora exhibit isomorphic structure across languages, as illustrated in Figure $3.2$. That means we can create a connection between source embedding and target embedding even with simple linear mapping. This has far-reaching implication on low-resource scenarios (\cite{adams2017cross}), because word embedding training requires only plain text, which is the most abundant form of linguistic resource.
 \begin{figure}[t]
 	\includegraphics[width=14cm]{crossembedding}
 	\centering
@@ -72,7 +74,7 @@ where the matrix of word-word co-occurrence counts be denoted as $C$, whose entr
 	
 
 \subsection{Supervised Training}
-Before we go on to the main training setting of this thesis (unsupervised), I will introduce the training methods under supervision. The supervision comes from seed lexicons, parallel data or document-aligned data.\\
+Before we go on to the main training setting of this thesis (unsupervised), I will introduce the training methods under supervision. The supervision comes from seed lexicons, parallel data or aligned document.\\
 Supervised training methods of cross-lingual word embedding can be divided into joint training approaches and mapping-based approaches. The difference is that joint methods train directly the cross-lingual word embeddings, while the mapping-based approaches first train monolingual word representations on corresponding corpus separately. Then mapping will be learned to project different embeddings into a shared space according to supervision signals. \\
 
 \textbf{Joint Training Approaches}\\
@@ -82,7 +84,7 @@ where the first two losses are exact the same as those in monolingual embedding 
 
 Different cross-lingual regularization terms are proposed to optimize the cross-lingual embeddings (\cite{coulmance2016trans}, \cite{luong2015bilingual}, \cite{gouws2015bilbowa}). For example, \cite{gouws2015bilbowa} models it as: 
 \[ \Omega_{\text{BilBOWA}} = \sum_{( f_1^J, e_1^I)}{\lVert \frac{1}{I}  \sum_{e_i \in e_1^I} \bm{e}_i - \frac{1}{J} \sum_{f_j \in f_1^J} \bm{f}_j\rVert}^2 \]
-where $\bm{f}_j$ and $\bm{e}_i$ are the word embeddings for words in parallel source and target sentences $(f_1^J, e_1^I)$. Instead of relying on expensive word alignments which minimize the distance that aligned to each other, they minimize the distance between the mean of the word representations in the aligned sentences. \\
+where $\bm{f}_j$ and $\bm{e}_i$ are the word embeddings for words in parallel sentences $(f_1^J, e_1^I)$. Instead of relying on expensive word alignments which minimize the distance that aligned to each other, they minimize the distance between the mean of the word representations in the aligned sentences. \\
 
 \textbf{Mapping-based Approaches}\\
 Another approach is to train monolingual word representations separately on monolingual corpora and then learn a transformation matrix mapping that maps representations in one language to the representations of other language.  This approach can be further divided into learning separate mappings for each language or learning mapping only for source language to project source embeddings into target embedding space.
@@ -173,7 +175,7 @@ Now this limitation is addressed by apply a applying a corrective metric at infe
 
 %Since we use the pseudo parallel data (source sentence and word-by-word target translation sentence), we can exploit the context information from language model to select the word translation candidate. Beam search with language model is implemented here. More details about sentence translation will be explained next chapter.\\
 \section{Phrase Embedding}
-Different methods are proposed to learn phrase embedding, which can be mainly divided into two categories. The first is based on the distributional hypothesis; it treats a phrase as fundamental unit as that in phrase-based MT. Phrases will be considered as non-divisible and phrase embedding algorithm is similar to word embedding. However, distributional methods cannot make use of the information embedded in component words and they also face data spareness problem. The second is based on the principle of compositionality. It infers phrase embedding according to the embeddings of its component words. However,  many phrases have a meaning that is not simple composition of the meaning of its individual words. \\
+Different methods are proposed to learn phrase embeddings, which can be mainly divided into two categories. The first is based on the distributional hypothesis; it treats a phrase as fundamental unit as that in phrase-based MT. Phrases will be considered as non-divisible and phrase embedding algorithm is similar to that for word embedding. Distributional methods however cannot make use of the information embedded in component words and they also face data spareness problem. The second is based on the principle of compositionality. It infers phrase embedding according to the embeddings of its component words. However,  many phrases have a meaning that is not simple composition of the meaning of its individual words. \\
 In this paper, we follow first idea, we train the phrase embeddings using the data-driven method proposed by \cite{mikolov2013distributed}. We also propose a novel phrase detection method. We find that our method is easy to implement and to tune the parameter. In experiments, our method works obviously better than the other one with the same phrase skip-gram training.\\
 
 \textbf{Phrase Detection}
@@ -182,8 +184,8 @@ In this paper, we follow first idea, we train the phrase embeddings using the da
 	\[\text{score}(e^{\prime}, e) = \frac{\text{count}(e^{\prime}, e)-\delta}{\text{count}(e^{\prime}) * \text{count}(e)} \]
 	where $\delta$ is a discounting coefficient and prevents too many phrases consisting of very infrequent words to be formed. The bigrams with score above the chosen threshold are then used as
 	phrases. 
-	\item Process sentences with most common phrases in training corpus\\
-	We count the most frequent bigrams in training corpus, using the counts directly as phrase score: $\text{score}(e^{\prime}, e) = \text{count}(e^{\prime}, e)$. We maximize the sum of phrase scores in given sentences in order to detect the phrases with dynamic programming. In our approach we consider the top-$k$ as the only parameter.
+	\item Process sentences with most k common phrases in training corpus\\
+	We count the most frequent bigrams in training corpus, using the counts directly as phrase score: $\text{score}(e^{\prime}, e) = \text{count}(e^{\prime}, e)$. We maximize the sum of phrase scores in given sentences in order to detect the phrases using dynamic programming. 
 \end{itemize}
 
-With the same training algorithm as word embedding, we can obtain the phrase embeddings. We use the phrase embeddings also in the machine translation system, which will be explained in Chapter 5, and find phrase embeddings performs better than word embedding iunder some specific settings. Experiment results are demonstrated in Chapter 6.4.4.
+With the same training algorithm as word embedding, we can obtain the phrase embeddings. We use the phrase embeddings in the MT system, which will be explained in Chapter 5, and find phrase embeddings performs better than word embedding with some specific settings. Experiment results are demonstrated in Chapter 6.4.4.

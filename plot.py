@@ -16,9 +16,9 @@ with open("en-de") as file:
     for line in file:
         en_de.append(float(line))
 
-plt.plot(range(51), norm, label="de-en, lm, initial lr")
-plt.plot(range(51), en_de, label="en-de, lm, initial lr")
-plt.plot(range(51), last, label="de-en, lm, inherited lr")
-plt.plot(range(51), nolm, label="de-en, no lm, initial lr")
+plt.plot(range(1,51), norm[1:], label="de-en, lm, initial lr")
+plt.plot(range(1,51), en_de[1:], label="en-de, lm, initial lr")
+plt.plot(range(1,51), last[1:], label="de-en, lm, inherited lr")
+plt.plot(range(1,51), nolm[1:], label="de-en, no lm, initial lr")
 plt.legend()
 plt.show()

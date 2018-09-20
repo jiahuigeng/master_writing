@@ -57,7 +57,7 @@ It models the specific number of output words in the output language. Generally 
 
 \subsubsection{Weighted Model}
  In order to optimize the sub-models with appropriate weights, scaling exponents ${\lambda_{m}}$ are introduced as in speech recognition. For example,
-\[ P(f_1^J, e_1^I; a_1^J) = P(J|I)^{\lambda_1} \cdot \prod_{i=1}^{I} P(e_i|e_1^{i-1})^{\lambda_2} \cdot \prod_{j=1}^{J} [P(a_j|a_{j-1}, I, J)^{\lambda_{3}} \cdot P(f_j|e_{a_j})^{\lambda_4}]  \]
+\[ Q(f_1^J, e_1^I; a_1^J) = p(J|I)^{\lambda_1} \cdot \prod_{i=1}^{I} p(e_i|e_1^{i-1})^{\lambda_2} \cdot \prod_{j=1}^{J} [p(a_j|a_{j-1}, I, J)^{\lambda_{3}} \cdot p(f_j|e_{a_j})^{\lambda_4}]  \]
 where the four probabilities corresponds to length model, language model, alignment model and lexical model respectively. 
 
 
@@ -114,11 +114,11 @@ translation quality.
 \subsection{Encoder-Decoder Framework}
 \begin{figure}[t]
 	\includegraphics[width=12cm]{nmt}
-	\caption{ English$\rightarrow$ French translation– example of a deep NMT (\cite{luong2015effective}).}
+	\caption{ English$\rightarrow$ French translation,, an example of deep NMT (\cite{luong2015effective}).}
 	\centering
 \end{figure}
 
-The most common NMT structure is the encoder-decoder framework, in which two  neural networks work together to transform one sequence to another. An encoder condenses an input sequence into a vector $\bm{c}$, and a decoder unfolds that vector into a new sequence. The model can be expressed as:
+The most common NMT structure is the encoder-decoder framework, in which two  neural networks work together to transform one sequence to another. An encoder condenses an input sequence into a vector $\bm{c}$, and a decoder unfolds that vector into a new sequence. The translation process is as illustrated in Figure 2.2. The model can be expressed as:
 \[ p(e_1^I | f_1^J) = \prod_{i} p(e_i|e_0^{i-1}, f_1^J) = \prod_{i} {p(e_i|e_0^{i-1},  {\bm{c}})} \] 
 
 %The final hidden and cell state from the encoder is used to initialize the state of the decoder. This means every time that the encoder model encodes an input sequence, the final internal states of the encoder model are used as the starting point for outputting the first character in the output sequence.
@@ -187,7 +187,7 @@ Since score function is referred as a content based function, different forms ca
 \end{equation}
 
 
-
+Figure 2.3 is the illustration of attention mechanism.
 
 
 \subsection{Transformer}
@@ -199,7 +199,8 @@ The RNN encoder-decoder models have achieved state of the art in sequence modeli
 	\includegraphics[width=10cm]{transformer}
 	\caption{The Transformer model architecture (\cite{vaswani2017attention})}
 \end{figure}
-The Transformer architecture still follows the encoder-decoder framework, the encoder is composed of a stack of $N=6$ identical layers. Each layers has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, positionwise fully connected feed-forward network. A residual connection is employed around each of the two sub-layers, followed by layer normalization. The decoder contains also $N=6$ identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack.\\
+The Transformer architecture still follows the encoder-decoder framework, the encoder is composed of a stack of $N=6$ identical layers. Each layers has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, positionwise fully connected feed-forward network. A residual connection is employed around each of the two sub-layers, followed by layer normalization. The decoder contains also $N=6$ identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. The architecture is as illustrated in Figure 2.4.\\
+
 %\textbf{Dot-Product Attention}
 %Given a query $\bm{q}$ and a set of key-value $(\bm{k}-\bm{v})$ pairs, the output is weighted average of values, where the weight of each value is computed by inner product of query and corresponding key. The queries and keys are of the same dimension ${d_k}$, values are of dimension ${d_v}$. Actually, for better understanding, the query $\bm{q}$  can be considered as the decoder state $\bm{s}_i$ and key $\bm{k}$ and values $\bm{v}$ can be considered as the encoder state $\bm{h}_j$ in previous attention model. Then the attention of query $\bm{q}$ on all $(\bm{k}-\bm{v})$ pairs are:
 %\[ A(\bm{q}, K, V) = \sum_{i}{ \frac{\exp\ ({\bm{q}\cdot \bm{k}_i})}{\sum_{j} \exp\ {\bm{q}\cdot \bm{k}_j} } \cdot \bm{v}_i}\]
@@ -221,6 +222,7 @@ Each weight coefficient $\alpha_{{j^{\prime}}j}$ is computed using a softmax fun
 And $r_{{j^{\prime}}j}$ is computed using a compatibility function:
 \[r_{{j^{\prime}}j} = \frac{(\bm{h}_{j^{\prime}})^{\top}(\bm{h}_j)}{\sqrt{d}} \]
 
+Figure 2.5 is the illustration of self-attention structure.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=10cm]{attentionself}
@@ -326,10 +328,10 @@ In order to share the encoder representations, we share all encoder and decoder 
 When minimizing the loss function, gradients will not be back propagated through the reverse model which generate the data. Instead the objective function minimized at every iteration is the sum of $L^{auto}$ and $L^{back}$
 \begin{itemize}
 	\item Denoising autoencoder loss
-	\[ \mathcal{L}^{auto} = \mathbb{E}_{e_1^I \sim \mathcal{E}}[-\log P_{t\rightarrow t}(e_1^I|\text{noise}(e_1^I))] + \mathbb{E}_{f_1^J\sim \mathcal{F}} [-\log P_{f\rightarrow e}(f_1^J|\text{noise}(f_1^J))]\]
+	\[ \mathcal{L}^{auto} = \mathbb{E}_{e_1^I \sim \mathcal{E}}[-\log p_{t\rightarrow t}(e_1^I|\text{noise}(e_1^I))] + \mathbb{E}_{f_1^J\sim \mathcal{F}} [-\log p_{f\rightarrow e}(f_1^J|\text{noise}(f_1^J))]\]
 	where $s$ $P_{f\rightarrow f}$ and $P_{e\rightarrow e}$ are the probability of encoder and decoder both operating in the source and target sides, respectively
 	\item Back-translation loss
-	\[ \mathcal{L}^{back} = \mathbb{E}_{e_1^I\sim \mathcal{E}} [-\log P_{f\rightarrow e}(e_1^I|u(e_1^I))] +  \mathbb{E}_{f_1^J\sim \mathcal{F}} [-\log P_{e\rightarrow f}(f_1^J|v(f_1^J))]\]
+	\[ \mathcal{L}^{back} = \mathbb{E}_{e_1^I\sim \mathcal{E}} [-\log p_{f\rightarrow e}(e_1^I|u(e_1^I))] +  \mathbb{E}_{f_1^J\sim \mathcal{F}} [-\log p_{e\rightarrow f}(f_1^J|v(f_1^J))]\]
 	 we denote the sentence that translated by intermediate target-to-source translation model as $u(e_1^I)$, similarly denote the sentence translated by source-to-target model as $v(f_1^J)$, so $u(y)$ should in source language and $v(x)$ should in target language. The pairs $(f_1^J, v(f_1^J))$, $(u(e_1^I), e_1^I)$ constitute synthetic parallel  sentences.
 \end{itemize}
 
