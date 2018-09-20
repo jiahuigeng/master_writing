@@ -7,7 +7,10 @@
 %Word-by-word translation based on cross-lingual word embedding depends highly on the frequent word mappings. We found that phrase embedding only helps in word-by-word translation with context-aware beam search, it works not as good as that under the processing of denoising autoencoder.
 
 The main contributions of this thesis are 1) a novel corpus-based training approach for cross-lingual word embeddings, 2) integration of LM and DAE to improve the unsupervised translation performance. \\
-The corpus-based approach combines the cross-lingual embedding learning, a word-by-word -- a simplified word based machine translation. The improvements of sub-models will feed each other to make the entire system improved. \\
-As to unsupervised MT, we achieved context-aware lexical choices using beam search and solved insertion/deletion/reordering problems using artificial noises. Actually insertion noise is a new noise type that first implemented in sequential denosing tasks and we observe up to $1.5$ BLEU score improvement with that noise for translation from German to English.  Our approach does no need expensive back-translation but still surpasses state-of-the-art unsupervised NMT systems.
+The corpus-based approach integrates corpus translation, lexicon induction into the mapping learning process. The performance measured on a cross-lingual word retrieval task shows that our approach can achieve competitive results, better than adversarial training only. In the future work, we can joint train the mapping with target $\rightarrow$ source translation, dictionary thresholding and replace word-by-word translation by more complex model with alignment model for reordering. We expect final results will get further improved.\\
+We implement context-aware lexical choice using beam search and solved insertion/deletion/reordering problems by modeling artificial noises in DAE. Actually insertion noise is a first introduced in sequential denosing tasks and leads to $1.5$ BLEU score for WMT \texttt{newstest2016}  German $\rightarrow$ English.  Our approach does not need expensive back-translation but still surpasses state-of-the-art unsupervised NMT systems.\\
+As ablation studies, we examine the effect of training corpus, each noise type in DAE, how the translation performance varies with different vocabulary size, and the effects of BPE.
+
+
 
 

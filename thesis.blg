@@ -4,54 +4,52 @@ The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: glossary.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Repeated entry---line 281 of file references.bib
- : @article{bahdanau2014neural
- :                            ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 391 of file references.bib
+Repeated entry---line 434 of file references.bib
  : @inproceedings{pennington2014glove
  :                                   ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "cao2016distribution"
-You've used 44 entries,
+Warning--I didn't find a database entry for "bojanowski2016enriching"
+Warning--I didn't find a database entry for "conneau2017word"
+Warning--I didn't find a database entry for ""
+You've used 45 entries,
             2773 wiz_defined-function locations,
-            796 strings with 13670 characters,
-and the built_in function-call counts, 24932 in all, are:
-= -- 2188
-> -- 1611
-< -- 36
-+ -- 543
-- -- 495
-* -- 1977
-:= -- 3652
-add.period$ -- 135
-call.type$ -- 44
-change.case$ -- 296
-chr.to.int$ -- 40
-cite$ -- 88
-duplicate$ -- 1183
-empty$ -- 1905
-format.name$ -- 547
-if$ -- 5375
+            811 strings with 14180 characters,
+and the built_in function-call counts, 25714 in all, are:
+= -- 2270
+> -- 1650
+< -- 37
++ -- 556
+- -- 507
+* -- 2043
+:= -- 3763
+add.period$ -- 142
+call.type$ -- 45
+change.case$ -- 303
+chr.to.int$ -- 41
+cite$ -- 90
+duplicate$ -- 1218
+empty$ -- 1962
+format.name$ -- 560
+if$ -- 5551
 int.to.chr$ -- 5
 int.to.str$ -- 1
-missing$ -- 45
-newline$ -- 228
-num.names$ -- 176
-pop$ -- 663
+missing$ -- 46
+newline$ -- 237
+num.names$ -- 180
+pop$ -- 668
 preamble$ -- 1
-purify$ -- 253
+purify$ -- 259
 quote$ -- 0
-skip$ -- 1005
+skip$ -- 1041
 stack$ -- 0
-substring$ -- 867
-swap$ -- 297
-text.length$ -- 29
+substring$ -- 909
+swap$ -- 310
+text.length$ -- 30
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 479
+type$ -- 490
 warning$ -- 0
-while$ -- 201
+while$ -- 207
 width$ -- 0
-write$ -- 567
-(There were 2 error messages)
+write$ -- 592
+(There was 1 error message)

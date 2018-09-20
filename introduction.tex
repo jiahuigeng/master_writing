@@ -15,11 +15,11 @@ I develop a fully unsupervised machine translation system starting from the simp
 \cite{mikolov2013efficient} propose two models for learning word embeddings with neural networks, namely skip-gram and continuous bag of words (CBOW) models. Neural architectures makes the training extremely efficient. In further work, \cite{mikolov2013distributed} discuss about learning the embedding for phrases. \cite{pennington2014glove} propose a regression model which combines the global matrix factorization and local context window methods, making the training process more interpretable. \cite{bojanowski2016enriching} represent each word as a bag of character $n$-grams, and assign for each character $n$-gram a distinct embedding. In this way, they can exploit subword information in word embedding training. \\
 \cite{mikolov2013exploiting} again notice that continuous embedding spaces exhibit similar structures across languages, even when for distant language pairs, for example, English-Vietnamese.  With separately learned monolingual embeddings they learn a linear mapping from source embedding space to target embedding space. To do this, they employ a parallel vocabulary of five thousand words as anchor points and evaluate their approach on a word translation task. \cite{xing2015normalized} show that results can be improved by enforcing an orthogonal constraint on the linear mapping. \\
 Recently, \cite{artetxe2017learning} raise an iterative method that aligns the word embedding spaces gradually. In their work, the vocabulary size for learning can be reduced to 25 word pairs and even with Arabic numerals. The performance is comparable to the learning with large vocabulary dictionary \cite{cao2016distribution} propose a distribution-based model, which is a modified CBOW model minimizing the distribution dissimilarity between source and target embeddings; here, distribution information refers the mean and variance. 
-\cite{zhang2017adversarial} put forward  a method using adversarial training without any parallel data. The discriminator tries to distinguish if the embedding is from the source side, the generator aims to learn the mapping from source embedding space to the target one. These methods are fully unsupervised but the performances are much worse than the supervised training. \cite{conneau2017word} simplify the adversarial training structure with different loss functions for the generator and discriminator, regularize the linear mapping to be orthogonal, the results get improved significantly. They also propose to use cross-domain similarity local scaling (CSLS) to handle hubness.
+\cite{zhang2017adversarial} put forward  a method using adversarial training without any parallel data. The discriminator tries to distinguish if the embedding is from the source side, the generator aims to learn the mapping from source embedding space to the target one. These methods are fully unsupervised but the performances are much worse than the supervised training. \cite{DBLP:journals/corr/abs-1710-04087} simplify the adversarial training structure with different loss functions for the generator and discriminator, regularize the linear mapping to be orthogonal, the results get improved significantly. They also propose to use cross-domain similarity local scaling (CSLS) to handle hubness.
 
 \subsection{Unsupervised Machine Translation}
 
-As mentioned previously, the lack of parallel corpora motivates people to use monolingual data to improve the machine translation system. Some researchers use triangulation techniques (\cite{cohn2007machine}) and semi-supervised approaches (\cite{cheng2016semi}) to alleviate this issue. But these methods still require parallel corpora.\\
+As mentioned previously, the lack of parallel corpora motivates people to use monolingual data to improve the machine translation system. Some researchers use triangulation techniques (\cite{cohn2007machine}) and semi-supervised approaches (\cite{DBLP:journals/corr/ChengXHHWSL16}) to alleviate this issue. But these methods still require parallel corpora.\\
 As to fully unsupervised machine translation, which only takes advantage of monolingual data, \cite{ravi2011deciphering} first consider it as a deciphering problem, where the source language is considered as ciphertext. They also propose iterative expectation-maximization (EM) method and Bayesian decipherment to train this unsupervised model. To solve the bottleneck of such model -- mainly the huge memory required to store the candidates search space, -- \cite{nuhn2012deciphering} limit search candidates according to the word similarity. \cite{nuhn2014decipherment} limit the search space by using and preselection beam search. For the same reason, \cite{kim2017unsupervised} enforce the sparsity with a simple thresholding for the lexicon, also initializing the training with word classes to efficiently boosts the performance. 
 Although initially not based on distributional semantics, recent studies show that the use of word embeddings can bring significant improvement in statistical decipherment \cite{duong2016learning}.\\
 For neural machine translation, \cite{he2016dual} show a bidirectional, iterative way of effectively using monolingual data. More concretely, they train two agents to translate in opposite directions (e.g. French ${\rightarrow}$ English and English ${\rightarrow}$ French) and make them teach each other through a reinforcement learning process. While promising, this approach still requires a small parallel corpora for a warm start.  
@@ -35,9 +35,9 @@ In this thesis, we use the following notations:
 	\item Source sentence:  ${f_1^J:= f_1 \cdots  f_j \cdots f_J}$ 
 	\item Target sentence:  ${e_1^I:= e_1 \cdots, e_i \cdots e_I}$
 	\item Parallel sentences: $(e_1^I, f_1^J)$
-	\item Probabilities of denoising autoencoders: $P_{f\rightarrow f}$, $P_{e\rightarrow e}$
+	\item Probabilities of denoising autoencoders: $p_{f\rightarrow f}$, $p_{e\rightarrow e}$
 	\item Translation models for both directions: $\Theta_{f\rightarrow e}$, $\Theta_{e \rightarrow f}$
-	\item Probabilities of translation models for both directions: $P_{f\rightarrow e}$, $P_{e\rightarrow f}$
+	\item Probabilities of translation models for both directions: $_{f\rightarrow e}$, $P_{e\rightarrow f}$
 	\item Loss for denoising autoencoder: $\mathcal{L}^{\text{auto}}$
 	\item Loss for back-translation: $\mathcal{L}^{\text{back}}$
 	\item Single character for each language: $f,e$ 
@@ -63,6 +63,9 @@ In this thesis, we use the following notations:
 	\item Language model for source and target size: $\textbf{LM}_f$, $\textbf{LM}_e$
 	\item Similarity matrices for source and target respectively: $M_F$,$M_E$
 	\item Vocabulary size for most frequent words ${\lvert \tilde{V} \rvert}$
+	\item Permutation distance: $d_{per}$
+	\item Probability of deletion noise: $p_{del}$, of insertion noise: $p_{ins}$
+	\item Vocabulary size for insertion noise  $V_{ins}$  
 \end{itemize}
 
 

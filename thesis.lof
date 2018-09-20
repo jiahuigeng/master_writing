@@ -8,8 +8,7 @@
 \contentsline {figure}{\numberline {\relax 2.2}{\ignorespaces English$\rightarrow $ French translation\IeC {\textendash } example of a deep NMT (\cite {luong2015effective}).}}{12}{figure.2.2}
 \contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Global attention (\cite {luong2015effective})}}{14}{figure.2.3}
 \contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces The Transformer model architecture (\cite {vaswani2017attention})}}{15}{figure.2.4}
-\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces Self-attention structure}}{16}{figure.2.5}
-\contentsline {figure}{\numberline {\relax 2.6}{\ignorespaces Self-attention structure}}{17}{figure.2.6}
+\contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces Self-attention structure}}{17}{figure.2.5}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Global attention model (\cite {mikolov2013efficient})}}{22}{figure.3.1}
 \contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces A cross-lingual embedding space between German and English (\cite {ruder2017survey})}}{24}{figure.3.2}
@@ -22,7 +21,7 @@
 \contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Insertion noise}}{44}{figure.5.2}
 \contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Deletion noise}}{45}{figure.5.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 6.1}{\ignorespaces Comparison of different experiments}}{50}{figure.6.1}
+\contentsline {figure}{\numberline {\relax 6.1}{\ignorespaces Comparison of different experimental settings}}{50}{figure.6.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

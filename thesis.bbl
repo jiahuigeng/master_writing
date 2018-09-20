@@ -1,4 +1,4 @@
-\begin{thebibliography}{44}
+\begin{thebibliography}{45}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -40,11 +40,13 @@ Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
   mappings of word embeddings.
 \newblock \emph{arXiv preprint arXiv:1805.06297}, 2018.
 
-\bibitem[Bahdanau et~al.(2014)Bahdanau, Cho, and Bengio]{bahdanau2014neural}
+\bibitem[Bahdanau et~al.(2014)Bahdanau, Cho, and
+  Bengio]{DBLP:journals/corr/BahdanauCB14}
 Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio.
 \newblock Neural machine translation by jointly learning to align and
   translate.
-\newblock \emph{arXiv preprint arXiv:1409.0473}, 2014.
+\newblock \emph{CoRR}, abs/1409.0473, 2014.
+\newblock URL \url{http://arxiv.org/abs/1409.0473}.
 
 \bibitem[Barone(2016)]{barone2016towards}
 Antonio Valerio~Miceli Barone.
@@ -53,15 +55,25 @@ Antonio Valerio~Miceli Barone.
 \newblock \emph{arXiv preprint arXiv:1608.02996}, 2016.
 
 \bibitem[Bojanowski et~al.(2016)Bojanowski, Grave, Joulin, and
-  Mikolov]{bojanowski2016enriching}
+  Mikolov]{DBLP:journals/corr/BojanowskiGJM16}
 Piotr Bojanowski, Edouard Grave, Armand Joulin, and Tomas Mikolov.
 \newblock Enriching word vectors with subword information.
-\newblock \emph{arXiv preprint arXiv:1607.04606}, 2016.
+\newblock \emph{CoRR}, abs/1607.04606, 2016.
+\newblock URL \url{http://arxiv.org/abs/1607.04606}.
 
-\bibitem[Cheng et~al.(2016)Cheng, Xu, He, He, Wu, Sun, and Liu]{cheng2016semi}
+\bibitem[Cao et~al.(2016)Cao, Zhao, Zhang, and Meng]{cao2016distribution}
+Hailong Cao, Tiejun Zhao, Shu Zhang, and Yao Meng.
+\newblock A distribution-based model to learn bilingual word embeddings.
+\newblock In \emph{Proceedings of COLING 2016, the 26th International
+  Conference on Computational Linguistics: Technical Papers}, pages 1818--1827,
+  2016.
+
+\bibitem[Cheng et~al.(2016)Cheng, Xu, He, He, Wu, Sun, and
+  Liu]{DBLP:journals/corr/ChengXHHWSL16}
 Yong Cheng, Wei Xu, Zhongjun He, Wei He, Hua Wu, Maosong Sun, and Yang Liu.
 \newblock Semi-supervised learning for neural machine translation.
-\newblock \emph{arXiv preprint arXiv:1606.04596}, 2016.
+\newblock \emph{CoRR}, abs/1606.04596, 2016.
+\newblock URL \url{http://arxiv.org/abs/1606.04596}.
 
 \bibitem[Cohn and Lapata(2007)]{cohn2007machine}
 Trevor Cohn and Mirella Lapata.
@@ -71,11 +83,12 @@ Trevor Cohn and Mirella Lapata.
   Computational Linguistics}, pages 728--735, 2007.
 
 \bibitem[Conneau et~al.(2017)Conneau, Lample, Ranzato, Denoyer, and
-  J{\'e}gou]{conneau2017word}
+  J{\'{e}}gou]{DBLP:journals/corr/abs-1710-04087}
 Alexis Conneau, Guillaume Lample, Marc'Aurelio Ranzato, Ludovic Denoyer, and
-  Herv{\'e} J{\'e}gou.
+  Herv{\'{e}} J{\'{e}}gou.
 \newblock Word translation without parallel data.
-\newblock \emph{arXiv preprint arXiv:1710.04087}, 2017.
+\newblock \emph{CoRR}, abs/1710.04087, 2017.
+\newblock URL \url{http://arxiv.org/abs/1710.04087}.
 
 \bibitem[Coulmance et~al.(2016)Coulmance, Marty, Wenzek, and
   Benhalloum]{coulmance2016trans}

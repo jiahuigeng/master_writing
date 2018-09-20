@@ -107,7 +107,7 @@ Since the model is very complicated, more assumptions are added to the model. Th
 %However, this method is limited to rather short sentences and simplistic settings.
 \section{Neural Machine Translation}
 NMT has recently become the dominant method for MT task. In comparison to the traditional SMT, NMT systems are trained end-to-end, taking advantage of continuous representation of the hidden states that greatly alleviate the sparsity problem and make better use of more contextual information.Traditional phrase-based MT, which consists of several models that are tuned separately. neural MT can directly output translations given input, it contains only one single model. Also NMT models are trained with only one single training criterion. \\
-\cite{sutskever2014sequence} first use a multi-layer Long Short-Term Memory (LSTM) to model a MT system. Attention mechanism has lately been used to improve neural MT by selectively focusing on parts of the source sentence during translation (\cite{bahdanau2014neural}, \cite{luong2015effective}). Here, inherently sequential nature precludes parallelization within training examples. Convolutional (\cite{gehring2017convolutional}) and self-attentional (\cite{vaswani2017attention}) architectures are brought forward  for significantly more parallelization during training process in order to better exploit GPU hardwares and can reach a new state-of-the-art in
+\cite{sutskever2014sequence} first use a multi-layer Long Short-Term Memory (LSTM) to model a MT system. Attention mechanism has lately been used to improve neural MT by selectively focusing on parts of the source sentence during translation (\cite{DBLP:journals/corr/BahdanauCB14}, \cite{luong2015effective}). Here, inherently sequential nature precludes parallelization within training examples. Convolutional (\cite{gehring2017convolutional}) and self-attentional (\cite{vaswani2017attention}) architectures are brought forward  for significantly more parallelization during training process in order to better exploit GPU hardwares and can reach a new state-of-the-art in
 translation quality.
 
 
@@ -140,7 +140,7 @@ There are obvious drawbacks in this model that will affect the performance of tr
 
 \subsection{Attention Mechanism}
 Alignment is the problem in MT that identifies which parts of the input sequence are relevant to each word in the output, whereas translation is the process of using the relevant information to select the appropriate output.
-\cite{bahdanau2014neural} introduce an extension to the encoder-decoder model which learns to alignment and translate jointly. Each time the model predicts the next target word, it softly searches for a set of positions in a source sentence where the most relevant information is concentrated. The model then predicts a target word based on the context vectors associated with these source positions and all the previous generated target words.\\
+\cite{DBLP:journals/corr/BahdanauCB14} introduce an extension to the encoder-decoder model which learns to alignment and translate jointly. Each time the model predicts the next target word, it softly searches for a set of positions in a source sentence where the most relevant information is concentrated. The model then predicts a target word based on the context vectors associated with these source positions and all the previous generated target words.\\
 Described in formula, attention mechanism derives a context vector ${\bm{c}_i}$ that capture the input information to help to predict the target word at the position ${i}$. Given the target hidden state ${\bm{s}_i}$ and the source-side context vector $\bm{c}_i$, we can compute the hidden state ${\tilde{\bm{s}}_i}$ by combining the current hidden state $\bm{s}_i$ and the context vector $\bm{c_i}$:
 \[ \tilde{\bm{s}}_i = tanh(W_c[\bm{c}_i; \bm{s}_i])\]
 
@@ -199,6 +199,7 @@ The RNN encoder-decoder models have achieved state of the art in sequence modeli
 	\includegraphics[width=10cm]{transformer}
 	\caption{The Transformer model architecture (\cite{vaswani2017attention})}
 \end{figure}
+The Transformer architecture still follows the encoder-decoder framework, the encoder is composed of a stack of $N=6$ identical layers. Each layers has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, positionwise fully connected feed-forward network. A residual connection is employed around each of the two sub-layers, followed by layer normalization. The decoder contains also $N=6$ identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack.\\
 %\textbf{Dot-Product Attention}
 %Given a query $\bm{q}$ and a set of key-value $(\bm{k}-\bm{v})$ pairs, the output is weighted average of values, where the weight of each value is computed by inner product of query and corresponding key. The queries and keys are of the same dimension ${d_k}$, values are of dimension ${d_v}$. Actually, for better understanding, the query $\bm{q}$  can be considered as the decoder state $\bm{s}_i$ and key $\bm{k}$ and values $\bm{v}$ can be considered as the encoder state $\bm{h}_j$ in previous attention model. Then the attention of query $\bm{q}$ on all $(\bm{k}-\bm{v})$ pairs are:
 %\[ A(\bm{q}, K, V) = \sum_{i}{ \frac{\exp\ ({\bm{q}\cdot \bm{k}_i})}{\sum_{j} \exp\ {\bm{q}\cdot \bm{k}_j} } \cdot \bm{v}_i}\]
@@ -226,13 +227,14 @@ And $r_{{j^{\prime}}j}$ is computed using a compatibility function:
 	\caption{Self-attention structure}
 \end{figure}
 
-In the self-attention structure, the total computational complexity per layer will be greatly reduced, amount of computations can be paralellized. It performs better for long-range dependencies than traditional RNN structure.
+%In the self-attention structure, the total computational complexity per layer will be greatly reduced, amount of computations can be paralellized. It performs better for long-range dependencies than traditional RNN structure.
+%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=10cm]{attentiondeen}
+%	\caption{Encoder-decoder attention}
+%\end{figure}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=10cm]{attentionself}
-	\caption{Self-attention structure}
-\end{figure}
 %\[ \alpha_{ki} = \frac{\exp(\text{score}(\bm{h}_k, \bm{h}_i))}{\sum_{j=1}^{I} \exp((\text{score}(\bm{h}_k, \bm{h}_j)))}\]
 %\[ \text{score}(\bm{h}_k, \bm{h}_i) = \bm{h}_k^\top \bm{h}_i /\sqrt{d} , \ \ \ d= \text{dim}(\bm{h}_k)\]
 %\[\bm{h}_k^{\prime} = \sum_{i=1}^{I} \alpha_{ki} \cdot \bm{h}_i\]
