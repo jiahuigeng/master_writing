@@ -61,7 +61,7 @@ We design three types of noise to handle the fertility and reordering problem, n
 		\item Rearrange the words to be in the new positions, to which where indices have been moved
 	\end{enumerate}
 	
-	Reordering actually depends on specific language pair. The reordering noise here just models the most general case.\\
+	Reordering actually depends on specific language pair. The reordering noise here just models the most general case. Figure 5.1 illustrates the our reordering noise.\\
 %	However in the experiments we found the performance of the denoising network aimed at such noise is not obvious. The Bleu score before and after the process is close.\\
 
 	
@@ -69,7 +69,7 @@ We design three types of noise to handle the fertility and reordering problem, n
 	\begin{figure}[ht]
 	\includegraphics[width=14cm]{insertion}
 	\caption{Insertion noise}
-	\centering
+
 \end{figure}	
 
 	The word-by-word translation system predict a target word at every source position of the sentence. However,  the vocabularies of different languages are not symmetric. For example, in German, there are more compound words than that in English. So when translating between languages, there are a plenty of cases that a single word will be translated to multiple words and multiple words correspond to a single word conversely. For example: from a German sentence: ``ich höre zu" to ``i'm listening". A very frequent word ``zu" which corresponds to ``to" in English, is dropped from the sentence. The design of insertion noise is as followed:
