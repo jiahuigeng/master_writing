@@ -1,15 +1,13 @@
 \chapter{Experiments}
-In this chapter, we present experimental results of our proposed methods: corpus-based translation and unsupervised translation system integrating LM and DAE. We also empirically analyze the effect of different factors in these methods. Before that, we describe the system, evaluation methodology, and datasets when the experiments are conducted.
-\section{Experimental Setup}
-Monoligual word embeddings have a dimensionality of 300 and  are trained as a skip-gram model using FastText (\cite{bojanowski2016enriching}) for 5 epochs, only for words that have occurs at least 10 times. (\cite{conneau2017word}). The novel corpus-based approach is also implemented on MUSE framework. Model optimization is performed with AdaM (\cite{bibid}).  Vocabulary sizes for source and target side are limited to 50k.
-$5$-gram LMs are trained separately using KenLM with Kneser–Ney smoothing.\\
-The training corpora for embeddings and LM are the same, containing 100M sentences respectively. Detailed statistics are in Table 6.1.\\
-Context-aware translation supported is performed using beam search with beam size 10 and the best hypothesis is the one with best sentence score evaluated by LM.\\
-DAE is implemented in Sockeye (\cite{hieber2017sockeye}), using RNN and Transformer architectures. RNN based DAE has 2-layer encoder and 2-layer decoder, the hidden layer size is 512.In Transfomer based DAE, encoder and decoder both have 6 layers and hidden layer size is also 512. The multi-head attention mechanism uses 6 heads. DAEs are trained on smaller corpora containing 20M sentences. \\
-We evaluate the different cross-lingual embedding learning methods on word retrieval tasks. The datasets are released by \cite{conneau2017word}, which contains 12 pairs of directional dictionaries. Each dictionary contains 5000 unique words for supervised training and 1500 unique words for evaluation.  the performances of translation systems on $\texttt{newstest2016}$ German$\leftrightarrow$English task and  $\texttt{newstest2014}$ French$\leftrightarrow$English task.
+In this chapter, we present experimental results of our proposed methods: corpus-based unsupervised learning algorithm for cross-lingual word embedding and unsupervised MT system integrating LM and DAE. We also empirically analyze the effect of different factors in these methods: corpus size, embedding unit, vocabulary size and artificial noises. Before that, we describe the parameter settings, evaluation methodology, and datasets for our experiments.
+
 
 
 \section{Corpus Statistics}
+ The training corpora for embedding and LM training are the same, containing 100M sentences
+ sampled from News Crawl 2014-2017 monolingual
+ corpora. The data was lowercased and filtered
+ to have a maximum sentence length 100. The test datasets are for MT evaluation, from WMT 2016   German$\leftrightarrow$English task and WMT 2014 French$\leftrightarrow$English task. We restrict MT vocabulary size to 50k. OOV rates reflect that the vocabulary size we set is reasonable. Each LM perplexity is in the proper range. Detailed statistics are in Table 6.1, 6.2.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{c|c|c|c|c}
@@ -35,103 +33,50 @@ We evaluate the different cross-lingual embedding learning methods on word retri
 		& \textbf{OOV Rates}             & \textbf{4116 (6.6\%)} & \textbf{1643 (2.5\%)} & \textbf{1731 (2.1\%)} & \textbf{1299 (1.8\%)} \\ \cline{2-6} 
 		& \textbf{LM perplexity}         & \textbf{211.0}        & \textbf{109.6}        & \textbf{51.2}         & \textbf{84.6}         \\ \hline
 		
-	\end{tabular}
-	\caption{Evaluation corpora for translation}
+	\end{tabular}$\texttt{newstest2016}$
+	\caption{Evaluation corpora for MT}
 \end{table}
-\section{Word Transnewsteslation}
-\subsection{Baseline Experiments}
- As demonstrated in Table 6.3, CSLS performs better than other dictionary induction methods: simple nearest neighbour search (NN) and inverted softmax (ISF). So in all tables related to word retrieval task, CSLS is the default method if without any specification.
+
+\section{Experimental Setup}
+We train monoligual word embeddings with a dimensionality of 300 using FastText (\cite{bojanowski2016enriching}) for 5 epochs, only for words that have occurs at least 10 times. Our corpus-based approach is also implemented on MUSE framework (\cite{conneau2017word}). Vocabulary sizes for source and target side are limited to 50k.
+$5$-gram LMs are trained separately using KenLM with Kneser–Ney smoothing (\cite{heafield2011kenlm}).\\
+LM supported context-aware beam search is performed among top 100 word translation candidates for each position with beam size 10.\\
+DAE is implemented in Sockeye (\cite{hieber2017sockeye}), using RNN and Transformer architectures. RNN-based DAE has 2-layer encoder and 2-layer decoder, the hidden layer size is 512. In Transfomer based DAE, encoder and decoder both have 6 layers and hidden layer size is also 512. The multi-head attention mechanism uses 6 heads. DAEs are trained on smaller monolingual corpora containing 20M sentences. \\
+We evaluate different cross-lingual embedding learning methods on cross-lingual word retrieval tasks. The datasets are released by \cite{conneau2017word}, which contains dictionaries for 12 language pairs. Each test dictionary contains 1500 unique source words for evaluation.  
+\section{Word Translation}
+We conduct the cross-lingual word retrieval task on English$\leftrightarrow$German pair. Empirically, we find the best sentence batch size is 1k and the best initial lr is $0.0001$. Numbers in Table 6.3 are the accuracy (\%) of results, with the same sentence batch size and initial lr. The last three rows are the baseline experiments: adversarial training, adversarial training with refinement, and supervised learning. Dictionary with 5000 unique source words are provided for supervised learning. We run the novel corpus-based approach on a relative small corpus with 50k sentences, just top 50k sentences from the training corpus using different lr schedulers. The first one is to start from initial lr, the second one is to inherit the lr after the training on previous batch sentences. The first lr scheduler always performs better than the second one. We demonstrate the results for German$\rightarrow$ English and English $\rightarrow$ German with the first scheduler, also the performance of  German$\rightarrow$ English with second scheduler. In order to lift the performance of the second scheduler, we augment corpus by training over the 50k corpus for two epochs and extend the corpus size to 200k. The results get better but still not as good as first lr scheduler. Results are in Table 6.4. Figure 6.1 demonstrates retrieval accuracy curve w.r.t the number of training batches.
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{llccc}
+	\begin{tabular}{llcc}
 		\hline
-		\multicolumn{2}{l}{Methods}                           & NN    & ISF   & CSLS  \\ \hline
-		Supervised                    & Procrustes             & 60.37 & 63.22 & 65.38 \\ \hline
-		\multirow{2}{*}{Unsupervised} & Adversarial            & 47.03 & 49.57 & 53.50 \\ \cline{2-5} 
-		& Adversarial+Procrustes & 61.75 & 62.68 & 64.92 \\ \hline
+		&                & De-En & En-De            \\ \hline
+		\multirow{2}{*}{Corpus-based } & lr scheduler 1 & 60.37 & 60.57            \\ \cline{2-4} 
+		& lr scheduler 2 & 51.50 & \textbackslash{} \\ \hline
+		Corpus-based without LM              & lr scheduler 1 & 54.36 &        \textbackslash{}           \\ \hline
+		Adversarial                            &                & 53.50 &       \textbackslash{}   \\ \hline
+		Adversarial + Refinement               &                & 64.92 & \textbackslash{}    \\ \hline
+		Supervised                             &                & 65.38 & \textbackslash{}  \\ \hline
 	\end{tabular}
-	\caption{3}
+	\caption{Cross-lingual word retrieval accuracy}
 \end{table}
-
-
-\subsection{Corpus-based Approach}
-We run the novel corpus-based approach on a relative small corpus with 50k sentences using different learning rate schedulers. One is to start from initial learning rate, the other is to inherit the learning rate after the training on previous batch sentences. The first learning rate scheduler always performs better than the second one. We demonstrate the results for German$\rightarrow$ English and English $\rightarrow$ German with the first scheduler, also the performance of  German$\rightarrow$ English with second scheduler. These are trained on a relative small corpus with 50k sentences. In order to lift the performance of the second scheduler, we augment corpus by training two loops over the 50k corpus and extend the corpus size to 200k. The results get better but still not as good as first learning rate scheduler. 
-\subsubsection{Different Learning Rate Scheduler}
-The tables below show results of word retrieval accuracy for online learning of corpus-based approach, where the column represents different initial learning rate and the row represents different sentence batch size.
-\begin{itemize}
-	\item Start from Initial Learning Rate
-%	\begin{itemize}
-%		\item .
-		\begin{table}[h]
-			\centering
-		\caption{Word translation accuracy for German$\rightarrow$English word retrieval}
-			\begin{tabular}{cccccc}
-				\hline
-				Accuracy (\%) & 100   & 500   & 1k    & 2k    & 5k    \\ \hline
-				0.01          & 1.00  & 6.01  & 24.21 & 28.37 & 42.71 \\ \hline
-				0.005         & 0.85  & 5.47  & 7.71  & 17.12 & 38.78 \\ \hline
-				0.001         & 1.23  & 7.32  & 14.88 & 15.34 & 27.45 \\ \hline
-				0.0005        & 1.54  & 45.26 & 49.88 & 54.43 & 54.97 \\ \hline
-				0.0001        & 36.23 & 58.09 & 60.14 & 60.37 & 58.67 \\ \hline
-			\end{tabular}
-
-		\end{table}
-%		\item Word translation accuracy for English $\rightarrow$ German, with different initial learning rates and sentence batch sizes.
-		\begin{table}[h]
-			\centering
-		 \caption{Word translation accuracy for English $\rightarrow$ German word retrieval}
-			\begin{tabular}{cccc}
-				\hline
-				Accuracy (\%) & 1k   & 2k   & 5k      \\ \hline
-				0.01          & 10.02  & 16.50  & 23.36 \\ \hline
-				0.005       & 47.65 & 22.28 & 24.21 \\ \hline
-				0.001        & 24.44 & 24.98 & 26.75 \\ \hline
-				0.0005          & 54.82  & 55.67  & 48.44 \\ \hline
-				0.00001        & 59.21 & 58.98 & 56.90 \\ \hline
-			\end{tabular}
-
-		\end{table}	
-%
-%		
+%In general, $1k$ is a option for sentence batch size. The embedding mappings from English to German and from German to English show close results.
+%However the second Empirically, we find the best sentence batch size is 1k and initial lrscheduler inheriting last lr works not as well as the first one. We augment training data by training 2 epochs and extending the corpus to 200k sentences. The results are in Table 6.7, the sentence batch size is $1k$ and initial lr are set to $0.0001$, the best settings empirically.\\
 %	\end{itemize}
-	\item Inherit Last Learning Rate
-%	\begin{itemize}
-%		\item Word translation accuracy for German$\rightarrow$English with different initial learning rates and sentence batch sizes.\\
-		\begin{table}[H]
-			\centering
-			\caption{Word translation accuracy for German$\rightarrow$English}
-			\begin{tabular}{cccc}
-				\hline
-				Accuracy (\%) & 1k   & 2k   & 5k      \\ \hline
-				0.01          & 7.79  & 4.70  & 6.01 \\ \hline
-				0.005       & 3.39 & 12.03 & 8.94 \\ \hline
-				0.001        & 5.40 & 11.49 & 18.89 \\ \hline
-				0.0005          & 5.78  & 8.33  & 10.25 \\ \hline
-				0.00001        & 51.50 & 37.63 & 15.27 \\ \hline
-			\end{tabular}
+In general, the results for mappings from English to German and from German to English are near, this is as we expected. Without LM the corpus-based approach can still learn a mapping, while the accuracy increases very slowly and converges to a level much lower than the normal one. The second lr scheduler learns very slow at the beginning and then tends to a good point, it seems that it keeps learning.  
 
-		\end{table}	
-
-Tables 6.4, 6.5, 6.6 demonstrates the performance of our online learning algorithm. In general, $1k$ is a option for sentence batch size. The embedding mappings from English to German and from German to English show close results.
-However the second scheduler inheriting last learning rate works not as well as the first one. We augment training data by training 2 loops and extending the corpus to 200k sentences. The results are in Table 6.7, the sentence batch size is $1k$ and initial learning rate are set to $0.0001$, the best settings empirically.
-
-		\begin{table}[H]
-			\centering
-				\caption{ Word translation accuracy for German$\rightarrow$English with different training corpus}
-			\begin{tabular}{lc}
-				\hline
-				Train & Accuracy (\%) \\ \hline
-				50k   & 51.50         \\ \hline
-				50k $\times$ 2 & 55.51         \\ \hline
-				200k  & 57.87         \\ \hline
-			\end{tabular}
-			
-		\end{table}
-%	\end{itemize}
-\end{itemize}
-Figure 6.1 demonstrates the training processes of different experimental settings, German$\rightarrow$English and English$'\rightarrow$German with the first scheduler and German$\rightarrow$ English with the second scheduler. We also conduct the corpus-based approach experiment without LM. We tune the learning rate decay separately. It turns out that without LM the accuracy will converge at a lower level. The second scheduler learns very slowly especially at the beginning stage. 
-\begin{figure}[H]
+\begin{table}[h]
+	\centering
+	\begin{tabular}{lc}
+		\hline
+		Corpus & Accuracy (\%) \\ \hline
+		50k    & 51.50         \\ \hline
+		50k $\times$2  & 55.51         \\ \hline
+		200k   & 57.87         \\ \hline
+	\end{tabular}
+	\caption{Word retrieval accuracy on different training corpus}
+\end{table}
+\begin{figure}[h]
 	\includegraphics[width=10cm]{corpus}
 	\centering
 	\caption{Comparison of different experiments}
@@ -141,13 +86,13 @@ Figure 6.1 demonstrates the training processes of different experimental setting
 \section{Sentence Translation}
 
 
-\subsection{Comprehensive Table}
+\subsection{Overall Results}
 \begin{table}[H]
 	
-	\caption{Translation results on German$\leftrightarrow$English \texttt{newstest2016} and French$\leftrightarrow$English \texttt{newstest2014} }
+
 	\centering
-\scalebox{0.8}{
-		\begin{tabular}{>{\bfseries}l>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c}
+		\scalebox{0.8}{
+		\begin{tabular}{lcccc}
 			\toprule
 			& De-En & En-De & Fr-En & En-Fr\\
 			System   & \textsc{Bleu} [\%] & \textsc{Bleu} [\%] & \textsc{Bleu} [\%] & \textsc{Bleu} [\%]\\
@@ -163,17 +108,25 @@ Figure 6.1 demonstrates the training processes of different experimental setting
 			\cite{lample2017unsupervised} & 13.3 & 9.6 & 14.3 & 15.1\\
 			\cite{artetxe2017unsupervised} & - & - & 15.6 & 15.1\\
 			\bottomrule
-		\end{tabular}
+		\end{tabular}}
+	\caption{Translation results on German$\leftrightarrow$English \texttt{newstest2016} and French$\leftrightarrow$English \texttt{newstest2014}}
 
-	}
 \end{table}
-As demonstrated above, our unsupervised MT surpass the start-of-the-art unsupervised NMT in almost all cases except English$\rightarrow$French translation. Each sub-model lift the performance respectively. Copy OOV word from source sentences works better than those predicted by language model, because OOV words are usually specific name entities and LM prefers common words rather than rare words. Denoising autoencoder based on Transformer structure outputs better translation than the traditional RNN structure. 
+As demonstrated in Table LM improves wordby-word
+baselines consistently in all four tasks, giving at least +3\% BLEU. When our denoising
+model is applied on top of it, we have additional
+gain around +3\% BLEU. Note that our methods
+do not involve any decoding steps to generate
+pseudo-parallel training data, but still perform
+better than unsupervised MT systems that rely on
+repetitive back-translations by up to +3.9\% BLEU.
+%above, our unsupervised MT surpass the start-of-the-art unsupervised NMT in almost all cases except English$\rightarrow$French translation. Each sub-model lift the performance respectively. Copy OOV word from source sentences works better than those predicted by language model, because OOV words are usually specific name entities and LM prefers common words rather than rare words. Denoising autoencoder based on Transformer structure outputs better translation than the traditional RNN structure. 
 
 
 	\begin{table}[!h]
 	\centering
 	\caption {Word-by-word translation from German to English}
-	\begin{tabular}{>{\bfseries}c>{\bfseries}c>{\bfseries}c}
+	\begin{tabular}{ccc}
 		\hline
 		&\textsc{Accuracy} [\%]& \textsc{Bleu} [\%] \\ \hline
 		5M & 44.9  & 9.7  \\ \hline
@@ -185,12 +138,12 @@ As demonstrated above, our unsupervised MT surpass the start-of-the-art unsuperv
 As in Table 6.9, larger corpus improves the word translation accuracy as well as the word-by-word translation. 
 
 \subsection{BPE vs Word}
-Byte pair encoding (BPE) is a simple data compression technique for word segmentation. It allows for the representation of an open vocabulary through a fixed-size vocabulary of variable-character sequences, making it very suitable word segmentation strategy for neural network models. It helps to reduce the vocabulary size and they eliminate the presence of unknown words in the output translation. We use BPE to represent the mapping between languages. 
+Byte pair encoding (BPE)(\cite{sennrich2015neural}) is a simple data compression technique for word segmentation. It allows for the representation of an open vocabulary through a fixed-size vocabulary of variable-character sequences, making it very suitable word segmentation strategy for neural network models. It helps to reduce the vocabulary size and they eliminate the presence of unknown words in the output translation. We use BPE to represent the mapping between languages and compare with word-level cross-lingual embeddings. In BPE algorithm, the vocabulary is updated using an iterative greedy algorithm. Merges in Table 6.7 denotes the pre-defined number of merge operations. 
 	\begin{table}[h]
-	\caption{Different embedding units and vocabulary size}
+
 	\centering
-	\scalebox{0.9}{
-		\begin{tabular}{>{\bfseries}l>{\bfseries}c>{\bfseries}c}
+	\scalebox{1}{
+		\begin{tabular}{lcc}
 			\toprule
 			\multicolumn{2}{c}{\textbf{Vocabulary}} & \textsc{Bleu} [\%] \\
 			\midrule
@@ -209,20 +162,26 @@ Byte pair encoding (BPE) is a simple data compression technique for word segment
 			& 200k & 14.4\\
 			\bottomrule
 		\end{tabular}
+	
 	}\\
-
+	\caption{Different embedding units and vocabulary size}
 \end{table}
 
 
-As in Table 6.10, the BPE performs worse than word in this unsupervised learning scenario. It might be difficult to learn the translation relationship between subword units. Also for sentence translation, larger vocabulary size does not improve the performance. In order to balance the efficiency and accuracy we limit the vocabulary size to 50k. To improve the results, LM are exploited here.
+%As in Table 6.10, the BPE performs worse than word in this unsupervised learning scenario. It might be difficult to learn the translation relationship between subword units. Also for sentence translation, larger vocabulary size does not improve the performance. In order to balance the efficiency and accuracy we limit the vocabulary size to 50k. To improve the results, LM are exploited here.
+We examine how the translation performance varies with different vocabularies of cross-lingual word embedding in Table 6.7. The first three show that BPE embeddings performs worse than word embeddings, especially with smaller vocabulary size. For small BPE tokens (1-3 characters),
+the context they meet during the embedding
+training is much more various than a complete word, and a direct translation of such small
+token to a BPE token of another language would be very ambiguous. For word level embeddings, we compared different vocabulary sizes used for training the
+cross-lingual mapping. Surprisingly, cross-lingual word embedding learned only on top 20k words is comparable to that of 200k words in the translation quality. This means that word-by-word translation with crosslingual embedding depends highly on the frequent word mappings, and learning the mapping between rare words does not have a positive effect. 
 
 \subsection{Artificial Noise}
 
 	\begin{table}[H]
-	\caption{Different artificial noises}
+
 	\centering
 	\scalebox{1}{
-		\begin{tabular}{>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}r>{\bfseries}c}
+		\begin{tabular}{cccrc}
 			\toprule
 			$d_\text{per}$ & $p_\text{del}$ & $p_\text{ins}$ & $V_\text{ins}$ & \textsc{Bleu} [\%] \\
 			\midrule
@@ -240,31 +199,49 @@ As in Table 6.10, the BPE performs worse than word in this unsupervised learning
 			\bottomrule
 		\end{tabular}
 	}
-	\setcounter{table}{1}
+
 	\label{tab:denoising}
+		\caption{Different artificial noises}
 \end{table}
-As in Table 6.11, each artificial noise improves the translation performance, though the permutation noise only aims at local reordering instead of global reordering. The lift from the insertion noise even improves the results up to 1.5 BLUE score.
+To examine the effect of each noise type in denoising
+autoencoder, we tuned each parameter of the noise and combined them incrementally as in Table 6.8.  Firstly, for permutations, a significant improvement is achieved from $d_{per}$ = 3, since a local
+reordering usually involves a sequence of 3 to 4
+words. With $d_{per} le 5$ , it shuffles too many consecutive
+words together, yielding no further improvement.
+This noise cannot handle long-range reordering, which is usually a swap of words that are far from each other, keeping the words in the
+middle as they are. \\
+Secondly, we applied the deletion noise with
+different values of $p_{del}$. 0.1 gives +0.8\% BLEU, but we immediately see a degradation with a larger value; it is hard to observe more than one one-tomany
+translations in each German→English sentence pair.
+Finally, we tested several sizes of $V_{ins}$ for the
+insertion noise, fixing $p_{ins}$ = 0.1. Increasing $V_{ins}$
+is generally not beneficial, since it provides too
+much variations in the inserted word, which might
+not be related to its neighboring words. Overall,
+we observe the best result (+1.5\% BLEU) with
+$V_{max} = 50$.
 
 
 
+\subsection{Phrase Embedding}
 
-%\subsection{Phrase Embedding}
-%
-%\begin{table}[h]
-%	\centering
-%	\begin{tabular}{>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c>{\bfseries}c  >{\bfseries}c}
-%		\hline
-%		\multicolumn{3}{c}{\multirow{2}{*}{\textbf{Vocabulary}}}                  & No LM & With LM & Denoising \\
-%		\multicolumn{3}{c}{}                                         &  \textsc{Bleu} [\%]  &  \textsc{Bleu} [\%] & \textsc{Bleu} [\%]   \\ \hline
-%		Word            & \multicolumn{2}{l}{}              & 11.2 & 14.5  &\leavevmode\color{blue}{ 17.2} \\
-%		\hline
-%		\multirow{3}{*}{\cite{mikolov2013distributed} } & \multirow{3}{*}{threshold} & 100  & 11.1 & 13.7  & 15.6 \\ \cline{3-6} 
-%		&                            & 500  & 11.0 & 13.7  & 16.2 \\ \cline{3-6} 
-%		&                            & 2000 & 10.7 & 14.0  &16.5 \\ \hline
-%		Top frequent              & \multicolumn{1}{l}{\textbf{count}}  & 50k  & \leavevmode\color{blue}12.0 & \leavevmode\color{blue}15.7  & 16.8 \\ \hline
-%	\end{tabular}
-%\end{table}
-%
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ccccc  c}
+		\hline
+		\multicolumn{3}{c}{\multirow{2}{*}{\textbf{Vocabulary}}}                  & No LM & With LM & Denoising \\
+		\multicolumn{3}{c}{}                                         &  \textsc{Bleu} [\%]  &  \textsc{Bleu} [\%] & \textsc{Bleu} [\%]   \\ \hline
+		Word            & \multicolumn{2}{l}{}              & 11.2 & 14.5  &\leavevmode\color{blue}{ 17.2} \\
+		\hline
+		\multirow{3}{*}{\cite{mikolov2013distributed} } & \multirow{3}{*}{threshold} & 100  & 11.1 & 13.7  & 15.6 \\ \cline{3-6} 
+		&                            & 500  & 11.0 & 13.7  & 16.2 \\ \cline{3-6} 
+		&                            & 2000 & 10.7 & 14.0  &16.5 \\ \hline
+		Top frequent              & \multicolumn{1}{l}{\text{count}}  & 50k  & \leavevmode\color{blue}12.0 & \leavevmode\color{blue}15.7  & 16.8 \\ \hline
+	\end{tabular}
+	\caption{Performance of phrase embedding in MT}
+\end{table}
+With word2vec tool (\cite{mikolov2013distributed}) we detect phrases in the training corpus. We set threshold value to 100, 500, 2000 to make the number of phrases differs. Fewer phrases will be detected as we lift the threshold value. As to our method, we extract only bigrams that in the top 50k frequent bigrams in the training corpus. We learn phrase embedding in an unsupervised manner as normal word embedding. \\
+As demonstrates in Table
 %?????? not sure if I need to add this corresponding part in unsupervised cross-lingual embedding
 
 
@@ -273,7 +250,7 @@ As in Table 6.11, each artificial noise improves the translation performance, th
 %	\parbox{.5\linewidth}{
 %		\centering
 %		\caption{Word embedding vocabulary cut-off}
-%		\begin{tabular}{>{\bfseries}c >{\bfseries}c >{\bfseries}c >{\bfseries}c } 
+%		\begin{tabular}{c c c c } 
 %			\hline
 %			\textsc{Bleu} [\%]	& 20k & 50k & 100k \\
 %			\hline
@@ -290,7 +267,7 @@ As in Table 6.11, each artificial noise improves the translation performance, th
 %	\parbox{.5\linewidth}{
 %		\centering
 %		\caption{Phrase embedding vocabulary cut-off}
-%		\begin{tabular}{>{\bfseries}c >{\bfseries}c >{\bfseries}c >{\bfseries}c } 
+%		\begin{tabular}{c c c c } 
 %			\hline
 %			\textsc{Bleu} [\%]	& 50k & 100k & 150k \\
 %			\hline

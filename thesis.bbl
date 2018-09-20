@@ -1,4 +1,4 @@
-\begin{thebibliography}{43}
+\begin{thebibliography}{44}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -12,6 +12,13 @@ Oliver Adams, Adam Makarucha, Graham Neubig, Steven Bird, and Trevor Cohn.
 \newblock In \emph{Proceedings of the 15th Conference of the European Chapter
   of the Association for Computational Linguistics: Volume 1, Long Papers},
   volume~1, pages 937--947, 2017.
+
+\bibitem[Artetxe et~al.(2016)Artetxe, Labaka, and Agirre]{artetxe2016learning}
+Mikel Artetxe, Gorka Labaka, and Eneko Agirre.
+\newblock Learning principled bilingual mappings of word embeddings while
+  preserving monolingual invariance.
+\newblock In \emph{Proceedings of the 2016 Conference on Empirical Methods in
+  Natural Language Processing}, pages 2289--2294, 2016.
 
 \bibitem[Artetxe et~al.(2017{\natexlab{a}})Artetxe, Labaka, and
   Agirre]{artetxe2017learning}
@@ -50,13 +57,6 @@ Antonio Valerio~Miceli Barone.
 Piotr Bojanowski, Edouard Grave, Armand Joulin, and Tomas Mikolov.
 \newblock Enriching word vectors with subword information.
 \newblock \emph{arXiv preprint arXiv:1607.04606}, 2016.
-
-\bibitem[Cao et~al.(2016)Cao, Zhao, Zhang, and Meng]{cao2016distribution}
-Hailong Cao, Tiejun Zhao, Shu Zhang, and Yao Meng.
-\newblock A distribution-based model to learn bilingual word embeddings.
-\newblock In \emph{Proceedings of COLING 2016, the 26th International
-  Conference on Computational Linguistics: Technical Papers}, pages 1818--1827,
-  2016.
 
 \bibitem[Cheng et~al.(2016)Cheng, Xu, He, He, Wu, Sun, and Liu]{cheng2016semi}
 Yong Cheng, Wei Xu, Zhongjun He, Wei He, Hua Wu, Maosong Sun, and Yang Liu.
@@ -258,6 +258,11 @@ Sujith Ravi and Kevin Knight.
 Sebastian Ruder, Ivan Vuli{\'c}, and Anders S{\o}gaard.
 \newblock A survey of cross-lingual word embedding models.
 \newblock \emph{arXiv preprint arXiv:1706.04902}, 2017.
+
+\bibitem[Sennrich et~al.(2015)Sennrich, Haddow, and Birch]{sennrich2015neural}
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+\newblock Neural machine translation of rare words with subword units.
+\newblock \emph{arXiv preprint arXiv:1508.07909}, 2015.
 
 \bibitem[Smith et~al.(2017)Smith, Turban, Hamblin, and
   Hammerla]{smith2017offline}

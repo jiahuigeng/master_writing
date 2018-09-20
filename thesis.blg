@@ -4,58 +4,54 @@ The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: glossary.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Repeated entry---line 101 of file references.bib
- : @inproceedings{mikolov2013distributed
- :                                      ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 287 of file references.bib
+Repeated entry---line 281 of file references.bib
  : @article{bahdanau2014neural
  :                            ,
 I'm skipping whatever remains of this entry
-Repeated entry---line 397 of file references.bib
+Repeated entry---line 391 of file references.bib
  : @inproceedings{pennington2014glove
  :                                   ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "bibid"
-You've used 43 entries,
+Warning--I didn't find a database entry for "cao2016distribution"
+You've used 44 entries,
             2773 wiz_defined-function locations,
-            793 strings with 13539 characters,
-and the built_in function-call counts, 24569 in all, are:
-= -- 2157
-> -- 1590
+            796 strings with 13670 characters,
+and the built_in function-call counts, 24932 in all, are:
+= -- 2188
+> -- 1611
 < -- 36
-+ -- 536
-- -- 489
-* -- 1949
-:= -- 3594
-add.period$ -- 132
-call.type$ -- 43
-change.case$ -- 291
-chr.to.int$ -- 39
-cite$ -- 86
-duplicate$ -- 1163
-empty$ -- 1874
-format.name$ -- 540
-if$ -- 5300
++ -- 543
+- -- 495
+* -- 1977
+:= -- 3652
+add.period$ -- 135
+call.type$ -- 44
+change.case$ -- 296
+chr.to.int$ -- 40
+cite$ -- 88
+duplicate$ -- 1183
+empty$ -- 1905
+format.name$ -- 547
+if$ -- 5375
 int.to.chr$ -- 5
 int.to.str$ -- 1
-missing$ -- 44
-newline$ -- 223
-num.names$ -- 172
-pop$ -- 653
+missing$ -- 45
+newline$ -- 228
+num.names$ -- 176
+pop$ -- 663
 preamble$ -- 1
-purify$ -- 249
+purify$ -- 253
 quote$ -- 0
-skip$ -- 991
+skip$ -- 1005
 stack$ -- 0
-substring$ -- 865
-swap$ -- 296
+substring$ -- 867
+swap$ -- 297
 text.length$ -- 29
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 468
+type$ -- 479
 warning$ -- 0
-while$ -- 198
+while$ -- 201
 width$ -- 0
-write$ -- 555
-(There were 3 error messages)
+write$ -- 567
+(There were 2 error messages)

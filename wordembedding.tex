@@ -23,7 +23,15 @@ where $e_i$ is the current word and $c$ is the size of training context. \\
 Similarly, we define the loss for CBOW model as
 \[ \mathcal{L}^e_{\text{CBOW}} = - \frac{1}{I} \sum_{i=1}^{I} \sum_{ -c \le d \le c, d\ne 0} \log\ {p(e_{i}|e_{i+d})}\]
 
-
+\textbf{Negtive Sampling}\\
+The prediction probability $p(e_{i+d}|e_i)$ is defined as a softmax function:
+\[p(e_{i+d}|e_i) = \frac{\exp \{ \text{score}(e_{i+d},e_i)\} }{\sum_{e^{\prime} \in V_e}{\exp  \{ \text{score}(e^{\prime}, e) \}}}\]
+where $V_e$ is the entire vocabulary. 
+The normalization over $V_e$ is very expensive since it is calculate for all words at every training steo. Negative sampling is proposed to approximate the sofrmax to make it computationally more efficient. It trains to model to distinguish a target word from negative samples drawn from a noise distribution \text{noise}.
+\[p(e_{i+d}|e_i) = \log p(e_{i+d}=1| e_i) + \frac{1}{k} \sum_{e^{\prime} \in p_{\text{noise}}}\log p(e^{\prime}=0|e_i)\]
+where $p(\cdot| e_i)$ is a model to predict if the word is in the context of $e_i$.\\ 
+\textbf{Subword Information}\\
+The training methods mentioned treat each word as a distinct word embedding, however, intuitively we can obtain more information from the morphological information of words. A subword model is proposed to capture the subword informaion. The training network is still CBOW or skip-gram. Each word is represented as a bag of character-level $n$-grams and assign a distinct embedding for each character $n$-gram. Score function in the network is calculated using the sum of inner products of the subword embeddings. 
 \subsection{GloVe}
 Global vectors(GloVe) allows us to learn word representations via matrix factorization. GloVe minimizes the difference between the dot product of the embeddings of word and its context and the logarithm of their number of co-occurrences within a certain window size:
 \[ \mathcal{L}_{GloVe}^e = \sum_{i,j=1}^{\lvert V_e \rvert} f(C_{ij})({\bm{e}_i}^{\top} \bm{e}_j - \log{C_{ij}} ) \]
@@ -156,7 +164,7 @@ Now this limitation is addressed by apply a applying a corrective metric at infe
 	The author observed that, if we invert the softmax and normalizing the probability over all the source words rather than target words, the hubness problem could be mitigated:
 	\[ p(e|f) = \frac{\exp{\Big(\beta \cdot  \text{score}(e,f)\Big)}}{\alpha \  \sum_{f^{\prime}} {\exp{\Big(\beta \cdot \text{score}(e, f^{\prime})\Big)}}}\]
 	\item  Cross-domain Similarity Local Scaling (CSLS)\\
-	We denote ${\mathcal{N}_e(\bm{f})}$ the set of ${k}$ nearest neighbors of points of the mapped $\bm{f}$ in the target embedding space, and ${\mathcal{N}_f(\bm{e})}$ the nearest neighbors of mapped ${\bm{e}}$ in the source embedding space. We consider the mean cosine similarity as hub-ness:
+	We denote ${\mathcal{N}_e(\bm{f})}$ the set of ${k}$ nearest neighbors of points of the mapped $\bm{f}$ in the target embeddiWe use the phrase embedding also in the machine translationng space, and ${\mathcal{N}_f(\bm{e})}$ the nearest neighbors of mapped ${\bm{e}}$ in the source embedding space. We consider the mean cosine similarity as hub-ness:
 	\[ r(\bm{f})= \frac{1}{K} \sum_{\bm{e}^{\prime} \in \mathcal{N}_e(\bm{f})} \cos(\bm{e}^{\prime}, W\bm{f})\]
 	So in this way we penalize the hub points:
 	\[ CSLS(\bm{e}, \bm{f}) = 2 \cos(\bm{e}, \bm{f}) - \frac{1}{k} \sum_{\bm{e^{\prime}} \in \mathcal{N}_e(\bm{f})} \cos(\bm{f}, \bm{e^{\prime}})- \frac{1}{k} \sum_{\bm{f^{\prime}} \in \mathcal{N}_f(\bm{e})} cos(\bm{f^{\prime}}, \bm{e}) \]
@@ -164,3 +172,18 @@ Now this limitation is addressed by apply a applying a corrective metric at infe
 
 
 %Since we use the pseudo parallel data (source sentence and word-by-word target translation sentence), we can exploit the context information from language model to select the word translation candidate. Beam search with language model is implemented here. More details about sentence translation will be explained next chapter.\\
+\section{Phrase Embedding}
+Different methods are proposed to learn phrase embedding, which can be mainly divided into two categories. The first is based on the distributional hypothesis; it treats a phrase as fundamental unit as that in phrase-based MT. Phrases will be considered as non-divisible and phrase embedding algorithm is similar to word embedding. However, distributional methods cannot make use of the information embedded in component words and they also face data spareness problem. The second is based on the principle of compositionality. It infers phrase embedding according to the embeddings of its component words. However,  many phrases have a meaning that is not simple composition of the meaning of its individual words. \\
+In this paper, we follow first idea, we train the phrase embeddings using the data-driven method proposed by \cite{mikolov2013distributed}. We also propose a novel phrase detection method. We find that our method is easy to implement and to tune the parameter. In experiments, our method works obviously better than the other one with the same phrase skip-gram training.\\
+
+\textbf{Phrase Detection}
+\begin{itemize}
+	\item Phrases formed based on the unigram and bigram counts (\cite{mikolov2013distributed})\\
+	\[\text{score}(e^{\prime}, e) = \frac{\text{count}(e^{\prime}, e)-\delta}{\text{count}(e^{\prime}) * \text{count}(e)} \]
+	where $\delta$ is a discounting coefficient and prevents too many phrases consisting of very infrequent words to be formed. The bigrams with score above the chosen threshold are then used as
+	phrases. 
+	\item Process sentences with most common phrases in training corpus\\
+	We count the most frequent bigrams in training corpus, using the counts directly as phrase score: $\text{score}(e^{\prime}, e) = \text{count}(e^{\prime}, e)$. We maximize the sum of phrase scores in given sentences in order to detect the phrases with dynamic programming. In our approach we consider the top-$k$ as the only parameter.
+\end{itemize}
+
+With the same training algorithm as word embedding, we can obtain the phrase embeddings. We use the phrase embeddings also in the machine translation system, which will be explained in Chapter 5, and find phrase embeddings performs better than word embedding iunder some specific settings. Experiment results are demonstrated in Chapter 6.4.4.

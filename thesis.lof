@@ -9,18 +9,20 @@
 \contentsline {figure}{\numberline {\relax 2.3}{\ignorespaces Global attention (\cite {luong2015effective})}}{14}{figure.2.3}
 \contentsline {figure}{\numberline {\relax 2.4}{\ignorespaces The Transformer model architecture (\cite {vaswani2017attention})}}{15}{figure.2.4}
 \contentsline {figure}{\numberline {\relax 2.5}{\ignorespaces Self-attention structure}}{16}{figure.2.5}
+\contentsline {figure}{\numberline {\relax 2.6}{\ignorespaces Self-attention structure}}{17}{figure.2.6}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Global attention model (\cite {mikolov2013efficient})}}{20}{figure.3.1}
-\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces A cross-lingual embedding space between German and English (\cite {ruder2017survey})}}{21}{figure.3.2}
-\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Cross-lingual projection with CCA (\cite {faruqui2014improving})}}{23}{figure.3.3}
+\contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Global attention model (\cite {mikolov2013efficient})}}{22}{figure.3.1}
+\contentsline {figure}{\numberline {\relax 3.2}{\ignorespaces A cross-lingual embedding space between German and English (\cite {ruder2017survey})}}{24}{figure.3.2}
+\contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Cross-lingual projection with CCA (\cite {faruqui2014improving})}}{26}{figure.3.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Illustration of similarity matrix method}}{28}{figure.4.1}
+\contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Illustration of similarity matrix method}}{32}{figure.4.1}
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Illustration of vocabulary-based learning (\cite {conneau2017word})}}{33}{figure.4.2}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Reordering noise}}{37}{figure.5.1}
-\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Insertion noise}}{38}{figure.5.2}
-\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Deletion noise}}{39}{figure.5.3}
+\contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Reordering noise}}{43}{figure.5.1}
+\contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Insertion noise}}{44}{figure.5.2}
+\contentsline {figure}{\numberline {\relax 5.3}{\ignorespaces Deletion noise}}{45}{figure.5.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {\relax 6.1}{\ignorespaces Comparison of different experiments}}{45}{figure.6.1}
+\contentsline {figure}{\numberline {\relax 6.1}{\ignorespaces Comparison of different experiments}}{50}{figure.6.1}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

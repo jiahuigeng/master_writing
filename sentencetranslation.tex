@@ -19,7 +19,7 @@ As mentioned previously, training a traditional machine translation system requi
 
  	where the lexicon score ${q(f,e) \in [0,1]}$ defined as:
  	\[q(f,e) = \frac{d(f,e)+1}{2} \]
- 	${d(f,e)\in [-1,1]}$ cosine similarity between ${f}$ and ${e}$
+ 	${d(f,e)\in [-1,1]}$ cosine similarity between $\bm{f}$ and $\bm{e}$
 	
 	
 	In experiments, we find linear scaling works better than others, e.g. sigmoid or softmax.
