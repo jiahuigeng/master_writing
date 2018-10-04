@@ -15,7 +15,7 @@
 \contentsline {figure}{\numberline {\relax 3.3}{\ignorespaces Cross-lingual projection with CCA (\cite {faruqui2014improving})}}{26}{figure.3.3}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Illustration of similarity matrix method}}{32}{figure.4.1}
-\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Illustration of vocabulary-based learning (\cite {conneau2017word})}}{33}{figure.4.2}
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Illustration of vocabulary-based learning (\cite {DBLP:journals/corr/abs-1710-04087})}}{33}{figure.4.2}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {\relax 5.1}{\ignorespaces Reordering noise}}{43}{figure.5.1}
 \contentsline {figure}{\numberline {\relax 5.2}{\ignorespaces Insertion noise}}{44}{figure.5.2}

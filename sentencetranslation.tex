@@ -31,7 +31,7 @@ As mentioned previously, training a traditional machine translation system requi
 %	An autoencoder is a neural network that is trained to copy its input to the output. Autoencoders minimize the loss function like: 
 %	\[ L(\bm x, g(f(\bm x))) \]
 	Autoencoder is a type of neural network model used to learn efficient data coding, typically dimension reduction in an unsupervised manner. DAE is to force the hidden layer to discover more robust features by training the autoencoder to reconstruct the input from a corrupted version. It does two things, try to encode the input and try to undo the effect of a corrupt process stochastically applied to the input. In our model, the corrupt input is the word-by-word translation and the output ought to be the standard translation with correct sequence. Since we do not have parallel data as the references. We need to model the denoising process with artificial parallel data. We design three types of noises including a novel noise type to mimic the corrupted sentence. The loss function for DAE is defined as: 
-	\[ \mathcal{L}^{auto} = \mathbb{E}_{e_1^I \sim \mathcal{E}}[-\log P(e_1^I| \text{noise}(e_1^I))] \]
+	\[ \mathcal{L}^{auto} = \mathbb{E}_{e_1^I \sim \mathcal{E}}[-\log p(e_1^I| \text{noise}(e_1^I))] \]
 	where $\text{noise}(e_1^I)$ is noisy target sentences where artificial noises are added.
 
 	

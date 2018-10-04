@@ -87,11 +87,11 @@ The model can be further extended by components like: bidirectional translation 
 \cite{ravi2011deciphering} frame the MT problem as a decipherment task, treating the foreign text as a cipher. They also propose iterative EM method and Bayesian method to train this unsupervised model. Many concepts in deciperment are the same as the SMT.\\
 
 IBM model tries to maximize the probability with hidden alignment model
-\[ \argmax{\theta} \prod_{(e_1^I,{f}_1^J) } {P_{\theta}(f_1^J|e_1^I)} = \argmax{\theta} \prod_{ (e_1^I,{f}_1^J) } \sum_{a} P_{\theta}({f}_1^J, a| e_1^I)  \]
+\[ \argmax{\theta} \prod_{(e_1^I,{f}_1^J) } {p_{\theta}(f_1^J|e_1^I)} = \argmax{\theta} \prod_{ (e_1^I,{f}_1^J) } \sum_{a} p_{\theta}({f}_1^J, a| e_1^I)  \]
 While for unsupervised case, we train 
-\[ \argmax{\theta} \prod_{f_1^J}P_{\theta}(f_1^J)= \argmax{\theta} \prod_{f_1^J} \sum_{e_1^I} P({e}_1^I) \cdot P_{\theta}(f_1^J|e_1^I)\]
+\[ \argmax{\theta} \prod_{f_1^J}p_{\theta}(f_1^J)= \argmax{\theta} \prod_{f_1^J} \sum_{e_1^I} p({e}_1^I) \cdot p_{\theta}(f_1^J|e_1^I)\]
 
-for hidden alignments: \[ \argmax{\theta} \prod_{{f}_1^I} \sum_{{e}_1^I} P({e}_1^I) \cdot \sum_{a} P_{\theta}({f}_1^J,a|{e}_1^I) \]
+for hidden alignments: \[ \argmax{\theta} \prod_{{f}_1^I} \sum_{{e}_1^I} p({e}_1^I) \cdot \sum_{a} p_{\theta}({f}_1^J,a|{e}_1^I) \]
 
 Since the model is very complicated, more assumptions are added to the model. The model accounts for word substitutions, insertions, deletions and local reordering during the translation process but does not incorporate fertilities or global re-ordering.\\
 
@@ -329,7 +329,7 @@ When minimizing the loss function, gradients will not be back propagated through
 \begin{itemize}
 	\item Denoising autoencoder loss
 	\[ \mathcal{L}^{auto} = \mathbb{E}_{e_1^I \sim \mathcal{E}}[-\log p_{t\rightarrow t}(e_1^I|\text{noise}(e_1^I))] + \mathbb{E}_{f_1^J\sim \mathcal{F}} [-\log p_{f\rightarrow e}(f_1^J|\text{noise}(f_1^J))]\]
-	where $s$ $P_{f\rightarrow f}$ and $P_{e\rightarrow e}$ are the probability of encoder and decoder both operating in the source and target sides, respectively
+	where $s$ $p_{f\rightarrow f}$ and $p_{e\rightarrow e}$ are the probability of encoder and decoder both operating in the source and target sides, respectively
 	\item Back-translation loss
 	\[ \mathcal{L}^{back} = \mathbb{E}_{e_1^I\sim \mathcal{E}} [-\log p_{f\rightarrow e}(e_1^I|u(e_1^I))] +  \mathbb{E}_{f_1^J\sim \mathcal{F}} [-\log p_{e\rightarrow f}(f_1^J|v(f_1^J))]\]
 	 we denote the sentence that translated by intermediate target-to-source translation model as $u(e_1^I)$, similarly denote the sentence translated by source-to-target model as $v(f_1^J)$, so $u(y)$ should in source language and $v(x)$ should in target language. The pairs $(f_1^J, v(f_1^J))$, $(u(e_1^I), e_1^I)$ constitute synthetic parallel  sentences.

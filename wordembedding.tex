@@ -154,7 +154,7 @@ learn the transformation for each language, both monolingual embeddings are mapp
 
 \subsection{Biligual Lexicon Induction}
 When we use nearest neighbors search to infer the word translation, we suffer from the so-called "hubness Problem": points are tending to be nearest neighbors of many points in high-dimensional space.  Those points (hubs) will harm the search accuracy.\\
-Now this limitation is addressed by apply a applying a corrective metric at inference time, such as inverted softmax (ISF)(\cite{smith2017offline})  or cross-domain similarity scaling (CSLS)(\cite{conneau2017word})
+Now this limitation is addressed by apply a applying a corrective metric at inference time, such as inverted softmax (ISF)(\cite{smith2017offline})  or cross-domain similarity scaling (CSLS)(\cite{DBLP:journals/corr/abs-1710-04087})
 \begin{itemize}
 	\item Inverted Softmax (ISF)\\
 	The confidence of choosing a target word as translation of a source word can be considered as softmax-like normalized probability

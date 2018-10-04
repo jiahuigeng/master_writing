@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.7.17)  20 SEP 2018 14:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.7.17)  20 SEP 2018 16:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2554,12 +2554,7 @@ File: ./figures/cca.png Graphic file (type png)
 <use ./figures/cca.png>
 Package pdftex.def Info: ./figures/cca.png  used on input line 97.
 (pdftex.def)             Requested size: 227.62204pt x 250.10553pt.
- [25] [26 <./figures/cca.png>]
-
-Package natbib Warning: Citation `conneau2017word' on page 27 undefined on inpu
-t line 157.
-
-[27]
+ [25] [26 <./figures/cca.png>] [27]
 Underfull \hbox (badness 10000) in paragraph at lines 178--180
 
  []
@@ -2580,33 +2575,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--6
  []
 
 [31]
-<./figures/similarity.png, id=731, 966.61125pt x 212.795pt>
+<./figures/similarity.png, id=733, 966.61125pt x 212.795pt>
 File: ./figures/similarity.png Graphic file (type png)
 <use ./figures/similarity.png>
 Package pdftex.def Info: ./figures/similarity.png  used on input line 14.
 (pdftex.def)             Requested size: 341.43306pt x 75.16447pt.
-<./figures/vocab.png, id=732, 1361.085pt x 277.035pt>
+<./figures/vocab.png, id=734, 1361.085pt x 277.035pt>
 File: ./figures/vocab.png Graphic file (type png)
 <use ./figures/vocab.png>
 Package pdftex.def Info: ./figures/vocab.png  used on input line 24.
 (pdftex.def)             Requested size: 341.43306pt x 69.4953pt.
-
-
-Package natbib Warning: Citation `conneau2017word' on page 32 undefined on inpu
-t line 26.
-
-
-Package natbib Warning: Citation `conneau2017word' on page 32 undefined on inpu
-t line 26.
-
-[32 <./figures/similarity.png>]
+ [32 <./figures/similarity.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 45--45
 []$[]$
  []
-
-
-Package natbib Warning: Citation `conneau2017word' on page 33 undefined on inpu
-t line 51.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 51--53
@@ -2635,23 +2617,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--104
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [35]
-[36]
-
-Package natbib Warning: Citation `conneau2017word' on page 37 undefined on inpu
-t line 121.
-
-[37]
-
-Package natbib Warning: Citation `conneau2017word' on page 38 undefined on inpu
-t line 150.
-
-[38]) (./sentencetranslation.tex [39] [40
+[36] [37] [38]) (./sentencetranslation.tex [39] [40
 
 
 ]
 chapter 5.
 [41] [42]
-<./figures/denoising.pdf, id=799, 379.4175pt x 114.4275pt>
+<./figures/denoising.pdf, id=812, 379.4175pt x 114.4275pt>
 File: ./figures/denoising.pdf Graphic file (type pdf)
 <use ./figures/denoising.pdf>
 Package pdftex.def Info: ./figures/denoising.pdf  used on input line 44.
@@ -2671,7 +2643,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 64--66
 
  []
 
-<./figures/insertion.png, id=816, 669.50125pt x 191.71625pt>
+<./figures/insertion.png, id=829, 669.50125pt x 191.71625pt>
 File: ./figures/insertion.png Graphic file (type png)
 <use ./figures/insertion.png>
 Package pdftex.def Info: ./figures/insertion.png  used on input line 70.
@@ -2691,7 +2663,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 88--91
 
  []
 
-<./figures/deletion.png, id=827, 689.57625pt x 191.71625pt>
+<./figures/deletion.png, id=840, 689.57625pt x 191.71625pt>
 File: ./figures/deletion.png Graphic file (type png)
 <use ./figures/deletion.png>
 Package pdftex.def Info: ./figures/deletion.png  used on input line 98.
@@ -2729,7 +2701,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--68
 
  []
 
-<./figures/corpus.png, id=865, 645.3711pt x 409.0482pt>
+<./figures/corpus.png, id=878, 645.3711pt x 409.0482pt>
 File: ./figures/corpus.png Graphic file (type png)
 <use ./figures/corpus.png>
 Package pdftex.def Info: ./figures/corpus.png  used on input line 70.
@@ -2771,10 +2743,6 @@ Overfull \hbox (3.17471pt too wide) in paragraph at lines 14--14
 an and En-glish ([][]Ruder 
  []
 
-
-Package natbib Warning: Citation `conneau2017word' on page 59 undefined on inpu
-t line 18.
-
 )
 \tf@lof=\write9
 \openout9 = `thesis.lof'.
@@ -2803,9 +2771,6 @@ Overfull \hbox (37.12018pt too wide) in paragraph at lines 15--15
 chapter without number
 [63] [64] [65] [66])
 
-Package natbib Warning: There were undefined citations.
-
-
 Package glossaries Warning: No \printglossary or \printglossaries found. 
 (Remove \makeglossaries if you don't want any glossaries.) 
 This document will not have a glossary.
@@ -2820,10 +2785,10 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: F08ED03931A7B488E5F8D3B11072D3E5;4090.
  ) 
 Here is how much of TeX's memory you used:
- 63417 strings out of 494221
- 1454794 string characters out of 6160689
+ 63416 strings out of 494221
+ 1454777 string characters out of 6160689
  1755588 words of memory out of 5000000
- 65580 multiletter control sequences out of 15000+600000
+ 65579 multiletter control sequences out of 15000+600000
  542508 words of font info for 66 fonts, out of 8000000 for 9000
  401 hyphenation exceptions out of 8191
  64i,16n,100p,10379b,718s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2849,10 +2814,10 @@ st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (75 pages, 1920778 bytes).
+Output written on thesis.pdf (75 pages, 1920967 bytes).
 PDF statistics:
- 1140 PDF objects out of 1200 (max. 8388607)
- 985 compressed objects within 10 object streams
+ 1155 PDF objects out of 1200 (max. 8388607)
+ 998 compressed objects within 10 object streams
  224 named destinations out of 1000 (max. 500000)
  574 words of extra memory for PDF output out of 10000 (max. 10000000)
 
